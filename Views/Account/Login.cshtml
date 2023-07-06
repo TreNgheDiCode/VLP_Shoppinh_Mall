@@ -1,0 +1,70 @@
+﻿@using VLPMall.ViewModels;
+@model LoginViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+
+<section class="vh-30">
+    <h1 class="text-center py-3">ĐĂNG NHẬP</h1>
+    <div class="container py-2">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                     class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <form method="post" >
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="col-md-12 alert alert-danger">
+                            <span><b>Lỗi!</b> - @TempData["Error"]</span>
+                        </div>
+                    }
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <!-- Email input -->
+                    <div class="form-group form-outline mb-4">
+                        <label asp-for="EmailAddress" class="form-label" for="form1Example13">Địa chỉ Email</label>
+                        <input asp-for="EmailAddress" type="email" id="inputEmail" class="form-control form-control-lg" placeholder="Nhập email của bạn" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-group form-outline mb-4">
+                        <label asp-for="Password" class="form-label" for="form1Example23">Mật khẩu</label>
+                        <input asp-for="Password" type="password" id="inputPassword" class="form-control form-control-lg" placeholder="Nhập mật khẩu" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+                        <!-- Checkbox -->
+                        <div class="form-check star">
+                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                            <label class="form-check-label" for="form1Example3">Ghi nhớ tài khoản</label>
+                        </div>
+                        <a href="#!">Quên mật khẩu?</a>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">ĐĂNG NHẬP</button>
+
+                    <div class="divider d-flex align-items-center my-4">
+                        <p class="text-center fw-bold mx-3 mb-0 text-muted">HOẶC</p>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-content-center">
+                        <a class="btn btn-lg text-white px-3 py-1 mx-3" style="background-color: #3b5998;" href="#!" role="button">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="btn btn-lg text-white px-3 py-1 mx-3" style="background-color: #dd4b39;" href="#!" role="button">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

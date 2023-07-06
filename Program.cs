@@ -3,12 +3,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using VLPMall.Data;
 using VLPMall.Helpers;
+using VLPMall.Interfaces;
 using VLPMall.Models;
+using VLPMall.Repository;
+using VLPMall.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IAgencyRepository, AgencyRepository>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 builder.Services.AddDbContext<DataContext>(options =>
 {
@@ -25,8 +32,8 @@ var app = builder.Build();
 
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
 {
-    await Seed.SeedUsersAndRolesAsync(app);
-    //Seed.SeedData(app);
+    //await Seed.SeedUsersAndRolesAsync(app);
+    Seed.SeedData(app);
 }
 
 // Configure the HTTP request pipeline.
@@ -41,6 +48,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

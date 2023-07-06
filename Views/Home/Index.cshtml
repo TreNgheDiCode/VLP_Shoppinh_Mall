@@ -8,6 +8,10 @@
         padding: 0;
         max-width: 100%;
     }
+
+    .carousel-item {
+        height: 32rem;
+    }
 </style>
 
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -22,9 +26,9 @@
 
             <div class="container">
                 <div class="carousel-caption text-start">
-                    <h1>Example headline.</h1>
+                    <h1>Chi nhánh.</h1>
                     <p>Trung tâm thương mại VLP Mall.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Khám phá ngay</a></p>
+                    <p><a class="btn btn-lg btn-primary" asp-area="" asp-controller="Agency" asp-action="IndexAgency">Khám phá ngay</a></p>
                 </div>
             </div>
         </div>
@@ -33,7 +37,7 @@
 
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
+                    <h1>Đăng nhập.</h1>
                     <p>Đăng nhập ngay để hưởng những ưu đãi chỉ riêng mình bạn có</p>
                     <p><a class="btn btn-lg btn-primary" href="#">Đăng ký</a></p>
                 </div>
@@ -44,7 +48,7 @@
 
             <div class="container">
                 <div class="carousel-caption text-end">
-                    <h1>One more for good measure.</h1>
+                    <h1>Đánh giá.</h1>
                     <p>Nếu bạn yêu thích chúng tôi hãy để lại một đánh giá nhé.</p>
                     <p><a class="btn btn-lg btn-primary" href="#">Đánh giá</a></p>
                 </div>

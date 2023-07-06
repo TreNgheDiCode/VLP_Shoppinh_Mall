@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,9 +17,13 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/VLPMall.styles.css" asp-append-version="true" />
     <link href="~/css/dropdown.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
         .footer {
             line-height: 1rem !important;
+            margin: 0;
+        }
+        .row {
             margin: 0;
         }
     </style>
@@ -28,14 +41,14 @@
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Club" asp-action="Index">Giới thiệu</a>
+                        <a class="nav-link" asp-area="" asp-controller="Introduce" asp-action="IndexIntroduce">Giới thiệu</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Danh mục
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Chi nhánh</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Agency" asp-action="IndexAgency">Chi nhánh</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Cửa hàng</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -57,24 +70,32 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Register">Đăng nhập</a>
-                        <span>&nbsp;hoặc&nbsp;</span>
-                        <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Login">Đăng ký</a>
-                    </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Logout">Đăng xuất</a>
+                        </li>
+                    } else
+                    {
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Login">Đăng nhập</a>
+                            <span>&nbsp;hoặc&nbsp;</span>
+                            <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Register">Đăng ký</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
     <div class="b-example-divider"></div>
 
-    <footer class="footer mt-auto py-3 bg-light row">
+    <footer class="mt-auto py-3 bg-light row">
         <div class="col-lg-6 mh-100">
             <div class="mb-2">
                 <h6>Trung tâm thương mại VLP MALL</h6>

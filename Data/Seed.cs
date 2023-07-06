@@ -1,10 +1,71 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using VLPMall.Data.Enum;
 using VLPMall.Models;
 
 namespace VLPMall.Data
 {
     public class Seed
     {
+        public static void SeedData(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<DataContext>();
+
+                context.Database.EnsureCreated();
+
+                if (!context.Agencies.Any())
+                {
+                    context.Agencies.AddRange(new List<Agency>()
+                    {
+                        new Agency()
+                        {
+                            Title = "Chi nhánh Sư Vạn Hạnh",
+                            Image = "https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/running.jpg?quality=82&strip=1&resize=640%2C360",
+                            Description = "Trung tâm thương mại VLP Mall",
+                            AddressId = 1,
+                            AgencyCategory = AgencyCategory.SVH
+                         },
+                    });
+                    context.SaveChanges();
+                }
+                //Races
+                //if (!context.Races.Any())
+                //{
+                //    context.Races.AddRange(new List<Race>()
+                //    {
+                //        new Race()
+                //        {
+                //            Title = "Running Race 1",
+                //            Image = "https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/running.jpg?quality=82&strip=1&resize=640%2C360",
+                //            Description = "This is the description of the first race",
+                //            RaceCategory = RaceCategory.Marathon,
+                //            Address = new Address()
+                //            {
+                //                Street = "123 Main St",
+                //                City = "Charlotte",
+                //                State = "NC"
+                //            }
+                //        },
+                //        new Race()
+                //        {
+                //            Title = "Running Race 2",
+                //            Image = "https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/running.jpg?quality=82&strip=1&resize=640%2C360",
+                //            Description = "This is the description of the first race",
+                //            RaceCategory = RaceCategory.Ultra,
+                //            AddressId = 5,
+                //            Address = new Address()
+                //            {
+                //                Street = "123 Main St",
+                //                City = "Charlotte",
+                //                State = "NC"
+                //            }
+                //        }
+                //    });
+                //    context.SaveChanges();
+                //}
+            }
+        }
         public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())

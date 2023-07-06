@@ -1,68 +1,68 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VLPMall.Interfaces;
 using VLPMall.Models;
+using VLPMall.ViewModels;
 
 namespace VLPMall.Controllers
 {
     public class AgencyController : Controller
     {
-        private readonly IClubRepository _clubRepository;
+        private readonly IAgencyRepository _agencyRepository;
         private readonly IPhotoService _photoService;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ClubController(IClubRepository clubRepository, IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
+        public AgencyController(IAgencyRepository agencyRepository, IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
         {
-            _clubRepository = clubRepository;
+            _agencyRepository = agencyRepository;
             _photoService = photoService;
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexAgency()
         {
-            var clubs = await _clubRepository.GetAll();
-            return View(clubs);
+            var agencies = await _agencyRepository.GetAll();
+            return View(agencies);
         }
 
-        public async Task<IActionResult> Detail(int id)
+        public async Task<IActionResult> DetailAgency(int id)
         {
-            Club club = await _clubRepository.GetByIdAsync(id);
-            return View(club);
+            Agency agency = await _agencyRepository.GetByIdAsync(id);
+            return View(agency);
         }
 
         public IActionResult Create()
         {
-            var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            var createClubViewModel = new CreateClubViewModel { UserId = curUserId };
-            return View(createClubViewModel);
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateClubViewModel clubVM)
+        public async Task<IActionResult> Create(CreateAgencyViewModel agencyVM)
         {
             if (ModelState.IsValid)
             {
-                var result = await _photoService.AddPhotoAsync(clubVM.Image);
+                var result = await _photoService.AddPhotoAsync(agencyVM.Image);
 
-                var club = new Club
+                var agency = new Agency
                 {
-                    Title = clubVM.Title,
-                    Description = clubVM.Description,
+                    Title = agencyVM.Title,
+                    Description = agencyVM.Description,
                     Image = result.Url.ToString(),
-                    UserId = clubVM.UserId,
                     Address = new Address
                     {
-                        Street = clubVM.Address.Street,
-                        City = clubVM.Address.City,
-                        State = clubVM.Address.State
+                        Street = agencyVM.Address.Street,
+                        City = agencyVM.Address.City,
+                        Ward = agencyVM.Address.Ward,
+                        District = agencyVM.Address.District
                     }
                 };
 
-                _clubRepository.Add(club);
+                _agencyRepository.Add(agency);
                 return RedirectToAction("Index");
             }
             else
                 ModelState.AddModelError("", "Photo upload failed");
 
-            return View(clubVM);
+            return View(agencyVM);
         }
     }
 }
