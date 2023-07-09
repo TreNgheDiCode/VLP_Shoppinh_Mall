@@ -155,7 +155,7 @@ namespace VLPMall.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("VLPMall.Models.Address", b =>
+            modelBuilder.Entity("VLPMall.Models.ChiNhanh", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -163,129 +163,29 @@ namespace VLPMall.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("City")
+                    b.Property<string>("AnhDaiDien")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("District")
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ward")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Addresses");
-                });
-
-            modelBuilder.Entity("VLPMall.Models.Agency", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("MaDiaChi")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AgencyCategory")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
+                    b.Property<string>("NgayHoatDong")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("NoiDung")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("SoDienThoai")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.ToTable("Agencies");
-                });
-
-            modelBuilder.Entity("VLPMall.Models.Brand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BrandCategory")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
+                    b.Property<string>("TenChiNhanh")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("VLPMall.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StoreId");
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("VLPMall.Models.Store", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AgencyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StoreCategory")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
+                    b.Property<string>("ThoiGianHoatDong")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
@@ -293,13 +193,98 @@ namespace VLPMall.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AgencyId");
-
-                    b.HasIndex("BrandId");
+                    b.HasIndex("MaDiaChi");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Stores");
+                    b.ToTable("ChiNhanh");
+                });
+
+            modelBuilder.Entity("VLPMall.Models.ChiNhanhCuaHang", b =>
+                {
+                    b.Property<int>("MaChiNhanh")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaCuaHang")
+                        .HasColumnType("int");
+
+                    b.HasKey("MaChiNhanh", "MaCuaHang");
+
+                    b.HasIndex("MaCuaHang");
+
+                    b.ToTable("ChiNhanhCuaHang");
+                });
+
+            modelBuilder.Entity("VLPMall.Models.CuaHang", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AnhDaiDien")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LoaiCuaHang")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NgayHoatDong")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SoDienThoai")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenCuaHang")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThoiGianHoatDong")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CuaHang");
+                });
+
+            modelBuilder.Entity("VLPMall.Models.DiaChi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Duong")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phuong")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Quan")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThanhPho")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DiaChi");
                 });
 
             modelBuilder.Entity("VLPMall.Models.User", b =>
@@ -308,9 +293,6 @@ namespace VLPMall.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -329,6 +311,9 @@ namespace VLPMall.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<int?>("MaDiaChi")
+                        .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -362,7 +347,7 @@ namespace VLPMall.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("MaDiaChi");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -426,61 +411,80 @@ namespace VLPMall.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VLPMall.Models.Agency", b =>
+            modelBuilder.Entity("VLPMall.Models.ChiNhanh", b =>
                 {
-                    b.HasOne("VLPMall.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
+                    b.HasOne("VLPMall.Models.DiaChi", "DiaChi")
+                        .WithMany("ChiNhanh")
+                        .HasForeignKey("MaDiaChi")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("VLPMall.Models.Product", b =>
-                {
-                    b.HasOne("VLPMall.Models.Store", "Store")
-                        .WithMany()
-                        .HasForeignKey("StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Store");
-                });
-
-            modelBuilder.Entity("VLPMall.Models.Store", b =>
-                {
-                    b.HasOne("VLPMall.Models.Agency", "Agency")
-                        .WithMany()
-                        .HasForeignKey("AgencyId");
-
-                    b.HasOne("VLPMall.Models.Brand", "Brand")
-                        .WithMany()
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VLPMall.Models.User", null)
-                        .WithMany("Stores")
+                    b.HasOne("VLPMall.Models.User", "User")
+                        .WithMany("ChiNhanh")
                         .HasForeignKey("UserId");
 
-                    b.Navigation("Agency");
+                    b.Navigation("DiaChi");
 
-                    b.Navigation("Brand");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("VLPMall.Models.ChiNhanhCuaHang", b =>
+                {
+                    b.HasOne("VLPMall.Models.ChiNhanh", "ChiNhanh")
+                        .WithMany("ChiNhanhCuaHang")
+                        .HasForeignKey("MaChiNhanh")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VLPMall.Models.CuaHang", "CuaHang")
+                        .WithMany("ChiNhanhCuaHang")
+                        .HasForeignKey("MaCuaHang")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChiNhanh");
+
+                    b.Navigation("CuaHang");
+                });
+
+            modelBuilder.Entity("VLPMall.Models.CuaHang", b =>
+                {
+                    b.HasOne("VLPMall.Models.User", "User")
+                        .WithMany("CuaHang")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("VLPMall.Models.User", b =>
                 {
-                    b.HasOne("VLPMall.Models.Address", "Address")
+                    b.HasOne("VLPMall.Models.DiaChi", "DiaChi")
                         .WithMany()
-                        .HasForeignKey("AddressId");
+                        .HasForeignKey("MaDiaChi");
 
-                    b.Navigation("Address");
+                    b.Navigation("DiaChi");
+                });
+
+            modelBuilder.Entity("VLPMall.Models.ChiNhanh", b =>
+                {
+                    b.Navigation("ChiNhanhCuaHang");
+                });
+
+            modelBuilder.Entity("VLPMall.Models.CuaHang", b =>
+                {
+                    b.Navigation("ChiNhanhCuaHang");
+                });
+
+            modelBuilder.Entity("VLPMall.Models.DiaChi", b =>
+                {
+                    b.Navigation("ChiNhanh");
                 });
 
             modelBuilder.Entity("VLPMall.Models.User", b =>
                 {
-                    b.Navigation("Stores");
+                    b.Navigation("ChiNhanh");
+
+                    b.Navigation("CuaHang");
                 });
 #pragma warning restore 612, 618
         }

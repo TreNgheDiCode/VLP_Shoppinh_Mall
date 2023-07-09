@@ -1,0 +1,348 @@
+﻿@using VLPMall.ViewModels;
+@model ChiNhanhViewModel;
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<style>
+    .row {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .nav-link {
+        padding: 0;
+    }
+</style>
+
+<section class="py-4">
+    <div class="row">
+        <div class="col-md-12 px-0 px-md-1">
+
+            <div style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb"  id="breadcrumbs" class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a asp-controller="Home" asp-action="Index">
+                            <span class="fa fa-home"></span>
+                        </a> 
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-controller="ChiNhanh" asp-action="Index">
+                            @if (@ViewContext.RouteData.Values["controller"].ToString() == "ChiNhanh")
+                            {
+                                <span>Chi Nhánh</span>
+                            }
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-controller="ChiNhanh" asp-action="Index">
+                            @if (@ViewContext.RouteData.Values["action"].ToString() == "Information")
+                            {
+                                <span>@Model.TenChiNhanh</span>
+                            }
+                        </a>
+                    </li>
+            </div>
+            <div class="container-fluid">
+                <div class="row aos-init aos-animate" data-aos ="fade-up">
+                    <div class="col-12 col-md-4 shadow p-3 mb-5 bg-white rounded">
+                        <div class="left-mall-details p-3">
+                            <img src="@Model.AnhDaiDien" alt="@Model.TenChiNhanh" class="img-fluid d-none d-lg-block" />
+                            <div class="my-3">
+                                <h4>Địa Chỉ</h4>
+                                <hr />
+                                <p>@Model.DiaChi.Duong, &nbsp; @Model.DiaChi.Phuong, &nbsp; @Model.DiaChi.Quan, &nbsp; @Model.DiaChi.ThanhPho</p>
+                            </div>
+                            <div class="my-3">
+                                <hr />
+                                <p></p>
+                                <div class="fw-bold">
+                                    <h4>Khung Giờ Hoạt động</h4>
+                                    <br />
+                                    <p>@Model.NgayHoatDong &nbsp; - &nbsp; @Model.ThoiGianHoatDong</p>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div class="my-3">
+                                <h4>Liên Hệ Chúng Tôi</h4>
+                                <hr />
+                                <div class="row align-items-center">
+                                    <div class="col-2 pr-0 text-center social-plugins">
+                                        <a href="" target="_blank" class="btn button-circle border-0 button-small text-primary mx-0">
+                                            <i class="fa fa-envelope"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-10">
+                                        <i class="fa-thin fa-envelopes align-middle"></i>
+                                        @Model.Email
+                                        <br />
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col-2 pr-0 text-center social-plugins">
+                                        <a href="" target="_blank" class="btn button-circle border-0 button-small text-primary mx-0">
+                                            <i class="fa fa-mobile"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-10">
+                                        <i class="align-middle"></i>
+                                        @Model.SoDienThoai
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="col-sm-12 p-0 d-none d-md-block">
+                            <img src="@Model.AnhDaiDien" alt="@Model.TenChiNhanh" class="img-fluid" />
+                        </div>
+                        <div class="col-sm-12 pt-3 pb-0 d-none d-md-block">
+                            <div class="row mall-location-buttons">
+                                <div class="col-4 px-1 px-md-4 text-center ">
+                                    <a target="_blank" href="https://goo.gl/maps/Rtyzkvk8N5CGHFGW6" type="button" class="btn button-white btn-block button-round button-shadow align-content-middle py-2 btn-sm text-uppercase font-medium shadow p-2 mb-3 bg-white rounded">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-direction.jpg" class="d-inline-block align-middle mx-2" style="width: 50px; height: auto;" align ="middle" />
+                                        <strong class="d-inline-block">ĐƯỜNG ĐI</strong>
+                                    </a>
+                                </div>
+                                <div class="col-4 px-1 px-md-4 text-center ">
+                                    <a target="_blank" href="#" type="button" class="btn button-white btn-block button-round button-shadow align-content-middle py-2 btn-sm text-uppercase font-medium shadow p-2 mb-3 bg-white rounded">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-mall-map.jpg" class="d-inline-block align-middle mx-2" style="width: 50px; height: auto;" align="middle" />
+                                        <strong class="d-inline-block">BẢN ĐỒ</strong>
+                                    </a>
+                                </div>
+                                <div class="col-4 px-1 px-md-4 text-center ">
+                                    <a target="_blank" href="#" type="button" class="btn button-white btn-block button-round button-shadow align-content-middle py-2 btn-sm text-uppercase font-medium shadow p-2 mb-3 bg-white rounded">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-mall-map.jpg" class="d-inline-block align-middle mx-2" style="width: 50px; height: auto;" align="middle" />
+                                        <strong class="d-inline-block">XEM ƯU ĐÃI</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="brand_sections shadow p-3 mb-5 bg-white rounded">
+                            <div class="col-sm-12 clearfix brand_section pb-2">
+                                <div class="col-sm-12 clearfix brand_section pb-2">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6 pt-4">
+                                            <h6 class="mx-2">@Model.TenChiNhanh - Cửa Hàng</h6>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 pt-2">
+                                            <form method="post" id="brand_search_form">
+                                                <div id="brand_search" class="mx-1 border border-dark">
+                                                    <div class="input-group border-0">
+                                                        <input type="text" name="brand" value="" class="form-control border-0 input-lg" placeholder="Tìm cửa hàng theo tên">
+                                                        <span class="input-group-btn border-left border-0">
+                                                            <button type="submit" id="brand_search_btn" class="btn btn-sm btn-white border-0 no-background padding-10"><h5 class="m-0 p-0"><i class="icofont-search-1"></i></h5></button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mx-1 mx-lg-0">
+                                <ul class="nav nav-pills justify-content-center mx-0 p-0 my-3 w-100" id="pills-tab" role="tablist">
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-A-tab" class="nav-link alpha  " data-toggle="pill" href="#alpha-brand-A" role="tab" aria-controls="pills-profile" aria-selected="false">A</a>
+                                        <!-- <a href="#brand_group_A" data-target="#brand_carousel" data-slide-to="0 "class="  filter filter-letter" data-group="brand_group_A" >A</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-B-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-B" role="tab" aria-controls="pills-profile" aria-selected="false">B</a>
+                                        <!-- <a href="#brand_group_B" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_B" >B</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-C-tab" class="nav-link alpha  " data-toggle="pill" href="#alpha-brand-C" role="tab" aria-controls="pills-profile" aria-selected="false">C</a>
+                                        <!-- <a href="#brand_group_C" data-target="#brand_carousel" data-slide-to="1 "class="  filter filter-letter" data-group="brand_group_C" >C</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-D-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-D" role="tab" aria-controls="pills-profile" aria-selected="false">D</a>
+                                        <!-- <a href="#brand_group_D" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_D" >D</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-E-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-E" role="tab" aria-controls="pills-profile" aria-selected="false">E</a>
+                                        <!-- <a href="#brand_group_E" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_E" >E</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-F-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-F" role="tab" aria-controls="pills-profile" aria-selected="false">F</a>
+                                        <!-- <a href="#brand_group_F" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_F" >F</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-G-tab" class="nav-link alpha  " data-toggle="pill" href="#alpha-brand-G" role="tab" aria-controls="pills-profile" aria-selected="false">G</a>
+                                        <!-- <a href="#brand_group_G" data-target="#brand_carousel" data-slide-to="2 "class="  filter filter-letter" data-group="brand_group_G" >G</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-H-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-H" role="tab" aria-controls="pills-profile" aria-selected="false">H</a>
+                                        <!-- <a href="#brand_group_H" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_H" >H</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-I-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-I" role="tab" aria-controls="pills-profile" aria-selected="false">I</a>
+                                        <!-- <a href="#brand_group_I" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_I" >I</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-J-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-J" role="tab" aria-controls="pills-profile" aria-selected="false">J</a>
+                                        <!-- <a href="#brand_group_J" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_J" >J</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-K-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-K" role="tab" aria-controls="pills-profile" aria-selected="false">K</a>
+                                        <!-- <a href="#brand_group_K" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_K" >K</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-L-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-L" role="tab" aria-controls="pills-profile" aria-selected="false">L</a>
+                                        <!-- <a href="#brand_group_L" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_L" >L</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-M-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-M" role="tab" aria-controls="pills-profile" aria-selected="false">M</a>
+                                        <!-- <a href="#brand_group_M" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_M" >M</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-N-tab" class="nav-link alpha  " data-toggle="pill" href="#alpha-brand-N" role="tab" aria-controls="pills-profile" aria-selected="false">N</a>
+                                        <!-- <a href="#brand_group_N" data-target="#brand_carousel" data-slide-to="3 "class="  filter filter-letter" data-group="brand_group_N" >N</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-O-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-O" role="tab" aria-controls="pills-profile" aria-selected="false">O</a>
+                                        <!-- <a href="#brand_group_O" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_O" >O</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-P-tab" class="nav-link alpha  " data-toggle="pill" href="#alpha-brand-P" role="tab" aria-controls="pills-profile" aria-selected="false">P</a>
+                                        <!-- <a href="#brand_group_P" data-target="#brand_carousel" data-slide-to="4 "class="  filter filter-letter" data-group="brand_group_P" >P</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-Q-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-Q" role="tab" aria-controls="pills-profile" aria-selected="false">Q</a>
+                                        <!-- <a href="#brand_group_Q" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_Q" >Q</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-R-tab" class="nav-link alpha  " data-toggle="pill" href="#alpha-brand-R" role="tab" aria-controls="pills-profile" aria-selected="false">R</a>
+                                        <!-- <a href="#brand_group_R" data-target="#brand_carousel" data-slide-to="5 "class="  filter filter-letter" data-group="brand_group_R" >R</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-S-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-S" role="tab" aria-controls="pills-profile" aria-selected="false">S</a>
+                                        <!-- <a href="#brand_group_S" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_S" >S</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-T-tab" class="nav-link alpha  " data-toggle="pill" href="#alpha-brand-T" role="tab" aria-controls="pills-profile" aria-selected="false">T</a>
+                                        <!-- <a href="#brand_group_T" data-target="#brand_carousel" data-slide-to="6 "class="  filter filter-letter" data-group="brand_group_T" >T</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-U-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-U" role="tab" aria-controls="pills-profile" aria-selected="false">U</a>
+                                        <!-- <a href="#brand_group_U" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_U" >U</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-V-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-V" role="tab" aria-controls="pills-profile" aria-selected="false">V</a>
+                                        <!-- <a href="#brand_group_V" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_V" >V</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-W-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-W" role="tab" aria-controls="pills-profile" aria-selected="false">W</a>
+                                        <!-- <a href="#brand_group_W" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_W" >W</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-X-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-X" role="tab" aria-controls="pills-profile" aria-selected="false">X</a>
+                                        <!-- <a href="#brand_group_X" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_X" >X</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-Y-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-Y" role="tab" aria-controls="pills-profile" aria-selected="false">Y</a>
+                                        <!-- <a href="#brand_group_Y" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_Y" >Y</a>  -->
+                                    </li>
+                                    <li class="nav-item flex-fill text-center">
+                                        <a id="alpha-brand-Z-tab" class="nav-link alpha text-muted " data-toggle="pill" href="#alpha-brand-Z" role="tab" aria-controls="pills-profile" aria-selected="false">Z</a>
+                                        <!-- <a href="#brand_group_Z" data-target="#brand_carousel" data-slide-to=" "class="disabled text-muted  filter filter-letter" data-group="brand_group_Z" >Z</a>  -->
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="row px-2">
+                                <div class="col-sm-12">
+                                    <div class="h6">Filter by Category</div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-6 col-sm-4 col-md-2 px-1 mb-2">
+                                            <!-- <div class="row"> -->
+                                            <a href="https://www.smsupermalls.com/mall-directory/mall-of-asia-arena-annex-bldg/information/dining" class="shop-category">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/dining-thumb-default.jpg" alt="dining" class="category-thumb-default rounded img-fluid">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/dining-thumb-active.jpg" alt="dining" class="category-thumb-active rounded img-fluid" style="display: none !important;">
+                                            </a>
+                                            <!-- </div> -->
+                                        </div>
+                                        <div class="col-6 col-sm-4 col-md-2 px-1 mb-2">
+                                            <!-- <div class="row"> -->
+                                            <a href="https://www.smsupermalls.com/mall-directory/mall-of-asia-arena-annex-bldg/information/entertainment" class="shop-category">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/entertainment-thumb-default.jpg" alt="entertainment" class="category-thumb-default rounded img-fluid">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/entertainment-thumb-active.jpg" alt="entertainment" class="category-thumb-active rounded img-fluid" style="display: none !important;">
+                                            </a>
+                                            <!-- </div> -->
+                                        </div>
+                                        <div class="col-6 col-sm-4 col-md-2 px-1 mb-2">
+                                            <!-- <div class="row"> -->
+                                            <a href="https://www.smsupermalls.com/cinema" class="shop-category">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/cinema-thumb-default.jpg" alt="cinema" class="category-thumb-default rounded img-fluid">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/cinema-thumb-active.jpg" alt="cinema" class="category-thumb-active rounded img-fluid" style="display: none !important;">
+                                            </a>
+                                            <!-- </div> -->
+                                        </div>
+                                        <div class="col-6 col-sm-4 col-md-2 px-1 mb-2">
+                                            <!-- <div class="row"> -->
+                                            <a href="https://www.smsupermalls.com/mall-directory/mall-of-asia-arena-annex-bldg/information/gadgets" class="shop-category">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/gadgets-thumb-default.jpg" alt="gadgets" class="category-thumb-default rounded img-fluid">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/gadgets-thumb-active.jpg" alt="gadgets" class="category-thumb-active rounded img-fluid" style="display: none !important;">
+                                            </a>
+                                            <!-- </div> -->
+                                        </div>
+                                        <div class="col-6 col-sm-4 col-md-2 px-1 mb-2">
+                                            <!-- <div class="row"> -->
+                                            <a href="https://www.smsupermalls.com/mall-directory/mall-of-asia-arena-annex-bldg/information/services" class="shop-category">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/services-thumb-default.jpg" alt="services" class="category-thumb-default rounded img-fluid">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/services-thumb-active.jpg" alt="services" class="category-thumb-active rounded img-fluid" style="display: none !important;">
+                                            </a>
+                                            <!-- </div> -->
+                                        </div>
+                                        <div class="col-6 col-sm-4 col-md-2 px-1 mb-2">
+                                            <!-- <div class="row"> -->
+                                            <a href="https://www.smsupermalls.com/mall-directory/mall-of-asia-arena-annex-bldg/information/shopping" class="shop-category">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/shopping-thumb-default.jpg" alt="shopping" class="category-thumb-default rounded img-fluid">
+                                                <img src="https://www.smsupermalls.com/themes/default/img/shops/shopping-thumb-active.jpg" alt="shopping" class="category-thumb-active rounded img-fluid" style="display: none !important;">
+                                            </a>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mx-2">
+                                <a asp-controller="ChiNhanh" asp-action="Information" asp-route-id="@Model.Id" class="text-black h6">Tất cả</a>
+                            </div>
+                            <div id="brand_list" class="panel-group">
+                                <div class="tab-content pt-2" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="alpha-brand-A" role="tabpanel" aria-labelledby="alpha-brand-Array-tab">
+                                        <div class="row">
+                                            @foreach (var item in Model.CuaHangs)
+                                            {
+                                                <div class="col-6 col-md-3 p-4 p-xs-1">
+                                                    <div class="clearfix padding-10 text-center">
+                                                        <div class="brand-image text-center mb-2">
+                                                            <a href="https://www.smsupermalls.com/mall-directory/tenants/maax/ALFAMART" id="@Model.TenChiNhanh" class="text-black" data-brand="@item.TenCuaHang" data-trim-brand="@item.TenCuaHang" data-brand-filter="A" data-category="@item.LoaiCuaHang">
+                                                                <img src="@item.AnhDaiDien" class="img-fluid lazy " data-placeholder="@item.AnhDaiDien" alt="@item.TenCuaHang">
+                                                            </a>
+                                                        </div>
+                                                        <div class="brand-description h6">
+                                                            <a href="https://www.smsupermalls.com/mall-directory/tenants/maax/ALFAMART" id="@Model.TenChiNhanh" class="text-black" data-brand="@Model.TenChiNhanh" data-trim-brand="@Model.TenChiNhanh" data-brand-filter="A" data-category="@item.LoaiCuaHang">
+                                                                <strong>@item.TenCuaHang</strong>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

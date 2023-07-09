@@ -6,9 +6,10 @@ namespace VLPMall.Models
     public class User : IdentityUser
     {
         public string? ProfileImageUrl { get; set; }
-        [ForeignKey("Address")]
-        public int? AddressId { get; set; }
-        public Address? Address { get; set; }
-        public ICollection<Store>? Stores { get; set; }
+        [ForeignKey("DiaChi")]
+        public int? MaDiaChi { get; set; }
+        public DiaChi? DiaChi { get; set; }
+        public ICollection<ChiNhanh>? ChiNhanh { get; set; }
+        public ICollection<CuaHang>? CuaHang { get; set; }
     }
 }

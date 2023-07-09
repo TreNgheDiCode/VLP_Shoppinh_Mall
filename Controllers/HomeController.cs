@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using VLPMall.Interfaces;
 using VLPMall.Models;
 
 namespace VLPMall.Controllers
@@ -7,15 +8,18 @@ namespace VLPMall.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IDirectoryRepository _directoryRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IDirectoryRepository directoryRepository)
         {
             _logger = logger;
+            _directoryRepository = directoryRepository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var directories =  _directoryRepository.GetAll();
+            return View(directories);
         }
 
         public IActionResult Privacy()

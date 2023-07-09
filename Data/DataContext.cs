@@ -8,11 +8,27 @@ namespace VLPMall.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
+        public DbSet<DiaChi> DiaChi { get; set; }
+        public DbSet<ChiNhanh>? ChiNhanh { get; set; }
+        public DbSet<CuaHang> CuaHang { get; set; }
+        public DbSet<ChiNhanhCuaHang> ChiNhanhCuaHang { get; set; }
 
-        public DbSet<Agency> Agencies { get; set; }
-        public DbSet<Brand> Brands { get; set; }
-        public DbSet<Store> Stores { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Address> Addresses { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<ChiNhanhCuaHang>()
+                .HasKey(_as => new { _as.MaChiNhanh, _as.MaCuaHang });
+
+            builder.Entity<ChiNhanhCuaHang>()
+                .HasOne(a => a.ChiNhanh)
+                .WithMany(_as => _as.ChiNhanhCuaHang)
+                .HasForeignKey(a => a.MaChiNhanh);
+
+            builder.Entity<ChiNhanhCuaHang>()
+                .HasOne(s => s.CuaHang)
+                .WithMany(_as => _as.ChiNhanhCuaHang)
+                .HasForeignKey(s => s.MaCuaHang);
+        }
     }
 }

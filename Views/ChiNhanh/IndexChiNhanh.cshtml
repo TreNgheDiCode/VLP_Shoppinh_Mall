@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ChiNhanh>
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 offset-md-1 px-0 px-md-1">
+            <div id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a asp-controller="Home" asp-action="Index">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-controller="Home" asp-action="Index">Chi nhánh</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <h2 class="col-sm-12 text-center d-none d-sm-block">
+                        <p class="font-medium">Chào mừng đến với trung tâm thương mại VLP Mall nơi bạn có thể mua sắm thỏa thích tại các cửa hàng và dịch vụ của VLP.</p>
+                    </h2>
+                </div>
+                <div class="col-12 col-sm-8 offset-sm-2 mt-3 mb-1">
+                    <div id="mall_search" class="clearfix">
+                        <div class="input-group border-0">
+                            <input type="text" name="mall" id="mall_search_name" value class="form-control border border-dark shadow input-lg" placeholder="Tìm kiếm chi nhánh" onkeyup="myFunction()" />
+                            <span class="input-group-btn border-left border-0">
+                                <button type="button" id="brand_search_btn" class="btn btn-sm btn-white border-0 no-background padding-10">
+                                    <h5 class="m-0 p-0">
+                                        <i class="icofont-search-1"></i>
+                                    </h5>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myUL" class="row px-2 px-md-0">
+        @foreach (var item in Model)
+        {
+            <div class="col-6 col-md-4 mb-3 px-2 mall-icon-box mall-branch">
+                <a asp-controller="ChiNhanh" asp-action="Information" asp-route-id="@item.Id" class="text-gray">
+                    <div class="card card-shadow">
+                        <div class="card-body p-0">
+                            <div>
+                                <img class="img-fluid m-directory-img" src="@item.AnhDaiDien" alt="Card image cap">
+                            </div>
+                            <div class="clearfix p-md-4 p-2 text-black text-center" id="directory_name">
+                                <h6 class="d-none d-lg-block p-0 m-0 text-uppercase">@item.TenChiNhanh</h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+        <div class="clearfix"></div>
+    </div>
+    <div id="no-mall" class="hide">
+        <h3 class="text-center">No malls found</h3>
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue, no_mall, li_hide;
+        input = document.getElementById("mall_search_name");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByClassName("mall-branch");
+        no_mall = document.getElementById('no-mall');
+
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                // li[i].style.display = "";
+                li[i].classList.remove("hide");
+            } else {
+                // li[i].style.display = "none";
+                li[i].classList.add("hide");;
+            }
+        }
+
+        li_hide = ul.getElementsByClassName("hide");
+        console.log(li_hide.length);
+        console.log(li.length);
+        if (li_hide.length === li.length) {
+            no_mall.classList.remove("hide");
+        } else {
+            no_mall.classList.add("hide");
+        }
+    }
+</script>                                     
