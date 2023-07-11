@@ -1,14 +1,14 @@
 ﻿﻿@using Microsoft.AspNetCore.Identity
 @using VLPMall.Data.Enum;
-@using VLPMall.ViewModels;
-
-@model IEnumerable<ChiNhanhViewModel>
+@using VLPMall.Interfaces;
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@inject IDirectoryRepository ChiNhanh
 
 @{
     var currentUser = await UserManager.GetUserAsync(User);
+    var directories = await ChiNhanh.GetAllAsync();
 }
 
 <!DOCTYPE html>
@@ -68,7 +68,7 @@
                             <li class="drop-down">
                                 <a asp-area="" asp-controller="ChiNhanh" asp-action="Index" class="text-uppercase">Chi nhánh</a>
                                 <ul>
-                                    @foreach (var item in Model)
+                                    @foreach(var item in directories)
                                     {
                                         <li class="">
                                             <a asp-controller="ChiNhanh" asp-action="Information" asp-route-id="@item.Id" class="text-uppercase">@item.TenChiNhanh</a>

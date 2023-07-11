@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using VLPMall.Interfaces;
 using VLPMall.Models;
+using VLPMall.ViewModels;
 
 namespace VLPMall.Controllers
 {
@@ -18,8 +19,7 @@ namespace VLPMall.Controllers
 
         public IActionResult Index()
         {
-            var directories =  _directoryRepository.GetAll();
-            return View(directories);
+            return View();
         }
 
         public IActionResult Privacy()

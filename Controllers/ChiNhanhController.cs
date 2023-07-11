@@ -46,5 +46,10 @@ namespace VLPMall.Controllers
 
             return View("InformationChiNhanh", chiNhanhCuaHang);
         }
+
+        public IActionResult Create()
+        {
+            return View("CreateChiNhanh");
+        }
     }
 }

@@ -14,7 +14,21 @@ namespace VLPMall.Repository
             _context = context;
         }
 
-        public IEnumerable<ChiNhanh> GetAll()
+        public bool Add(ChiNhanh chiNhanh)
+        {
+            _context.Add(chiNhanh);
+
+            return Save();
+        }
+
+        public bool Delete(ChiNhanh chiNhanh)
+        {
+            _context.Remove(chiNhanh);
+
+            return Save();
+        }
+
+        public List<ChiNhanh> GetAll()
         {
             return _context.ChiNhanh.ToList();
         }
@@ -32,6 +46,20 @@ namespace VLPMall.Repository
         public List<CuaHang> GetCuaHangByChiNhanh(int id)
         {
             return _context.ChiNhanhCuaHang.Where(a => a.ChiNhanh.Id == id).Select(s => s.CuaHang).ToList();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+
+            return saved > 0 ? true : false;
+        }
+
+        public bool Update(ChiNhanh chiNhanh)
+        {
+            _context.Update(chiNhanh);
+
+            return Save();
         }
     }
 }
