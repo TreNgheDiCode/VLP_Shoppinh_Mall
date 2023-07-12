@@ -1,4 +1,8 @@
 ﻿@using VLPMall.Interfaces;
+@using VLPMall.ViewModels;
+
+@model AdminViewModel;
+
 @inject IDirectoryRepository ChiNhanh;
 
 @*
@@ -10,7 +14,6 @@
 }
 
 <div class="wrapper">
-
 	<div class="body-overlay"></div>
 
 	<!-------sidebar--design------------>
@@ -40,11 +43,11 @@
 			<li class="dropdown">
 				<a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false"
 				   class="dropdown-toggle">
-					<i class="material-icons">apps</i>widgets
+					<i class="material-icons">apps</i>Tiện ích
 				</a>
 				<ul class="collapse list-unstyled menu" id="homeSubmenu2">
-					<li><a href="#">Apps 1</a></li>
-					<li><a href="#">Apps 2</a></li>
+					<li><a href="#">Máy tính</a></li>
+					<li><a href="#">	</a></li>
 					<li><a href="#">Apps 3</a></li>
 				</ul>
 			</li>
@@ -52,12 +55,12 @@
 			<li class="dropdown">
 				<a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false"
 				   class="dropdown-toggle">
-					<i class="material-icons">equalizer</i>charts
+					<i class="material-icons">equalizer</i>Biểu đồ dữ liệu
 				</a>
 				<ul class="collapse list-unstyled menu" id="homeSubmenu3">
-					<li><a href="#">Pages 1</a></li>
-					<li><a href="#">Pages 2</a></li>
-					<li><a href="#">Pages 3</a></li>
+					<li><a href="#">Tổng quan</a></li>
+					<li><a href="#">Lượt truy cập</a></li>
+					<li><a href="#">Chi tiêu</a></li>
 				</ul>
 			</li>
 
@@ -102,12 +105,12 @@
 			<li class="dropdown">
 				<a href="#homeSubmenu7" data-toggle="collapse" aria-expanded="false"
 				   class="dropdown-toggle">
-					<i class="material-icons">content_copy</i>Pages
+					<i class="material-icons">content_copy</i>Quản lý trang
 				</a>
 				<ul class="collapse list-unstyled menu" id="homeSubmenu7">
-					<li><a href="#">Pages 1</a></li>
-					<li><a href="#">Pages 2</a></li>
-					<li><a href="#">Pages 3</a></li>
+					<li><a href="#">Trang chi nhánh</a></li>
+					<li><a href="#">Trang cửa hàng</a></li>
+					<li><a href="#">Trang sản phẩm</a></li>
 				</ul>
 			</li>
 
@@ -116,7 +119,7 @@
 				<a href="#" class=""><i class="material-icons">date_range</i>copy </a>
 			</li>
 			<li class="">
-				<a href="#" class=""><i class="material-icons">library_books</i>calender </a>
+				<a href="#" class=""><i class="material-icons">library_books</i>Lịch làm việc </a>
 			</li>
 
 		</ul>
@@ -215,9 +218,13 @@
 				</div>
 
 				<div class="xp-breadcrumbbar text-center">
-					<h4 class="page-title">Bảng điều khiển</h4>
+					<h4 class="my-2 page-title">Bảng điều khiển</h4>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">VLP Mall</a></li>
+						<li class="breadcrumb-item">
+							<a asp-controller="Home" asp-action="Index">
+								<span class="fa fa-home"></span>
+							</a>
+						</li>
 						<li class="breadcrumb-item active" aria-curent="page">Bảng điều khiển</li>
 					</ol>
 				</div>
@@ -289,13 +296,13 @@
 										<th>@item.SoDienThoai</th>
 										<th>@item.NgayHoatDong</th>
 										<th>@item.ThoiGianHoatDong</th>
-										<th>@item.DiaChi</th>
+										<th>@item.DiaChi?.Duong, @item.DiaChi?.Phuong, @item.DiaChi?.Quan, @item.DiaChi?.ThanhPho</th>
 										<th>
 											<a href="#editEmployeeModal" class="edit" data-toggle="modal">
-												<i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
 											</a>
 											<a href="#deleteEmployeeModal" class="delete" data-toggle="modal">
-												<i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
 											</a>
 										</th>
 									</tr>
@@ -328,33 +335,105 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body">
-								<div class="form-group">
-									<label>Name</label>
-									<input type="text" class="form-control" required>
+							<form method="post" class="modal-body" asp-controller="ChiNhanh" asp-action="Create" enctype="multipart/form-data">
+								<input type="hidden" asp-for="UserId" />
+
+								<div class="my-2 form-group">
+									<label asp-for="@Model.chiNhanhViewModel.TenChiNhanh">Tên chi nhánh</label>
+									<input asp-for="@Model.chiNhanhViewModel.TenChiNhanh" type="text" class="form-control" placeholder="Tên chi nhánh">
+									<span asp-validation-for="@Model.chiNhanhViewModel.TenChiNhanh" class="text-danger"></span>
 								</div>
-								<div class="form-group">
-									<label>Email</label>
-									<input type="email" class="form-control" required>
+								<div class="my-2 form-group">
+									<label asp-for="@Model.chiNhanhViewModel.NoiDung">Nội dung</label>
+									<input asp-for="@Model.chiNhanhViewModel.NoiDung" type="text" class="form-control" placeholder="Nội dung">
+									<span asp-validation-for="@Model.chiNhanhViewModel.NoiDung" class="text-danger"></span>
 								</div>
-								<div class="form-group">
-									<label>Address</label>
-									<textarea class="form-control" required></textarea>
+								<div class="my-2 form-group">
+									<label asp-for="@Model.chiNhanhViewModel.AnhDaiDien">Ảnh đại diện</label>
+									<input asp-for="@Model.chiNhanhViewModel.AnhDaiDien" type="file" class="form-control" placeholder="Ảnh đại diện">
+									<span asp-validation-for="@Model.chiNhanhViewModel.AnhDaiDien" class="text-danger"></span>
 								</div>
-								<div class="form-group">
-									<label>Phone</label>
-									<input type="text" class="form-control" required>
+								<div class="my-2 form-group">
+									<label asp-for="@Model.chiNhanhViewModel.Email">Email</label>
+									<input asp-for="@Model.chiNhanhViewModel.Email" type="email" class="form-control" placeholder="Email">
+									<span asp-validation-for="@Model.chiNhanhViewModel.Email" class="text-danger"></span>
 								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-								<button type="button" class="btn btn-success">Thêm</button>
-							</div>
+								<div class="my-2 form-group">
+									<label asp-for="@Model.chiNhanhViewModel.SoDienThoai">Số điện thoại</label>
+									<input asp-for="@Model.chiNhanhViewModel.SoDienThoai" type="text" class="form-control" placeholder="Số điện thoại">
+									<span asp-validation-for="@Model.chiNhanhViewModel.SoDienThoai" class="text-danger"></span>
+								</div>
+								<div class="my-2 form-group">
+									<label asp-for="@Model.chiNhanhViewModel.NgayHoatDong">Ngày hoạt động</label>
+									<select asp-for="@Model.chiNhanhViewModel.NgayHoatDong">
+										<option>--Chọn--</option>
+										<option>Thứ Hai</option>
+										<option>Thứ Ba</option>
+										<option>Thứ Tư</option>
+										<option>Thứ Năm</option>
+										<option>Thứ Sàu</option>
+										<option>Thứ Bảy</option>
+										<option>Chủ Nhật</option>
+									</select>
+									<span>&nbsp;-&nbsp;</span>
+									<select asp-for="@Model.chiNhanhViewModel.NgayHoatDong">
+										<option>--Chọn--</option>
+										<option>Thứ Hai</option>
+										<option>Thứ Ba</option>
+										<option>Thứ Tư</option>
+										<option>Thứ Năm</option>
+										<option>Thứ Sàu</option>
+										<option>Thứ Bảy</option>
+										<option>Chủ Nhật</option>
+									</select>
+									<span asp-validation-for="@Model.chiNhanhViewModel.NgayHoatDong" class="text-danger"></span>
+								</div>
+								<div class="my-2 form-group">
+									<label>Thời gian hoạt động</label>
+									<div>Từ</div>
+									<input asp-for="@Model.chiNhanhViewModel.ThoiGianHoatDong" type="time" class="form-control">
+									Đến
+									<input asp-for="@Model.chiNhanhViewModel.ThoiGianHoatDong" type="time" class="form-control">
+								</div>
+								<div class="my-2 form-group">
+									<label>Địa chỉ</label>
+									<div class="row">
+										<div class="col-12">
+											<label asp-for="@Model.chiNhanhViewModel.DiaChi.Duong">Tên đường &amp; Số nhà</label>
+											<input asp-for="@Model.chiNhanhViewModel.DiaChi.Duong" type="text" class="form-control" placeholder="Tên đường &amp; Số nhà">
+											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.Duong" class="text-danger"></span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6">
+											<label asp-for="@Model.chiNhanhViewModel.DiaChi.Phuong">Phường</label>
+											<input asp-for="@Model.chiNhanhViewModel.DiaChi.Phuong" type="text" class="form-control" placeholder="Phường">
+											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.Phuong" class="text-danger"></span>
+										</div>
+										<div class="col-6">
+											<label asp-for="@Model.chiNhanhViewModel.DiaChi.Quan">Quận</label>
+											<input asp-for="@Model.chiNhanhViewModel.DiaChi.Quan" type="text" class="form-control" placeholder="Quận">
+											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.Quan" class="text-danger"></span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<label asp-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho">Thành phố</label>
+											<input asp-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho" type="text" class="form-control" placeholder="Thành phố">
+											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+									<button type="submit" class="btn btn-success">Thêm</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 
-				<!----edit-modal end--------->
+				<!----add-modal end--------->
 				<!----edit-modal start--------->
 				<div class="modal fade" tabindex="-1" id="editEmployeeModal" role="dialog">
 					<div class="modal-dialog" role="document">

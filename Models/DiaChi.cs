@@ -16,6 +16,5 @@ namespace VLPMall.Models
         public string? ThanhPho { get; set; }
 
         // Liên kết một nhiều
-        public ICollection<ChiNhanh> ChiNhanh { get; set; }
     }
 }

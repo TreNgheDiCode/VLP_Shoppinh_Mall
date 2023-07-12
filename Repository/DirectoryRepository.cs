@@ -35,7 +35,7 @@ namespace VLPMall.Repository
 
         public async Task<IEnumerable<ChiNhanh>> GetAllAsync()
         {
-            return await _context.ChiNhanh.ToListAsync();
+            return await _context.ChiNhanh.Include(a => a.DiaChi).ToListAsync();
         }
 
         public async Task<ChiNhanh> GetByIdAsync(int id)

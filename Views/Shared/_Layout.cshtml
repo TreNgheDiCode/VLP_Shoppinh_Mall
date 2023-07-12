@@ -42,7 +42,7 @@
         .fa-caret-down {
             margin-left: 0.255em;
         }
-        .nav-link {
+        .nav-item {
             margin: 0 15px !important;
         }
     </style>
@@ -116,7 +116,15 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li class="nav-item">
-                            <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Logout">Đăng xuất</a>
+                            <form method="post">
+                                @if (User.IsInRole("admin"))
+                                {
+                                    <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-light">Bảng điều khiển</a>
+                                }
+                                <span>&nbsp;|&nbsp;</span>
+                                <input asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-outline-light" type="submit" value="Đăng xuất" />
+                            </form>
+                            
                         </li>
                     } else
                     {

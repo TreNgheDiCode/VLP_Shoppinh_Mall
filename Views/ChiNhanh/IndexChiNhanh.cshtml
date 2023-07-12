@@ -1,6 +1,7 @@
-﻿@model IEnumerable<ChiNhanh>
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<ChiNhanh>
 
-
+@inject SignInManager<User> SignInManager;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -26,7 +27,6 @@
                 <div class="row">
                     <h2 class="col-sm-12 text-center d-none d-sm-block">
                         <p class="font-medium">Chào mừng đến với trung tâm thương mại VLP Mall nơi bạn có thể mua sắm thỏa thích tại các cửa hàng và dịch vụ của VLP.</p>
-                        <a asp-controller="ChiNhanh" asp-action="Create" class="btn btn-success">Thêm chi nhánh</a>
                     </h2>
                 </div>
                 <div class="col-12 col-sm-8 offset-sm-2 mt-3 mb-1">
