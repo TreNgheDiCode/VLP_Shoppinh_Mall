@@ -17,7 +17,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - VLPMall</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/VLPMall.styles.css" asp-append-version="true" />
     <link href="~/css/dropdown.css" rel="stylesheet" />
@@ -121,7 +121,6 @@
                                 {
                                     <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-light">Bảng điều khiển</a>
                                 }
-                                <span>&nbsp;|&nbsp;</span>
                                 <input asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-outline-light" type="submit" value="Đăng xuất" />
                             </form>
                             
@@ -199,8 +198,8 @@
             </div>
         </div>
     </footer>
+    <script src="~/js/bootstrap.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/owlcarousel2-2.3.4/dist/owl.carousel.js"></script>
     <script src="~/lib/owlcarousel2-2.3.4/dist/owl.carousel.min.js"></script>
