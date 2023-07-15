@@ -11,7 +11,6 @@
 @{
 	Layout = "_DashboardLayout";
 	var directories = await ChiNhanh.GetAllAsync();
-	int id;
 }
 
 <div class="wrapper">
@@ -169,10 +168,7 @@
 											<span class="notification">4</span>
 										</a>
 										<ul class="dropdown-menu">
-											<li><a href="#">You Have 4 New Messages</a></li>
-											<li><a href="#">You Have 4 New Messages</a></li>
-											<li><a href="#">You Have 4 New Messages</a></li>
-											<li><a href="#">You Have 4 New Messages</a></li>
+											<li><a href="#">Bạn có thông báo mới</a></li>
 										</ul>
 									</li>
 
@@ -191,20 +187,22 @@
 											<li>
 												<a href="#">
 													<span class="material-icons">person_outline</span>
-													Profile
+													Hồ sơ
 												</a>
 											</li>
 											<li>
 												<a href="#">
 													<span class="material-icons">settings</span>
-													Settings
+													Cài đặt
 												</a>
 											</li>
 											<li>
-												<a href="#">
-													<span class="material-icons">logout</span>
-													Logout
-												</a>
+												<form method="post">
+													<a asp-controller="Account" asp-action="Logout">
+														<span class="material-icons">logout</span>
+														Đăng xuất
+													</a>
+												</form>
 											</li>
 
 										</ul>
@@ -244,7 +242,7 @@
 						<div class="table-title">
 							<div class="row">
 								<div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
-									<h2 class="ml-lg-2">Quản lý chi nhánh</h2>
+									<h2 class="ml-lg-2">Danh sách chi nhánh</h2>
 								</div>
 								<div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
 									<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
@@ -299,12 +297,34 @@
 										<th>@item.ThoiGianHoatDong</th>
 										<th>@item.DiaChi?.Duong, @item.DiaChi?.Phuong, @item.DiaChi?.Quan, @item.DiaChi?.ThanhPho</th>
 										<th>
-											<a href="#editEmployeeModal" class="edit" data-toggle="modal">
+											<a asp-controller="ChiNhanh" asp-action="Edit" asp-route-id="@item.Id" class="edit">
 												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
 											</a>
-											<a asp-controller="ChiNhanh" asp-action="Delete" asp-route-id="@item.Id" class="delete" data-toggle="modal">
+											<a href ="#deleteDirectoryModal" class="delete" data-toggle="modal">
 												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
 											</a>
+											<!----delete-modal start--------->
+											<div class="modal fade" tabindex="-1" id="deleteDirectoryModal" role="dialog">
+												<div class="modal-dialog" role="document">
+													<form method="post" asp-action="Delete" enctype="multipart/form-data" class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title">Xóa chi nhánh</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Bạn có chắc chắn muốn xóa chi nhánh này không?</p>
+															<p class="text-dander"><strong>Hành động này không thể VÃN HỒI</strong></p>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+															<button asp-controller="ChiNhanh" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
+														</div>
+													</form>
+												</div>
+											</div>
+											<!----delete-modal end--------->
 										</th>
 									</tr>
 								}
@@ -365,8 +385,8 @@
 									<span asp-validation-for="@Model.chiNhanhViewModel.SoDienThoai" class="text-danger"></span>
 								</div>
 								<div class="my-2 form-group">
-									<label asp-for="@Model.chiNhanhViewModel.NgayHoatDong">Ngày hoạt động</label>
-									<select asp-for="@Model.chiNhanhViewModel.NgayHoatDong">
+									<label asp-for="@Model.chiNhanhViewModel.NgayHoatDong1">Từ</label>
+									<select asp-for="@Model.chiNhanhViewModel.NgayHoatDong1">
 										<option>--Chọn--</option>
 										<option>Thứ Hai</option>
 										<option>Thứ Ba</option>
@@ -376,8 +396,10 @@
 										<option>Thứ Bảy</option>
 										<option>Chủ Nhật</option>
 									</select>
+									<span asp-validation-for="@Model.chiNhanhViewModel.NgayHoatDong1" class="text-danger"></span>
 									<span>&nbsp;-&nbsp;</span>
-									<select asp-for="@Model.chiNhanhViewModel.NgayHoatDong">
+									<label asp-for="@Model.chiNhanhViewModel.NgayHoatDong2">Đến</label>
+									<select asp-for="@Model.chiNhanhViewModel.NgayHoatDong2">
 										<option>--Chọn--</option>
 										<option>Thứ Hai</option>
 										<option>Thứ Ba</option>
@@ -387,14 +409,14 @@
 										<option>Thứ Bảy</option>
 										<option>Chủ Nhật</option>
 									</select>
-									<span asp-validation-for="@Model.chiNhanhViewModel.NgayHoatDong" class="text-danger"></span>
+									<span asp-validation-for="@Model.chiNhanhViewModel.NgayHoatDong2" class="text-danger"></span>
 								</div>
 								<div class="my-2 form-group">
 									<label>Thời gian hoạt động</label>
 									<div>Từ</div>
-									<input asp-for="@Model.chiNhanhViewModel.ThoiGianHoatDong" type="time" class="form-control">
+									<input asp-for="@Model.chiNhanhViewModel.ThoiGianHoatDong1" type="time" class="form-control">
 									Đến
-									<input asp-for="@Model.chiNhanhViewModel.ThoiGianHoatDong" type="time" class="form-control">
+									<input asp-for="@Model.chiNhanhViewModel.ThoiGianHoatDong2" type="time" class="form-control">
 								</div>
 								<div class="my-2 form-group">
 									<label>Địa chỉ</label>
@@ -419,7 +441,7 @@
 									</div>
 									<div class="row">
 										<div class="col-12">
-											<label asp-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho">Thành phố</label>
+											<label asp-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho">Tỉnh/Thành phố</label>
 											<input asp-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho" type="text" class="form-control" placeholder="Thành phố">
 											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho" class="text-danger"></span>
 										</div>
@@ -440,7 +462,7 @@
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">Edit Employees</h5>
+								<h5 class="modal-title">Cập nhật</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
@@ -472,29 +494,7 @@
 				</div>
 
 				<!----edit-modal end--------->
-				<!----delete-modal start--------->
-				<div class="modal fade" tabindex="-1" id="deleteDirectoryModal" role="dialog">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">Xóa chi nhánh</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<p>Bạn có chắc chắn muốn xóa chi nhánh này không?</p>
-								<p class="text-warning"><small>hành động này không thể VÃN HỒI</small></p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-								<button type="button" class="btn btn-danger"></button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!----edit-modal end--------->
+				
 
 
 
@@ -525,7 +525,7 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		$(".xp-menubar").on('click', function () {
-			$("#sidebar").toggleClass('active');
+			$("#sidebar").togg   leClass('active');
 			$("#content").toggleClass('active');
 		});
 

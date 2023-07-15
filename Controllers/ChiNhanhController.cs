@@ -73,8 +73,8 @@ namespace VLPMall.Controllers
                     AnhDaiDien = result.Uri.ToString(),
                     Email = adminVM.chiNhanhViewModel.Email,
                     SoDienThoai = adminVM.chiNhanhViewModel.SoDienThoai,
-                    NgayHoatDong = adminVM.chiNhanhViewModel.NgayHoatDong,
-                    ThoiGianHoatDong = adminVM.chiNhanhViewModel.ThoiGianHoatDong,
+                    NgayHoatDong = adminVM.chiNhanhViewModel.NgayHoatDong1 + " - " + adminVM.chiNhanhViewModel.NgayHoatDong2,
+                    ThoiGianHoatDong = adminVM.chiNhanhViewModel.ThoiGianHoatDong1 + " - " + adminVM.chiNhanhViewModel.ThoiGianHoatDong2,
                     DiaChi = new DiaChi
                     {
                         Duong = adminVM.chiNhanhViewModel.DiaChi.Duong,
@@ -85,13 +85,100 @@ namespace VLPMall.Controllers
                 };
 
                 _directoryRepository.Add(chiNhanh);
-                return RedirectToAction("Index", "Admin");
+                return RedirectToAction("Index", "ChiNhanh");
             } else
             {
                 ModelState.AddModelError("", "Lỗi không xác định xảy ra");
             }
 
-            return RedirectToAction("Index", "ChiNhanh", adminVM);
+            return RedirectToAction("Index", "Admin", adminVM);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var chiNhanh = await _directoryRepository.GetByIdAsync(id);
+
+            var cuaHang = _directoryRepository.GetCuaHangByChiNhanh(id);
+
+            if (chiNhanh == null) { return View("Error"); }
+
+            var chiNhanhVM = new EditChiNhanhViewModel
+            {
+                Id = chiNhanh.Id,
+                TenChiNhanh = chiNhanh.TenChiNhanh,
+                NoiDung = chiNhanh.NoiDung,
+                AnhDaiDien = chiNhanh.AnhDaiDien,
+                Email = chiNhanh.Email,
+                SoDienThoai = chiNhanh.SoDienThoai,
+                NgayHoatDong = chiNhanh.NgayHoatDong,
+                ThoiGianHoatDong = chiNhanh.ThoiGianHoatDong,
+                MaDiaChi = chiNhanh.MaDiaChi,
+                DiaChi = chiNhanh.DiaChi,
+                CuaHangs = cuaHang
+            };
+
+            return View("EditChiNhanh", chiNhanhVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditChiNhanhViewModel chiNhanhVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Thất bại khi đang cập nhật chi nhánh");
+                return View("EditChiNhanh", chiNhanhVM);
+            }
+
+            var userChiNhanh = await _directoryRepository.GetByIdAsyncNoTracking(id);
+
+            var cuaHang = _directoryRepository.GetCuaHangByChiNhanh(id);
+
+            chiNhanhVM.CuaHangs = cuaHang;
+
+            if (userChiNhanh != null)
+            {
+                try
+                {
+                    await _photoService.DeletePhotoAsync(userChiNhanh.AnhDaiDien);
+                } catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Không thể xóa ảnh");
+                    return View("EditChiNhanh", chiNhanhVM);
+                }
+
+                var photoResult = await _photoService.AddPhotoAsync(chiNhanhVM.HinhDaiDien);
+
+                var chiNhanh = new ChiNhanh
+                {
+                    Id = id,
+                    TenChiNhanh = chiNhanhVM.TenChiNhanh,
+                    NoiDung = chiNhanhVM.NoiDung,
+                    AnhDaiDien = photoResult.Url.ToString(),
+                    Email = chiNhanhVM.Email,
+                    SoDienThoai = chiNhanhVM.SoDienThoai,
+                    NgayHoatDong = chiNhanhVM.NgayHoatDong,
+                    ThoiGianHoatDong = chiNhanhVM.ThoiGianHoatDong,
+                    DiaChi = chiNhanhVM.DiaChi
+                };
+
+                _directoryRepository.Update(chiNhanh);
+
+                return RedirectToAction("Index", "ChiNhanh");
+            } else
+            {
+                return View("EditChiNhanh", chiNhanhVM);
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteChiNhanh(int id)
+        {
+            var chiNhanh = await _directoryRepository.GetByIdAsync(id);
+            if (chiNhanh == null) { return View("Error"); }
+
+            _directoryRepository.Delete(chiNhanh);
+
+            return RedirectToAction("Index", "Admin");
         }
 	}
 }

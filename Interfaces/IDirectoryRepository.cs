@@ -7,6 +7,7 @@ namespace VLPMall.Interfaces
         List<ChiNhanh> GetAll();
         Task<IEnumerable<ChiNhanh>> GetAllAsync();
         Task<ChiNhanh> GetByIdAsync(int id);
+        Task<ChiNhanh> GetByIdAsyncNoTracking(int id);
         List<CuaHang> GetCuaHangByChiNhanh(int maChiNhanh);
         bool Add(ChiNhanh chiNhanh);
         bool Update(ChiNhanh chiNhanh);

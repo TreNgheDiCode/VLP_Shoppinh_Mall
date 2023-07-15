@@ -10,8 +10,10 @@ namespace VLPMall.ViewModels
 		public IFormFile? AnhDaiDien { get; set; }
 		public string? Email { get; set; }
 		public string? SoDienThoai { get; set; }
-		public string? NgayHoatDong { get; set; }
-		public string? ThoiGianHoatDong { get; set; }
+		public string? NgayHoatDong1 { get; set; }
+		public string? NgayHoatDong2 { get; set; }
+		public string? ThoiGianHoatDong1 { get; set; }
+		public string? ThoiGianHoatDong2 { get; set; }
 		public DiaChi? DiaChi { get; set; }
 		public string? UserId { get; set; }
 	}

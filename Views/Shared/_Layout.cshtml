@@ -20,17 +20,15 @@
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/VLPMall.styles.css" asp-append-version="true" />
-    <link href="~/css/dropdown.css" rel="stylesheet" />
     <link href="~/lib/fontawesome-free-6.4.0-web/css/all.css" rel="stylesheet" />
-    <link href="~/lib/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" />
     <link href="~/lib/icofont/icofont.min.css" rel="stylesheet" />
-    <link href="~/lib/aos-master/dist/aos.css" rel="stylesheet" />
     <link href="~/lib/owlcarousel2-2.3.4/dist/assets/owl.carousel.css" rel="stylesheet" />
-    <link href="~/lib/owlcarousel2-2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet" />
     <link href="~/lib/boxicons-2.1.4/css/animations.css" rel="stylesheet" />
     <link href="~/lib/boxicons-2.1.4/css/boxicons.css" rel="stylesheet" />
-    <link href="~/lib/boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="~/lib/boxicons-2.1.4/css/transformations.css" rel="stylesheet" />
+    <!--AOS-->
+    <link href="~/lib/aos-master/dist/aos.css" rel="stylesheet" />
+    <link href="~/css/dropdown.css" rel="stylesheet" />
     <style>
         .footer {
             line-height: 1rem !important;
@@ -45,25 +43,41 @@
         .nav-item {
             margin: 0 15px !important;
         }
+
+        .nav-pills .nav-item {
+            margin: 0 !important;
+        }
+
+        .xp-searchbar .btn {
+            font-size: 18px !important;
+        }
+
+        .modal-dialog {
+            max-width: 600px !important;
+        }
+
+        .nav-link {
+            color: white !important;
+        }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-danger px-3">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index" id="logo-text">VLP MALL</a>
+        <nav class="navbar navbar-expand-md bg-danger px-3">
+            <a class="navbar-brand text-white" asp-controller="Home" asp-action="Index" id="logo-text">VLP MALL</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                 <ul class="nav-menu navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item text-white">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Introduce" asp-action="IndexIntroduce">Giới thiệu</a>
                     </li>
                     <li class="nav-item drop-down">
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Danh mục<i class="fa fa-caret-down"></i></a>
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link" >Danh mục<i class="fa fa-caret-down"></i></a>
                         <ul>
                             <li class="drop-down">
                                 <a asp-area="" asp-controller="ChiNhanh" asp-action="Index" class="text-uppercase">Chi nhánh</a>
@@ -83,13 +97,73 @@
                                     {
                                         var name = Enum.GetName(typeof(LoaiCuaHang), item);
                                         <li class="drop-down">
-
-                                            <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">@name</a>
-                                            <ul>
-                                                <li class="">
-                                                    <a href="https://www.smsupermalls.com/shops/gadgets/applianceselectronicsgames" class="text-uppercase">Appliances/Electronics/Games</a>
-                                                </li>
-                                            </ul>
+                                            @switch (name)
+                                            {
+                                                case "AmThuc": 
+                                                    {
+                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Ẩm thực</a>
+                                                        <ul>
+                                                            @foreach (var amThucItem in Enum.GetValues(typeof (LoaiAmThuc)))
+                                                            {
+                                                                var amThuc = Enum.GetName(typeof(LoaiAmThuc), amThucItem);
+                                                                <li class="">
+                                                                    <a href="" class="text-uppercase">@amThuc</a>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    break;
+                                                    }
+                                                case "RapChieuPhim":
+                                                    {
+                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Rạp chiếu phim</a>
+                                                        <ul>
+                                                            <li class="">
+                                                                <a href="" class="text-uppercase">Đồ ăn nhanh</a>
+                                                            </li>
+                                                        </ul>
+                                                        break;
+                                                    }
+                                                case "GiaiTri":
+                                                    {
+                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Giải trí</a>
+                                                        <ul>
+                                                            <li class="">
+                                                                <a href="" class="text-uppercase">Đồ ăn nhanh</a>
+                                                            </li>
+                                                        </ul>
+                                                        break;
+                                                    }
+                                                case "TienIch":
+                                                    {
+                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Tiện ích</a>
+                                                        <ul>
+                                                            <li class="">
+                                                                <a href="" class="text-uppercase">Đồ ăn nhanh</a>
+                                                            </li>
+                                                        </ul>
+                                                        break;
+                                                    }
+                                                case "DichVu":
+                                                    {
+                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Dịch vụ</a>
+                                                        <ul>
+                                                            <li class="">
+                                                                <a href="" class="text-uppercase">Đồ ăn nhanh</a>
+                                                            </li>
+                                                        </ul>
+                                                        break;
+                                                    }
+                                                case "MuaSam":
+                                                    {
+                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Mua sắm</a>
+                                                        <ul>
+                                                            <li class="">
+                                                                <a href="" class="text-uppercase">Đồ ăn nhanh</a>
+                                                            </li>
+                                                        </ul>
+                                                        break;
+                                                    }
+                                            } 
                                         </li>
                                     }
                                 </ul>
@@ -97,7 +171,7 @@
                         </ul>
                     </li>
                     <li class="nav-item drop-down">
-                        <a href="https://www.smsupermalls.com/#sm-malls" class="nav-link">Danh mục <i class="fa fa-caret-down"></i></a>
+                        <a href="https://www.smsupermalls.com/#sm-malls" class="nav-link">Hoạt động <i class="fa fa-caret-down"></i></a>
                         <ul>
                             @foreach (var item in Enum.GetValues(typeof(LoaiHoatDong)))
                             {
@@ -128,6 +202,7 @@
                     } else
                     {
                         <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-light">Bảng điều khiển</a>
                             <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Login">Đăng nhập</a>
                             <span>&nbsp;hoặc&nbsp;</span>
                             <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Register">Đăng ký</a>
@@ -198,14 +273,13 @@
             </div>
         </div>
     </footer>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/jquery-3.3.1.slim.min.js" asp-append-version="true"></script>
+    <script src="~/js/popper.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/lib/owlcarousel2-2.3.4/dist/owl.carousel.js"></script>
-    <script src="~/lib/owlcarousel2-2.3.4/dist/owl.carousel.min.js"></script>
     <script src="~/lib/aos-master/dist/aos.js"></script>
+    <script src="~/lib/owlcarousel2-2.3.4/dist/owl.carousel.js"></script>
     <script src="~/lib/fontawesome-free-6.4.0-web/js/all.js"></script>
-    <script src="~/lib/fontawesome-free-6.4.0-web/js/all.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
 </body>
 </html>

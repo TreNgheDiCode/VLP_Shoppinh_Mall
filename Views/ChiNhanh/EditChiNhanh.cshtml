@@ -1,17 +1,17 @@
 ﻿@using VLPMall.ViewModels;
-@model ChiNhanhViewModel;
+@model EditChiNhanhViewModel
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
-
 <style>
     .row {
         padding-right: 0;
         padding-left: 0;
     }
+
     .nav-pills .nav-link {
         padding: 0;
         margin: 0 !important;
@@ -21,39 +21,47 @@
 <section class="py-4">
     <div class="row">
         <div class="col-md-12 px-0 px-md-1">
-            <div style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb"  id="breadcrumbs" class="container-fluid">
+            <div style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" id="breadcrumbs" class="container-fluid">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a asp-controller="Home" asp-action="Index">
                             <span class="fa fa-home"></span>
-                        </a> 
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a asp-controller="ChiNhanh" asp-action="Index">
-                            @if (@ViewContext.RouteData.Values["controller"].ToString() == "ChiNhanh")
-                            {
-                                <span>Chi Nhánh</span>
-                            }
                         </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a asp-controller="ChiNhanh" asp-action="Index">
-                            @if (@ViewContext.RouteData.Values["action"].ToString() == "Information")
-                            {
-                                <span>@Model.TenChiNhanh</span>
-                            }
-                        </a>
+                        @if (@ViewContext.RouteData.Values["controller"].ToString() == "Information")
+                        {
+                            <a asp-controller="ChiNhanh" asp-action="Index">
+                                <span>Thông tin @Model.TenChiNhanh</span>
+                            </a>
+                        }
+                        else if (@ViewContext.RouteData.Values["action"].ToString() == "Edit")
+                        {
+                            <a asp-controller="Admin" asp-action="Index">
+                                <span>Bảng điều khiển</span>
+                            </a>
+                        }
                     </li>
+                    <li class="breadcrumb-item">
+                        @if (@ViewContext.RouteData.Values["action"].ToString() == "Information")
+                        {
+                            <a asp-controller="ChiNhanh" asp-action="Information" asp-route-id="@Model.Id">
+                                <span>Thông tin @Model.TenChiNhanh</span>
+                            </a>
+                        } else if (@ViewContext.RouteData.Values["action"].ToString() == "Edit")
+                        {
+                            <a asp-controller="ChiNhanh" asp-action="Edit" asp-route-id="@Model.Id">
+                                <span>Cập nhật @Model.TenChiNhanh</span>
+                            </a>
+                        }
+                    </li>
+                </ul>
             </div>
             <div class="container-fluid">
-                <div class="row aos-init aos-animate" data-aos ="fade-up">
+                <div class="row aos-init aos-animate" data-aos="fade-up">
                     <div class="col-12 col-md-4 shadow p-3 mb-5 bg-white rounded">
                         <div class="left-mall-details p-3">
                             <img src="@Model.AnhDaiDien" alt="@Model.TenChiNhanh" class="img-fluid d-none d-lg-block" />
-                            <div class="my-3">
-                                <h4>@Model.TenChiNhanh</h4>
-                                <p>@Model.NoiDung</p>
-                            </div>
                             <div class="my-3">
                                 <h4>Địa Chỉ</h4>
                                 <hr />
@@ -96,6 +104,11 @@
                                         <br />
                                     </div>
                                 </div>
+                                <hr />
+                            </div>
+                            <div class="my-3">
+                                <a href="#CapNhatChiNhanh" class="edit btn btn-outline-warning mx-3" data-toggle="modal">Cập nhật</a>
+                                <a href="#XoaChiNhanh" class="delete btn btn-outline-danger mx-3" data-toggle="modal">Xóa</a>
                             </div>
                         </div>
                     </div>
@@ -107,7 +120,7 @@
                             <div class="row mall-location-buttons">
                                 <div class="col-4 px-1 px-md-4 text-center ">
                                     <a target="_blank" href="https://goo.gl/maps/Rtyzkvk8N5CGHFGW6" type="button" class="btn button-white btn-block button-round button-shadow align-content-middle py-2 btn-sm text-uppercase font-medium shadow p-2 mb-3 bg-white rounded">
-                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-direction.jpg" class="d-inline-block align-middle mx-2" style="width: 50px; height: auto;" align ="middle" />
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-direction.jpg" class="d-inline-block align-middle mx-2" style="width: 50px; height: auto;" align="middle" />
                                         <strong class="d-inline-block">ĐƯỜNG ĐI</strong>
                                     </a>
                                 </div>
@@ -316,7 +329,7 @@
                             </div>
                             <hr />
                             <div class="mx-2">
-                                <a asp-controller="ChiNhanh" asp-action="Information" asp-route-id="@Model.Id" class="text-black h6">Tất cả</a>
+                                <a href="#" class="text-black h6">Tất cả</a>
                             </div>
                             <div id="brand_list" class="panel-group">
                                 <div class="tab-content pt-2" id="pills-tabContent">
@@ -350,3 +363,113 @@
         </div>
     </div>
 </section>
+
+<!----edit-modal start--------->
+<div class="modal fade" tabindex="-1" id="CapNhatChiNhanh" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form method="post" asp-action="Edit" enctype="multipart/form-data" class="modal-content">
+            <input asp-for="AnhDaiDien" type="hidden" value="@Model.AnhDaiDien" id="AnhDaiDien" />
+            <input asp-for="CuaHangs" type="hidden" />
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="TenChiNhanh">Tên chi nhánh</label>
+                    <input asp-for="TenChiNhanh" class="form-control" placeholder="Title">
+                    <span asp-validation-for="TenChiNhanh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NoiDung">Nội dung</label>
+                    <textarea asp-for="NoiDung" class="form-control" placeholder="Title"></textarea>
+                    <span asp-validation-for="NoiDung" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HinhDaiDien">Hình đại diện</label>
+                    <input asp-for="HinhDaiDien" type="file" class="form-control" placeholder="Image">
+                    <span asp-validation-for="HinhDaiDien" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email">Email</label>
+                    <input asp-for="Email" class="form-control" placeholder="Title">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SoDienThoai">Số điện thoại</label>
+                    <input asp-for="SoDienThoai" class="form-control" placeholder="Title">
+                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NgayHoatDong">Ngày hoạt động</label>
+                    <input asp-for="NgayHoatDong" class="form-control" placeholder="Title">
+                    <span asp-validation-for="NgayHoatDong" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ThoiGianHoatDong">Thời gian hoạt động</label>
+                    <input asp-for="ThoiGianHoatDong" class="form-control" placeholder="Title">
+                    <span asp-validation-for="ThoiGianHoatDong" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <div class="row">
+                        <div class="col-12">
+                            <label asp-for="@Model.DiaChi.Duong">Tên đường &amp; Số nhà</label>
+                            <input asp-for="@Model.DiaChi.Duong" type="text" class="form-control" placeholder="Tên đường &amp; Số nhà">
+                            <span asp-validation-for="@Model.DiaChi.Duong" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label asp-for="DiaChi.Phuong">Phường</label>
+                            <input asp-for="DiaChi.Phuong" type="text" class="form-control" placeholder="Phường">
+                            <span asp-validation-for="DiaChi.Phuong" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="DiaChi.Quan">Quận</label>
+                            <input asp-for="DiaChi.Quan" type="text" class="form-control" placeholder="Quận">
+                            <span asp-validation-for="DiaChi.Quan" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label asp-for="DiaChi.ThanhPho">Thành phố</label>
+                            <input asp-for="DiaChi.ThanhPho" type="text" class="form-control" placeholder="Thành phố">
+                            <span asp-validation-for="DiaChi.ThanhPho" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-success">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!----edit-modal end--------->
+<!----delete-modal start--------->
+<div class="modal fade" tabindex="-1" id="XoaChiNhanh" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form method="post" asp-action="Delete" enctype="multipart/form-data" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa chi nhánh</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa chi nhánh này không?</p>
+                <p class="text-danger"><strong>Hành động này không thể VÃN HỒI</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button asp-controller="ChiNhanh" asp-action="Delete" asp-route-id="@Model.Id" type="submit" class="btn btn-danger">Đồng ý</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!----delete-modal end--------->
+

@@ -20,6 +20,7 @@ namespace VLPMall.Models
         public string? UserId { get; set; }
         public User? User { get; set; }
         public LoaiCuaHang LoaiCuaHang { get; set; }
+        public LoaiAmThuc? LoaiAmThuc { get; set; }
 
         // Liên kết nhiều nhiều
         public ICollection<ChiNhanhCuaHang>? ChiNhanhCuaHang { get; set; }

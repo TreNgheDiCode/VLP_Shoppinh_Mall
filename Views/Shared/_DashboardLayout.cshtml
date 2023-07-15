@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <!--Bootstrap-->
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/custom.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome-free-6.4.0-web/css/all.css" rel="stylesheet" />
     <!--AOS-->
     <link href="~/lib/aos-master/dist/aos.css" rel="stylesheet" />
-    <!--CSS-->
-    <link href="~/css/custom.css" rel="stylesheet" />
     <!--Template-->
     <link href="~/lib/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" />
     <link href="~/lib/icofont/icofont.min.css" rel="stylesheet" />
@@ -36,10 +36,13 @@
     <div>
         @RenderBody()
     </div>
-    <script src="~/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/jquery-3.3.1.slim.min.js" asp-append-version="true"></script>
+    <script src="~/js/popper.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/aos-master/dist/aos.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/lib/owlcarousel2-2.3.4/dist/owl.carousel.js"></script>
+    <script src="~/lib/fontawesome-free-6.4.0-web/js/all.js"></script>
+    <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/js/jquery-3.3.1.min.js"></script>
 </body>
 </html>

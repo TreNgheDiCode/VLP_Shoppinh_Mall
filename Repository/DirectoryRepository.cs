@@ -43,6 +43,11 @@ namespace VLPMall.Repository
             return await _context.ChiNhanh.Include(a => a.DiaChi).FirstOrDefaultAsync(i => i.Id == id);
         }
 
+        public async Task<ChiNhanh> GetByIdAsyncNoTracking(int id)
+        {
+            return await _context.ChiNhanh.Include(a => a.DiaChi).AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
+        }
+
         public List<CuaHang> GetCuaHangByChiNhanh(int id)
         {
             return _context.ChiNhanhCuaHang.Where(a => a.ChiNhanh.Id == id).Select(s => s.CuaHang).ToList();

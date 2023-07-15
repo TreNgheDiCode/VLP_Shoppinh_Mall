@@ -103,8 +103,8 @@ body,html{
   
   .wrapper{
 	position:relative;
-width:100%;
-overflow:auto;	
+	width:100%;
+	overflow:auto;	
   }
   
   /*=========sidebar---design------*/
@@ -396,26 +396,8 @@ background-color:rgba(0,0,0,0.09);
 		  }
 	  }
 	  
-	  .navbar-nav > li.show .dropdown-menu{
-		  transform:translate3d(0,0,0);
-		  opacity:1;
-		  display:block;
-		  visibility:visible;
-	  }
+
 	  
-	  .dropdown-menu{
-		  border:0;
-		  box-shadow:0 2px 5px 0 rgba(0 0 0 / 26%);
-		  transform:translate3d(0, -20px ,0);
-		  visibility:hidden;
-		  position:absolute!important;
-		  transition:all 150ms linear;
-		  display:block;
-		  min-width:15rem;
-		  right:0;
-		  left:auto;
-		  opacity:0;
-	  }
 	  
 	  .small-menu{
 		  min-width:10rem;
@@ -796,19 +778,3 @@ background-color:rgba(0,0,0,0.09);
 			background-color:rgba(0,0,0,0.5);
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-  
