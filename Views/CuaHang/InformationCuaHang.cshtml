@@ -1,0 +1,142 @@
+﻿@using VLPMall.Interfaces;
+@using VLPMall.ViewModels;
+@model InformationCuaHangVIewModel
+
+@inject IStoreRepository CuaHang;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var directories = await CuaHang.GetChiNhanhByCuaHang(Model.Id);
+}
+
+<style>
+    .container {
+        max-width: 100% !important;
+        margin: 0;
+        padding: 0;
+    }
+    .img-responsive {
+        max-width: 100%
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 offset-md-1 px-0 px-md-1">
+            <div id="breadcrumbs" class="container-fluid">
+                <ul class="breadcrumb"><li><a href="https://www.smsupermalls.com/"><span class="fa fa-home"></span></a> </li><li><a href="https://www.smsupermalls.com/mall-directory">Chi nhánh</a> </li><li><a href="https://www.smsupermalls.com/mall-directory/visayas/">Visayas</a> </li><li><a href="https://www.smsupermalls.com/mall-directory/sm-seaside-city-cebu/information/">SM Seaside City Cebu</a> </li></ul>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 flexing">
+                        <img src="@Model.AnhDaiDien" alt="@Model.TemCuaHang" class="img-responsive tenant-logo">
+                    </div>
+
+                    <div class="col-md-6">
+                        <div>
+                            <div class="clearfix form-group">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h2 class="display-name">@Model.TemCuaHang.ToUpper()</h2>
+                                    </div>
+                                    <div class="col-md-4 text-left text-md-end soc-med my-3 my-md-0">
+                                        <a href="https://www.facebook.com/Benscookies" target="_blank" class="btn button-circle button-small bg-black text-white"><i class="fa-brands fa-facebook-f"></i></a>
+                                        <a href="https://www.instagram.com/Benscookies/" target="_blank" class="btn button-circle button-small bg-black text-white"><i class="fa-brands fa-instagram"></i></a>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="space-10"></div>
+                                        <p class="container-fluid">
+                                            @Model.NoiDung.                                                            <a href="https://www.benscookies.com/shop/" target="_blank" class="container-fluid">Xem trang chủ</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+
+                                            <div class="col-md-5">
+                                                <h5>NGÀY HOẠT ĐỘNG: </h5>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@Model.NgayHoatDong</p>
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <h5>KHUNG GIỜ HOẠT ĐỘNG: </h5>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@Model.ThoiGianHoatDong</p>
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <h5>ĐỊA CHỈ EMAIL: </h5>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@Model.Email</p>
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <h5>ĐIỆN THOẠI: </h5>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@Model.SoDienThoai</p>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <h5>LOẠI: </h5>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@Model.LoaiCuaHang - @Model.LoaiAmThuc</p>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <h5>ĐỊA ĐIỂM: </h5>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@Model.DiaDiem</p>
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <!-- Split dropend button -->
+                                                <div class="btn-group dropend">
+                                                    <button type="button" class="btn btn-outline-success">
+                                                        Chi nhánh
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <span class="visually-hidden">Toggle Dropend</span>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <!-- Dropdown menu links -->
+                                                        @foreach(var item in directories)
+                                                        {
+                                                            <a class="dropdown-item" href="#">@item.TenChiNhanh</a>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix form-group">
+                                <div class="row">
+                                    <div class="col-md-12 alert-tab">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,212 @@
+﻿@using VLPMall.Data.Enum;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<link href="~/css/shops.css" rel="stylesheet" />
+
+<style>
+    .container {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+    }
+</style>
+
+
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#F37F34" /></svg>
+
+            <div class="container">
+                <div class="carousel-caption text-start">
+                    <h1>Chi nhánh.</h1>
+                    <p>Trung tâm thương mại VLP Mall.</p>
+                    <p><a class="btn btn-lg btn-primary" asp-area="" asp-controller="Agency" asp-action="IndexAgency">Khám phá ngay</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#F3627D" /></svg>
+
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Đăng nhập.</h1>
+                    <p>Đăng nhập ngay để hưởng những ưu đãi chỉ riêng mình bạn có</p>
+                    <p><a class="btn btn-lg btn-primary" href="#">Đăng ký</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#F132DE" /></svg>
+
+            <div class="container">
+                <div class="carousel-caption text-end">
+                    <h1>Đánh giá.</h1>
+                    <p>Nếu bạn yêu thích chúng tôi hãy để lại một đánh giá nhé.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#">Đánh giá</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 offset-md-1 px-0 px-md-1">
+            <div id="breadcrumbs" class="container-fluid">
+                <ul class="breadcrumb"><li><a href="https://www.smsupermalls.com/"><span class="fa fa-home"></span></a> </li><li><a href="https://www.smsupermalls.com/shops">Shops</a> </li></ul>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="d-none">
+                        <h1>Shops</h1>
+                    </div>
+                    <div class="col-lg-8 col-xl-9">
+
+                        <div class="clearfix">
+                            <div class="row px-lg-3">
+                                @foreach (var item in Enum.GetValues(typeof(LoaiCuaHang)))
+                                {
+                                    var name = Enum.GetName(typeof(LoaiCuaHang), item);
+                                    switch (name)
+                                    {
+                                        case "AmThuc":
+                                            {
+                                                <div class="col-xs-12 col-md-6 p-0 m-0 shop-category-wrapper">
+                                                    <div class="shop-category category-header shop-dining">
+                                                        <a asp-controller="AmThuc" asp-action="AmThuc" class="text-white">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <div class="h2 font-medium text-capitalize">Ẩm thực</div>
+                                                                </div>
+                                                                <div class="col-4 text-right">
+                                                                    <i class="h1 m-0 p-0 fa-solid fa-arrow-right"></i>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                break;
+                                            }
+                                        case "RapChieuPhim":
+                                            {
+                                                <div class="col-xs-12 col-md-6 p-0 m-0 shop-category-wrapper">
+                                                    <div class="shop-category category-header shop-cinema">
+                                                        <a href="https://www.smsupermalls.com/shops/dining" class="text-white">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <div class="h2 font-medium text-capitalize">Cinema</div>
+                                                                </div>
+                                                                <div class="col-4 text-right">
+                                                                    <i class="h1 m-0 p-0 fa-solid fa-arrow-right"></i>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                break;
+                                            }
+                                        case "GiaiTri":
+                                            {
+                                                <div class="col-xs-12 col-md-6 p-0 m-0 shop-category-wrapper">
+                                                    <div class="shop-category category-header shop-entertainment">
+                                                        <a href="https://www.smsupermalls.com/shops/dining" class="text-white">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <div class="h2 font-medium text-capitalize">Giải trí</div>
+                                                                </div>
+                                                                <div class="col-4 text-right">
+                                                                    <i class="h1 m-0 p-0 fa-solid fa-arrow-right"></i>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                break;
+                                            }
+                                        case "TienIch":
+                                            {
+                                                <div class="col-xs-12 col-md-6 p-0 m-0 shop-category-wrapper">
+                                                    <div class="shop-category category-header shop-gadget">
+                                                        <a href="https://www.smsupermalls.com/shops/dining" class="text-white">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <div class="h2 font-medium text-capitalize">Tiện ích</div>
+                                                                </div>
+                                                                <div class="col-4 text-right">
+                                                                    <i class="h1 m-0 p-0 fa-solid fa-arrow-right"></i>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                break;
+                                            }
+                                        case "DichVu":
+                                            {
+                                                <div class="col-xs-12 col-md-6 p-0 m-0 shop-category-wrapper">
+                                                    <div class="shop-category category-header shop-service">
+                                                        <a href="https://www.smsupermalls.com/shops/dining" class="text-white">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <div class="h2 font-medium text-capitalize">Dịch vụ</div>
+                                                                </div>
+                                                                <div class="col-4 text-right">
+                                                                    <i class="h1 m-0 p-0 fa-solid fa-arrow-right"></i>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                break;
+                                            }
+                                        case "MuaSam":
+                                            {
+                                                <div class="col-xs-12 col-md-6 p-0 m-0 shop-category-wrapper">
+                                                    <div class="shop-category category-header shop-shopping">
+                                                        <a href="https://www.smsupermalls.com/shops/dining" class="text-white">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <div class="h2 font-medium text-capitalize">Mua sắm</div>
+                                                                </div>
+                                                                <div class="col-4 text-right">
+                                                                    <i class="h1 m-0 p-0 fa-solid fa-arrow-right"></i>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                break;
+                                            }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-3 d-none d-lg-block">
+                        <div class="bg-light-gray py-3 px-4">
+                            <div><div class="h4 font-bold mb-3">Latest</div><ul class="list-group latest-news"><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/flash-deals-alert-here-are-the-best-treats-you-can-get-at-sm-deals-birthday-blowout" class="text-black font-bold">Flash Deals Alert: Here are the Best Treats You Can Get at SM Deals Birthday Blowout</a><br><small class="text-muted">13 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/experience-how-to-live-like-barbie-in-barbie-land-at-sm-mall-of-asia" class="text-black font-bold">EXPERIENCE HOW TO LIVE LIKE “BARBIE” IN BARBIE LAND AT SM MALL OF ASIA </a><br><small class="text-muted">13 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/mall-sale-events/3-day-sale-july14-16" class="text-black font-bold">3 Day Sale: July 14 - 16</a><br><small class="text-muted">11 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/sm-city-baguio-set-to-convert-rainwater-to-potable-water" class="text-black font-bold">SM City Baguio set to convert rainwater to potable water</a><br><small class="text-muted">8 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/let-your-kids-shine-the-brightest-at-sm-little-stars-2023" class="text-black font-bold">Let your kids shine the brightest at SM Little Stars 2023</a><br><small class="text-muted">7 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/auro-world-chocolate-fair-is-back-at-s-maison-at-conrad-manila" class="text-black font-bold">Auro World Chocolate Fair is back at S Maison at Conrad Manila</a><br><small class="text-muted">7 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/movie-guide-experience-awe-sm-thrills-at-sm-cinema-this-july" class="text-black font-bold">MOVIE GUIDE: Experience AweSM thrills at SM Cinema this July!</a><br><small class="text-muted">7 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/where-to-buy-10-yummy-eats-to-pair-with-your-coffee" class="text-black font-bold">Where to Buy: 10 Yummy Eats to Pair with Your Coffee</a><br><small class="text-muted">7 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/whats-hot-parachute-cargo-and-denims" class="text-black font-bold">What's HOT: Parachute, Cargo, and Denims</a><br><small class="text-muted">6 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/5-must-try-cafes-at-sm-city-clark" class="text-black font-bold">5 Must-Try Cafes at SM City Clark</a><br><small class="text-muted">5 Jul 2023</small></div></li></ul></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

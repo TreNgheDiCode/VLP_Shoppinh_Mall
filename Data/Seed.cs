@@ -47,7 +47,8 @@ namespace VLPMall.Data
                                         SoDienThoai = "0763615414",
                                         NgayHoatDong = "Thứ Hai - Chủ Nhật",
                                         ThoiGianHoatDong = "08:00 - 21:00",
-                                        LoaiCuaHang = LoaiCuaHang.AmThuc
+                                        LoaiCuaHang = LoaiCuaHang.AmThuc,
+                                        LoaiAmThuc = LoaiAmThuc.DoAnNhanh
                                     }
                                 },
                                 new ChiNhanhCuaHang
@@ -61,7 +62,8 @@ namespace VLPMall.Data
                                         SoDienThoai = "0763615414",
                                         NgayHoatDong = "Thứ Hai - Chủ Nhật",
                                         ThoiGianHoatDong = "08:00 - 21:00",
-                                        LoaiCuaHang = LoaiCuaHang.RapChieuPhim
+                                        LoaiCuaHang = LoaiCuaHang.RapChieuPhim,
+                                        LoaiRapChieuPhim = LoaiRapChieuPhim.FullHD
                                     }
                                 }
                             }
@@ -81,37 +83,6 @@ namespace VLPMall.Data
                                 Phuong = "Phường Tân Xuân",
                                 Quan = "Thị trấn Hóc Môn",
                                 ThanhPho = "Thành phố Hồ Chí Minh",
-                            },
-                            ChiNhanhCuaHang = new List<ChiNhanhCuaHang>()
-                            {
-                                new ChiNhanhCuaHang
-                                {
-                                    CuaHang = new CuaHang()
-                                    {
-                                        TenCuaHang = "Lotteria Việt Nam",
-                                        NoiDung = "Cửa hàng gà rán thơm ngon",
-                                        AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688909823/Chi%E1%BA%BFc_%C3%B4__11_aqmzoj.jpg",
-                                        Email = "gabayan170@gmail.com",
-                                        SoDienThoai = "0763615414",
-                                        NgayHoatDong = "Thứ Hai - Chủ Nhật",
-                                        ThoiGianHoatDong = "08:00 - 21:00",
-                                        LoaiCuaHang = LoaiCuaHang.AmThuc
-                                    }
-                                },
-                                new ChiNhanhCuaHang
-                                {
-                                    CuaHang = new CuaHang()
-                                    {
-                                        TenCuaHang = "CGV Vietnam",
-                                        NoiDung = "Đi xem phim khum",
-                                        AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688909823/Chi%E1%BA%BFc_%C3%B4__11_aqmzoj.jpg",
-                                        Email = "gabayan170@gmail.com",
-                                        SoDienThoai = "0763615414",
-                                        NgayHoatDong = "Thứ Hai - Chủ Nhật",
-                                        ThoiGianHoatDong = "08:00 - 21:00",
-                                        LoaiCuaHang = LoaiCuaHang.RapChieuPhim
-                                    }
-                                }
                             }
                         }
                     });

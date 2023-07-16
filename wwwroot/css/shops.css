@@ -1,0 +1,143 @@
+﻿a.shop-category:hover img.category-thumb-default {
+    display: none !important;
+}
+
+a.shop-category img.category-thumb-active {
+    display: none !important;
+}
+
+a.shop-category:hover img.category-thumb-active {
+    display: block !important;
+}
+
+a.shop-filter-by-initial {
+    display: inline-block;
+}
+
+input#searchshop.form-control {
+    background-repeat: no-repeat !important;
+    background-position: center right !important;
+    padding: 6px 40px 6px 15px !important;
+    border-color: #bbb !important;
+}
+
+.shop-category-wrapper {
+    background-origin: border-box !important;
+}
+
+.shop-category.shop-dining {
+    background-color: yellowgreen !important;
+}
+
+.shop-category.shop-cinema {
+    background-color: hotpink !important;
+}
+
+.shop-category.shop-entertainment {
+    background-color: orange !important;
+}
+
+.shop-category.shop-gadget {
+    background-color: teal !important;
+}
+
+.shop-category.shop-service {
+    background-color: mediumpurple !important;
+}
+
+.shop-category.shop-shopping {
+    background-color: blue !important;
+}
+
+.shop-category.category-header {
+    background-image: url(https://www.smsupermalls.com/themes/revamp2022/assets/img/cicle-pattern.png);
+    background-repeat: repeat-y;
+    background-position: center top;
+    margin: 0 10px 20px;
+    padding: 33px 50px;
+    border-radius: 10px;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+
+.shop-category {
+    background-origin: border-box;
+}
+
+@media(min-width: 320px) {
+    .subcategories {
+        -webkit-column-count: 1; /* Chrome, Safari, Opera */
+        -moz-column-count: 1; /* Firefox */
+        column-count: 1 !important;
+    }
+
+    a.shop-filter-by-initial {
+        padding: 0 3px;
+    }
+}
+
+@media(min-width: 768px) {
+    .subcategories {
+        -webkit-column-count: 2; /* Chrome, Safari, Opera */
+        -moz-column-count: 2; /* Firefox */
+        column-count: 2 !important;
+    }
+
+    a.shop-filter-by-initial {
+        padding: 0 1px;
+    }
+}
+
+#mall_search {
+    padding: 6px 10px;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+}
+
+#mall_search input:focus, #mall_search input:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.mall-icon-box .card {
+    min-height: 154px;
+}
+
+#brand_search {
+    overflow: hidden;
+}
+
+.filter-first-letter {
+    display: flex;
+    justify-content: space-around;
+}
+
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+.mall-title {
+    font-size: 2rem;
+    font-family: var(--font-family-henry-medium);
+    font-weight: 400;
+}
+
+.mall-tabs li {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 200px;
+    width: 14%;
+    margin: 0 4px;
+    vertical-align: middle;
+    display: inline !important;
+}
+
+    .mall-tabs li .nav-link {
+        padding: 15px 10px !important;
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+
+        .mall-tabs li .nav-link h6 {
+            font-size: 0.85rem !important;
+        }

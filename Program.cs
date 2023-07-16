@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IDirectoryRepository, DirectoryRepository>();
+builder.Services.AddScoped<IStoreRepository, StoreRepository>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
@@ -32,8 +33,8 @@ var app = builder.Build();
 
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
 {
+    Seed.SeedData(app);
     await Seed.SeedUsersAndRolesAsync(app);
-    //Seed.SeedData(app);
 }
 
 // Configure the HTTP request pipeline.
@@ -54,6 +55,11 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+app.MapControllerRoute(
+    name: "CuaHang",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{name?}"
+    );
 
 app.Run();

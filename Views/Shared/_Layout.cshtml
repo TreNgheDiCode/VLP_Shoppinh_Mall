@@ -60,6 +60,11 @@
             color: white !important;
         }
     </style>
+
+    <style type="text/css">
+        a.shop-category img.category-thumb-default {
+            display: block !important;
+    </style>
 </head>
 <body>
     <header>
@@ -91,7 +96,7 @@
                                 </ul>
                             </li>
                             <li class="drop-down">
-                                <a href="https://www.smsupermalls.com/shops" class="text-uppercase">Cửa hàng</a>
+                                <a asp-controller="CuaHang" asp-action="Index" class="text-uppercase">Cửa hàng</a>
                                 <ul>
                                     @foreach (var item in Enum.GetValues(typeof(LoaiCuaHang)))
                                     {
@@ -273,13 +278,17 @@
             </div>
         </div>
     </footer>
-    <script src="~/js/jquery-3.3.1.slim.min.js" asp-append-version="true"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+            crossorigin="anonymous"></script>
+    <script src="~/js/jquery-3.3.1.slim.min.js"></script>
     <script src="~/js/popper.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/aos-master/dist/aos.js"></script>
     <script src="~/lib/owlcarousel2-2.3.4/dist/owl.carousel.js"></script>
     <script src="~/lib/fontawesome-free-6.4.0-web/js/all.js"></script>
     <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
-    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
