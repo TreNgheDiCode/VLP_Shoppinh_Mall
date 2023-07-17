@@ -15,7 +15,34 @@ namespace VLPMall.Repository
             _context = dataContext;
         }
 
-        public async Task<IEnumerable<CuaHang>> GetAllAsync()
+		public bool Add(CuaHang cuaHang, int maChiNhanh)
+		{
+			var chiNhanh = _context.ChiNhanh.Where(a => a.Id == maChiNhanh).FirstOrDefault();
+
+			var chiNhanhCuaHang = new ChiNhanhCuaHang
+			{
+				ChiNhanh = chiNhanh,
+				CuaHang = cuaHang
+			};
+
+			_context.Add(chiNhanhCuaHang);
+
+            return Save();
+		}
+
+		public bool Delete(CuaHang cuaHang)
+		{
+			_context.Remove(cuaHang);
+
+            return Save();
+		}
+
+		public IEnumerable<CuaHang> GetAll()
+		{
+			return _context.CuaHang.ToList();
+		}
+
+		public async Task<IEnumerable<CuaHang>> GetAllAsync()
         {
             return await _context.CuaHang.ToListAsync();
         }
@@ -49,5 +76,19 @@ namespace VLPMall.Repository
         {
             throw new NotImplementedException();
         }
-    }
+
+		public bool Save()
+		{
+			var saved = _context.SaveChanges();
+
+            return saved > 0 ? true : false;
+		}
+
+		public bool Update(CuaHang cuaHang)
+		{
+			_context.Update(cuaHang);
+
+            return Save();
+		}
+	}
 }

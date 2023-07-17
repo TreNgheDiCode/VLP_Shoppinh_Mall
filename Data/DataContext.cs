@@ -27,7 +27,7 @@ namespace VLPMall.Data
 
             builder.Entity<ChiNhanhCuaHang>()
                 .HasOne(s => s.CuaHang)
-                .WithMany(_as => _as.ChiNhanhCuaHang)
+                .WithMany(_as => _as.ChiNhanhCuaHangs)
                 .HasForeignKey(s => s.MaCuaHang);
         }
     }
