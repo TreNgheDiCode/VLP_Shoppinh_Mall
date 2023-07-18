@@ -6,7 +6,6 @@ namespace VLPMall.ViewModels
 {
 	public class CreateCuaHangViewModel
 	{
-        public int Id { get; set; }
         public string? TenCuaHang { get; set; }
         public string? NoiDung { get; set; }
         public IFormFile? AnhDaiDien { get; set; }
@@ -22,6 +21,5 @@ namespace VLPMall.ViewModels
 		public LoaiRapChieuPhim? LoaiRapChieuPhim { get; set; }
         public ICollection<ChiNhanh>? ChiNhanhs { get; set; }
         public List<int>? SelectedChiNhanh { get; set; }
-        public SelectList? ChiNhanhSelectList { get; set; }
 	}
 }

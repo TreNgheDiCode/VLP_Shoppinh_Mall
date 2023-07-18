@@ -16,7 +16,6 @@ namespace VLPMall.Models
         public string? SoDienThoai { get; set; }
         public string? NgayHoatDong { get; set; }
         public string? ThoiGianHoatDong { get; set; }
-        public string? DiaDiem { get; set; }
         [ForeignKey("User")]
         public string? UserId { get; set; }
         public User? User { get; set; }

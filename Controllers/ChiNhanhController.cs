@@ -84,7 +84,13 @@ namespace VLPMall.Controllers
                     }
                 };
 
-                _directoryRepository.Add(chiNhanh);
+                var cuaHangId = adminVM.chiNhanhViewModel.SelectedCuaHang;
+
+                foreach(var item in cuaHangId)
+                {
+                    _directoryRepository.Add(chiNhanh, item);
+                }
+
                 return RedirectToAction("Index", "ChiNhanh");
             } else
             {

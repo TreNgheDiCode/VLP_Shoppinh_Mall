@@ -9,7 +9,7 @@ namespace VLPMall.Interfaces
         Task<ChiNhanh> GetByIdAsync(int id);
         Task<ChiNhanh> GetByIdAsyncNoTracking(int id);
         List<CuaHang> GetCuaHangByChiNhanh(int maChiNhanh);
-        bool Add(ChiNhanh chiNhanh);
+        bool Add(ChiNhanh chiNhanh, int maCuaHang);
         bool Update(ChiNhanh chiNhanh);
         bool Delete(ChiNhanh chiNhanh);
         bool Save();

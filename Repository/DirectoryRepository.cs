@@ -14,9 +14,17 @@ namespace VLPMall.Repository
             _context = context;
         }
 
-        public bool Add(ChiNhanh chiNhanh)
+        public bool Add(ChiNhanh chiNhanh, int maCuaHang)
         {
-            _context.Add(chiNhanh);
+            var cuaHang = _context.CuaHang.Where(s => s.Id == maCuaHang).FirstOrDefault();
+
+            var chiNhanhCuaHang = new ChiNhanhCuaHang
+            {
+                ChiNhanh = chiNhanh,
+                CuaHang = cuaHang
+            };
+
+            _context.Add(chiNhanhCuaHang);
 
             return Save();
         }

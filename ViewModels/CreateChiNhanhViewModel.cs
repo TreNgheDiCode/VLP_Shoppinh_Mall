@@ -1,4 +1,5 @@
-﻿using VLPMall.Models;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using VLPMall.Models;
 
 namespace VLPMall.ViewModels
 {
@@ -16,5 +17,8 @@ namespace VLPMall.ViewModels
 		public string? ThoiGianHoatDong2 { get; set; }
 		public DiaChi? DiaChi { get; set; }
 		public string? UserId { get; set; }
+
+		public ICollection<CuaHang>? CuaHangs { get; set; }
+		public List<int>? SelectedCuaHang { get; set; }
 	}
 }

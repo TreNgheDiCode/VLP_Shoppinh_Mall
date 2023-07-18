@@ -1,13 +1,14 @@
 ﻿@using VLPMall.Interfaces;
 @using VLPMall.ViewModels;
-@model InformationCuaHangVIewModel
+@model EditCuaHangViewModel
 
-@inject IStoreRepository CuaHang;
+@inject IStoreRepository CuaHangs;
+
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    var directories = await CuaHang.GetChiNhanhByCuaHang(Model.Id);
+    var chiNhanhs = await CuaHangs.GetChiNhanhByCuaHang(Model.Id);
 }
 
 <style>
@@ -15,8 +16,8 @@
         max-width: 100% !important;
         margin: 0;
         padding: 0;
-		public Task<ICollection<ChiNhanh>>? ChiNhanhs { get; set; }
     }
+
     .img-responsive {
         max-width: 100%
     }
@@ -32,7 +33,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6 flexing">
-                        <img src="@Model.AnhDaiDien" alt="@Model.TemCuaHang" class="img-responsive tenant-logo">
+                        <img src="@Model.AnhDaiDien" alt="@Model.TenCuaHang" class="img-responsive tenant-logo">
                     </div>
 
                     <div class="col-md-6">
@@ -40,7 +41,7 @@
                             <div class="clearfix form-group">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <h2 class="display-name">@Model.TemCuaHang.ToUpper()</h2>
+                                        <h2 class="display-name">@Model.TenCuaHang.ToUpper()</h2>
                                     </div>
                                     <div class="col-md-4 text-left text-md-end soc-med my-3 my-md-0">
                                         <a href="https://www.facebook.com/Benscookies" target="_blank" class="btn button-circle button-small bg-black text-white"><i class="fa-brands fa-facebook-f"></i></a>
@@ -112,7 +113,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <!-- Dropdown menu links -->
-                                                        @foreach(var item in directories)
+                                                        @foreach (var item in chiNhanhs)
                                                         {
                                                             <a class="dropdown-item" href="#">@item.TenChiNhanh</a>
                                                         }
@@ -120,6 +121,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
+                                                <a href="#CapNhatCuaHang" class="edit btn btn-outline-warning mx-3" data-toggle="modal">Cập nhật</a>
+                                                <a href="#XoaCuaHang" class="btn btn-outline-danger mx-3" data-toggle="modal">Xóa</a>
                                             </div>
 
                                         </div>
@@ -132,7 +135,6 @@
                                     <div class="col-md-12 alert-tab">
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -141,3 +143,83 @@
         </div>
     </div>
 </div>
+
+<!----edit-modal start--------->
+<div class="modal fade" tabindex="-1" id="CapNhatCuaHang" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form method="post" asp-action="Edit" enctype="multipart/form-data" class="modal-content">
+            <input asp-for="AnhDaiDien" type="hidden" value="@Model.AnhDaiDien" id="AnhDaiDien" />
+            <input asp-for="ChiNhanhs" type="hidden" />
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="TenCuaHang">Tên cửa hàng</label>
+                    <input asp-for="TenCuaHang" class="form-control" placeholder="Title">
+                    <span asp-validation-for="TenCuaHang" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NoiDung">Nội dung</label>
+                    <textarea asp-for="NoiDung" class="form-control" placeholder="Title"></textarea>
+                    <span asp-validation-for="NoiDung" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HinhDaiDien">Hình đại diện</label>
+                    <input asp-for="HinhDaiDien" type="file" class="form-control" placeholder="Image">
+                    <span asp-validation-for="HinhDaiDien" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email">Email</label>
+                    <input asp-for="Email" class="form-control" placeholder="Title">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SoDienThoai">Số điện thoại</label>
+                    <input asp-for="SoDienThoai" class="form-control" placeholder="Title">
+                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NgayHoatDong">Ngày hoạt động</label>
+                    <input asp-for="NgayHoatDong" class="form-control" placeholder="Title">
+                    <span asp-validation-for="NgayHoatDong" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ThoiGianHoatDong">Thời gian hoạt động</label>
+                    <input asp-for="ThoiGianHoatDong" class="form-control" placeholder="Title">
+                    <span asp-validation-for="ThoiGianHoatDong" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-success">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!----edit-modal end--------->
+<!----delete-modal start--------->
+<div class="modal fade" tabindex="-1" id="XoaCuaHang" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form method="post" asp-action="Delete" enctype="multipart/form-data" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa cửa hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa cửa hàng này không?</p>
+                <p class="text-danger"><bold>Hành động này không thể VÃN HỒI</bold></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button asp-controller="ChiNhanh" asp-action="Delete" asp-route-id="@Model.Id" type="submit" class="btn btn-danger">Đồng ý</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!----delete-modal end--------->

@@ -15,14 +15,12 @@ namespace VLPMall.Controllers
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly IPhotoService _photoService;
         private readonly IStoreRepository _storeRepository;
-		private readonly IDirectoryRepository _directoryRepository;
 
 		public CuaHangController(IHttpContextAccessor httpContextAccessor, IPhotoService photoService, IStoreRepository storeRepository, IDirectoryRepository directoryRepository)
         {
 			_httpContextAccessor = httpContextAccessor;
 			_photoService = photoService;
             _storeRepository = storeRepository;
-			_directoryRepository = directoryRepository;
 		}
 
         public IActionResult Index()
@@ -44,7 +42,6 @@ namespace VLPMall.Controllers
                 SoDienThoai = cuaHang.SoDienThoai,
                 NgayHoatDong = cuaHang.NgayHoatDong,
                 ThoiGianHoatDong = cuaHang.ThoiGianHoatDong,
-                DiaDiem = cuaHang.DiaDiem,
                 LoaiCuaHang = cuaHang.LoaiCuaHang,
                 LoaiAmThuc = cuaHang.LoaiAmThuc
             };
@@ -55,7 +52,6 @@ namespace VLPMall.Controllers
 		public IActionResult Create()
 		{
 			var curUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
-			var chiNhanh = _directoryRepository.GetAll();
 			var createAdminViewModel = new AdminViewModel
 			{
 				UserId = curUserId,
@@ -100,6 +96,29 @@ namespace VLPMall.Controllers
 			}
 
 			return RedirectToAction("Index", "Admin", adminVM);
+		}
+
+		public async Task<IActionResult> Edit(int id)
+		{
+			var cuaHang = await _storeRepository.GetByIdAsync(id);
+
+			if (cuaHang == null) { return View("Error"); }
+
+			var cuaHangVM = new EditCuaHangViewModel
+			{
+				Id = cuaHang.Id,
+				TenCuaHang = cuaHang.TenCuaHang,
+				NoiDung = cuaHang.NoiDung,
+				AnhDaiDien = cuaHang.AnhDaiDien,
+				Email = cuaHang.Email,
+				SoDienThoai = cuaHang.SoDienThoai,
+				NgayHoatDong = cuaHang.NgayHoatDong,
+				ThoiGianHoatDong = cuaHang.ThoiGianHoatDong,
+				LoaiCuaHang = cuaHang.LoaiCuaHang,
+				LoaiAmThuc = cuaHang.LoaiAmThuc
+			};
+
+			return View("EditCuaHang", cuaHangVM);
 		}
 	}
 }

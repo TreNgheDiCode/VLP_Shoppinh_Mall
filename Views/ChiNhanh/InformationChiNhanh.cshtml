@@ -327,7 +327,7 @@
                                                 <div class="col-6 col-md-3 p-4 p-xs-1">
                                                     <div class="clearfix padding-10 text-center">
                                                         <div class="brand-image text-center mb-2">
-                                                            <a href="https://www.smsupermalls.com/mall-directory/tenants/maax/ALFAMART" id="@Model.TenChiNhanh" class="text-black" data-brand="@item.TenCuaHang" data-trim-brand="@item.TenCuaHang" data-brand-filter="A" data-category="@item.LoaiCuaHang">
+                                                            <a asp-controller="CuaHang" asp-action="Information" asp-route-name="@item.TenCuaHang" id="@Model.TenChiNhanh" class="text-black" data-brand="@item.TenCuaHang" data-trim-brand="@item.TenCuaHang" data-brand-filter="A" data-category="@item.LoaiCuaHang">
                                                                 <img src="@item.AnhDaiDien" class="img-fluid lazy " data-placeholder="@item.AnhDaiDien" alt="@item.TenCuaHang">
                                                             </a>
                                                         </div>

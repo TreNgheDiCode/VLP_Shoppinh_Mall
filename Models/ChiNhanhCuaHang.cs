@@ -13,5 +13,6 @@ namespace VLPMall.Models
         public int MaCuaHang { get; set; }
         public ChiNhanh? ChiNhanh { get; set; }
         public CuaHang? CuaHang { get; set; }
+        public string? DiaDiem { get; set; }
     }
 }

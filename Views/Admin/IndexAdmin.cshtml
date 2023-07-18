@@ -5,7 +5,7 @@
 @model AdminViewModel;
 
 @inject IDirectoryRepository ChiNhanhRepository;
-@inject IStoreRepository CuaHang;
+@inject IStoreRepository CuaHangs;
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,9 +13,7 @@
 @{
 	Layout = "_DashboardLayout";
 	var directories = await ChiNhanhRepository.GetAllAsync();
-	var stores = await CuaHang.GetAllAsync();
-
-	var numTest = new List<int>{1, 2};
+	var stores = await CuaHangs.GetAllAsync();
 }
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css">
@@ -455,6 +453,16 @@
 										</div>
 									</div>
 								</div>
+								<div class="my-2 form-group">
+									<div class="inline w-100 field">
+										<label asp-for="@Model.chiNhanhViewModel.CuaHangs">Chọn chi nhánh</label>
+										<select asp-for="@Model.chiNhanhViewModel.SelectedCuaHang" asp-items="new SelectList(stores, nameof(CuaHang.Id), nameof(CuaHang.TenCuaHang))" multiple class="label ui selection fluid dropdown">
+											<option value="">Chọn</option>
+
+										</select>
+									</div>
+									<span asp-validation-for="@Model.cuaHangViewModel.ChiNhanhs" class="text-danger"></span>
+								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
 									<button type="submit" class="btn btn-success">Thêm</button>
@@ -524,11 +532,11 @@
 									<h2 class="ml-lg-2">Danh sách cửa hàng</h2>
 								</div>
 								<div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
-									<a href="#addStoreModal" class="btn btn-success" data-toggle="modal">
+									<a href="#CapNhatCuaHang" class="btn btn-success" data-toggle="modal">
 										<i class="material-icons">&#xE147;</i>
 										<span>Thêm cửa hàng mới</span>
 									</a>
-									<a href="#deleteDirectoryModal" class="btn btn-danger" data-toggle="modal">
+									<a href="#deleteStoreModal" class="btn btn-danger" data-toggle="modal">
 										<i class="material-icons">&#xE15C;</i>
 										<span>Xóa tất cả</span>
 									</a>
@@ -552,7 +560,6 @@
 									<th>Số điện thoại</th>
 									<th>Ngày hoạt động</th>
 									<th>Thời gian hoạt động</th>
-									<th>Địa điểm</th>
 									<th>Loại cửa hàng</th>
 									<th>Tính năng</th>
 								</tr>
@@ -575,13 +582,12 @@
 										<th>@item.SoDienThoai</th>
 										<th>@item.NgayHoatDong</th>
 										<th>@item.ThoiGianHoatDong</th>
-										<th>@item.DiaDiem</th>
 										<th>@item</th>
 										<th>
 											<a asp-controller="CuaHang" asp-action="Edit" asp-route-id="@item.Id" class="edit">
 												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
 											</a>
-											<a href="#deleteDirectoryModal" class="delete" data-toggle="modal">
+											<a href="#deleteStoreModal" class="delete" data-toggle="modal">
 												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
 											</a>
 											<!----delete-modal start--------->
@@ -595,8 +601,8 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<p>Bạn có chắc chắn muốn xóa chi nhánh này không?</p>
-															<p class="text-danger"><strong>Hành động này không thể VÃN HỒI</strong></p>
+															<p>Bạn có chắc chắn muốn xóa cửa hàng này không?</p>
+															<p class="text-danger"><bold>Hành động này không thể VÃN HỒI</bold></p>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
@@ -628,7 +634,7 @@
 				</div>
 
 				<!----add-modal start--------->
-				<div class="modal fade" tabindex="-1" id="addStoreModal" role="dialog">
+				<div class="modal fade" tabindex="-1" id="CapNhatCuaHang" role="dialog">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -720,9 +726,9 @@
 								</div>
 								<div class="my-2 form-group">
 									<div class="inline w-100 field">
-										<label asp-for="@Model.cuaHangViewModel.ChiNhanhs">Chọn chi nhánh</label>
-										<select asp-for="@Model.cuaHangViewModel.SelectedChiNhanh" asp-items="new SelectList(numTest)" multiple class="label ui selection fluid dropdown">
-											<option value="">Tất cả</option>
+										<label asp-for="@Model.cuaHangViewModel.ChiNhanhs">Chọn cửa hàng</label>
+										<select asp-for="@Model.cuaHangViewModel.SelectedChiNhanh" asp-items="new SelectList(directories, nameof(ChiNhanh.Id), nameof(ChiNhanh.TenChiNhanh))" multiple class="label ui selection fluid dropdown">
+											<option value="">Chọn</option>
 											
 										</select>
 									</div>
@@ -739,7 +745,7 @@
 
 				<!----add-modal end--------->
 				<!----edit-modal start--------->
-				<div class="modal fade" tabindex="-1" id="editEmployeeModal" role="dialog">
+				<div class="modal fade" tabindex="-1" id="CapNhatCuaHang" role="dialog">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
