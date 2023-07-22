@@ -52,9 +52,19 @@ namespace VLPMall.Repository
             return await _context.CuaHang.FirstOrDefaultAsync(s => s.Id == id);
         }
 
+        public async Task<CuaHang> GetByIdAsyncNoTracking(int id)
+        {
+            return await _context.CuaHang.AsNoTracking().FirstOrDefaultAsync(s => s.Id == id);
+        }
+
         public async Task<CuaHang> GetByNameAsync(string name)
         {
             return await _context.CuaHang.FirstOrDefaultAsync(s => s.TenCuaHang == name);
+        }
+
+        public async Task<string> GetDiaDiemgById(int maChiNhanh, int maCuaHang)
+        {
+            return await _context.ChiNhanhCuaHang.Where(a => (a.MaChiNhanh == maChiNhanh) && (a.MaCuaHang == maCuaHang)).Select(a => a.DiaDiem).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<ChiNhanh>> GetChiNhanhByCuaHang(int id)
@@ -67,9 +77,33 @@ namespace VLPMall.Repository
             return await _context.ChiNhanhCuaHang.Where(s => s.CuaHang.TenCuaHang == name).Select(s => s.ChiNhanh).ToListAsync();
         }
 
-        public async Task<IEnumerable<CuaHang>> GetCuaHangByDanhMuc(LoaiCuaHang loaiCuaHang, LoaiAmThuc loaiAmThuc)
+        public async Task<IEnumerable<CuaHang>> GetCuaHangByDanhMuc(LoaiCuaHang loaiCuaHang, int loaiDanhMuc)
         {
-            return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiAmThuc == loaiAmThuc)).ToListAsync();
+            switch(loaiCuaHang)
+            {
+                case LoaiCuaHang.AmThuc:
+                    {
+                        return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiAmThuc == (LoaiAmThuc)loaiDanhMuc)).ToListAsync();
+                    }
+                case LoaiCuaHang.GiaiTri:
+                    {
+                        return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiGiaiTri == (LoaiGiaiTri)loaiDanhMuc)).ToListAsync();
+                    }
+                case LoaiCuaHang.TienIch:
+                    {
+                        return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiTienIch == (LoaiTienIch)loaiDanhMuc)).ToListAsync();
+                    }
+                case LoaiCuaHang.DichVu:
+                    {
+                        return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiDichVu == (LoaiDichVu)loaiDanhMuc)).ToListAsync();
+                    }
+                case LoaiCuaHang.MuaSam:
+                    {
+                        return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiMuaSam == (LoaiMuaSam)loaiDanhMuc)).ToListAsync();
+                    }
+                default: 
+                    return null;
+            }
         }
 
         public Task<IEnumerable<CuaHang>> GetCuaHangByTheLoai(LoaiCuaHang loaiCuaHang)
@@ -90,5 +124,15 @@ namespace VLPMall.Repository
 
             return Save();
 		}
-	}
+
+        public async Task<CuaHang> GetCuaHang(int id)
+        {
+            return await _context.CuaHang.Where(s => s.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<CuaHang> GetCuaHang(string name)
+        {
+            return await _context.CuaHang.Where(s => s.TenCuaHang == name).FirstOrDefaultAsync();
+        }
+    }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VLPMall.Data;
 
@@ -11,9 +12,11 @@ using VLPMall.Data;
 namespace VLPMall.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230720072940_FixRelationChiNhanhCuaHang")]
+    partial class FixRelationChiNhanhCuaHang
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,11 +176,9 @@ namespace VLPMall.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NgayHoatDong")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NoiDung")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SoDienThoai")
@@ -188,7 +189,6 @@ namespace VLPMall.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ThoiGianHoatDong")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
@@ -241,24 +241,13 @@ namespace VLPMall.Migrations
                     b.Property<int>("LoaiCuaHang")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LoaiDichVu")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LoaiGiaiTri")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LoaiMuaSam")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LoaiTienIch")
+                    b.Property<int?>("LoaiRapChieuPhim")
                         .HasColumnType("int");
 
                     b.Property<string>("NgayHoatDong")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NoiDung")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SoDienThoai")
@@ -269,7 +258,6 @@ namespace VLPMall.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ThoiGianHoatDong")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")

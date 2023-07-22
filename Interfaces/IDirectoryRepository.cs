@@ -6,6 +6,8 @@ namespace VLPMall.Interfaces
     {
         List<ChiNhanh> GetAll();
         Task<IEnumerable<ChiNhanh>> GetAllAsync();
+        Task<ChiNhanh> GetChiNhanh(int id);
+        Task<ChiNhanh> GetChiNhanh(string name);
         Task<ChiNhanh> GetByIdAsync(int id);
         Task<ChiNhanh> GetByIdAsyncNoTracking(int id);
         List<CuaHang> GetCuaHangByChiNhanh(int maChiNhanh);

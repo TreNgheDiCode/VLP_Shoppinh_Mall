@@ -70,7 +70,7 @@ namespace VLPMall.Controllers
                 {
                     TenChiNhanh = adminVM.chiNhanhViewModel.TenChiNhanh,
                     NoiDung = adminVM.chiNhanhViewModel.NoiDung,
-                    AnhDaiDien = result.Uri.ToString(),
+                    AnhDaiDien = result.Url.ToString(),
                     Email = adminVM.chiNhanhViewModel.Email,
                     SoDienThoai = adminVM.chiNhanhViewModel.SoDienThoai,
                     NgayHoatDong = adminVM.chiNhanhViewModel.NgayHoatDong1 + " - " + adminVM.chiNhanhViewModel.NgayHoatDong2,

@@ -5,14 +5,10 @@ namespace VLPMall.Models
 {
     public class ChiNhanhCuaHang
     {
-        [Key]
-        [ForeignKey("ChiNhanh")]
         public int MaChiNhanh { get; set; }
-        [Key]
-        [ForeignKey("CuaHang")]
         public int MaCuaHang { get; set; }
+        public string? DiaDiem { get; set; }
         public ChiNhanh? ChiNhanh { get; set; }
         public CuaHang? CuaHang { get; set; }
-        public string? DiaDiem { get; set; }
     }
 }

@@ -18,10 +18,10 @@ namespace VLPMall.ViewModels
 		public string? ThoiGianHoatDong { get; set; }
 		public string? ThoiGianHoatDong1 { get; set; }
 		public string? ThoiGianHoatDong2 { get; set; }
-		public string? DiaDiem { get; set; }
-		public LoaiCuaHang LoaiCuaHang { get; set; }
+        public string? DiaDiem { get; set; }
+        public LoaiCuaHang LoaiCuaHang { get; set; }
 		public LoaiAmThuc? LoaiAmThuc { get; set; }
-		public Task<ICollection<ChiNhanh>>? ChiNhanhs { get; set; }
+		public Task<IEnumerable<ChiNhanh>>? ChiNhanhs { get; set; }
 		public List<int>? SelectedChiNhanh { get; set; }
 	}
 }

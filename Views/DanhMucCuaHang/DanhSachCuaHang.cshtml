@@ -6,7 +6,7 @@
 
 @using VLPMall.Data.Enum;
 @using VLPMall.ViewModels;
-@model IEnumerable<ListAmThucViewModel>
+@model IEnumerable<ListDanhMucViewModel>
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -109,12 +109,52 @@
                     @foreach (var item in Model)
                     {
                         <div data-shop-name="@item.TenCuaHang" data-initial="@item.TenCuaHang.Trim().Substring(0,1).ToUpper()" class="col-6 col-md-3 p-4 p-xs-1 text-center category-brand" data-visibility="visible">
-                            <div class="padding-10">
-                                <a asp-controller="CuaHang" asp-action="Information" asp-route-name="@item.TenCuaHang" id="brand_@item.TenCuaHang.Trim().Replace(" ", "-").ToUpper()" class="text-black" data-brand="@item.TenCuaHang.Trim().ToUpper()" data-trim-brand="@item.TenCuaHang.Trim().Replace(" ", "").ToUpper()" data-brand-filter="@item.TenCuaHang.Trim().Substring(0,1).ToUpper()" data-category="@Enum.GetName(typeof(LoaiCuaHang), item.LoaiAmThuc).ToUpper()">
+                            @if (item.LoaiAmThuc != null)
+                            {
+                                <div class="padding-10">
+                                <a asp-controller="CuaHang" asp-action="Information" asp-route-name="@item.TenCuaHang" id="brand_@item.TenCuaHang.Trim().Replace(" ", "-").ToUpper()" class="text-black" data-brand="@item.TenCuaHang.Trim().ToUpper()" data-trim-brand="@item.TenCuaHang.Trim().Replace(" ", "").ToUpper()" data-brand-filter="@item.TenCuaHang.Trim().Substring(0,1).ToUpper()" data-category="@Enum.GetName(typeof(LoaiCuaHang), LoaiCuaHang.AmThuc).ToUpper()">
                                     <img src="@item.LinkAnh" class="img-fluid" alt="@item.TenCuaHang.Trim().ToUpper()">
                                     <h5 class="mt-2 text-black text-uppercase">@item.TenCuaHang.Trim().ToUpper()</h5>
                                 </a>
                             </div>
+                            }
+                            else if (item.LoaiGiaiTri != null)
+                            {
+                                <div class="padding-10">
+                                <a asp-controller="CuaHang" asp-action="Information" asp-route-name="@item.TenCuaHang" id="brand_@item.TenCuaHang.Trim().Replace(" ", "-").ToUpper()" class="text-black" data-brand="@item.TenCuaHang.Trim().ToUpper()" data-trim-brand="@item.TenCuaHang.Trim().Replace(" ", "").ToUpper()" data-brand-filter="@item.TenCuaHang.Trim().Substring(0,1).ToUpper()" data-category="@Enum.GetName(typeof(LoaiCuaHang), LoaiCuaHang.GiaiTri).ToUpper()">
+                                    <img src="@item.LinkAnh" class="img-fluid" alt="@item.TenCuaHang.Trim().ToUpper()">
+                                    <h5 class="mt-2 text-black text-uppercase">@item.TenCuaHang.Trim().ToUpper()</h5>
+                                </a>
+                            </div>
+                            }
+                            else if (item.LoaiDichVu != null)
+                            {
+                                <div class="padding-10">
+                                    <a asp-controller="CuaHang" asp-action="Information" asp-route-name="@item.TenCuaHang" id="brand_@item.TenCuaHang.Trim().Replace(" ", "-").ToUpper()" class="text-black" data-brand="@item.TenCuaHang.Trim().ToUpper()" data-trim-brand="@item.TenCuaHang.Trim().Replace(" ", "").ToUpper()" data-brand-filter="@item.TenCuaHang.Trim().Substring(0,1).ToUpper()" data-category="@Enum.GetName(typeof(LoaiCuaHang), LoaiCuaHang.DichVu).ToUpper()">
+                                    <img src="@item.LinkAnh" class="img-fluid" alt="@item.TenCuaHang.Trim().ToUpper()">
+                                    <h5 class="mt-2 text-black text-uppercase">@item.TenCuaHang.Trim().ToUpper()</h5>
+                                </a>
+                            </div>
+                            }
+                            else if (item.LoaiTienIch != null)
+                            {
+                                <div class="padding-10">
+                                    <a asp-controller="CuaHang" asp-action="Information" asp-route-name="@item.TenCuaHang" id="brand_@item.TenCuaHang.Trim().Replace(" ", "-").ToUpper()" class="text-black" data-brand="@item.TenCuaHang.Trim().ToUpper()" data-trim-brand="@item.TenCuaHang.Trim().Replace(" ", "").ToUpper()" data-brand-filter="@item.TenCuaHang.Trim().Substring(0,1).ToUpper()" data-category="@Enum.GetName(typeof(LoaiCuaHang), LoaiCuaHang.TienIch).ToUpper()">
+                                    <img src="@item.LinkAnh" class="img-fluid" alt="@item.TenCuaHang.Trim().ToUpper()">
+                                    <h5 class="mt-2 text-black text-uppercase">@item.TenCuaHang.Trim().ToUpper()</h5>
+                                </a>
+                            </div>
+                            }
+                            else if (item.LoaiMuaSam != null)
+                            {
+                                <div class="padding-10">
+                                    <a asp-controller="CuaHang" asp-action="Information" asp-route-name="@item.TenCuaHang" id="brand_@item.TenCuaHang.Trim().Replace(" ", "-").ToUpper()" class="text-black" data-brand="@item.TenCuaHang.Trim().ToUpper()" data-trim-brand="@item.TenCuaHang.Trim().Replace(" ", "").ToUpper()" data-brand-filter="@item.TenCuaHang.Trim().Substring(0,1).ToUpper()" data-category="@Enum.GetName(typeof(LoaiCuaHang), LoaiCuaHang.MuaSam).ToUpper()">
+                                    <img src="@item.LinkAnh" class="img-fluid" alt="@item.TenCuaHang.Trim().ToUpper()">
+                                    <h5 class="mt-2 text-black text-uppercase">@item.TenCuaHang.Trim().ToUpper()</h5>
+                                </a>
+                            </div>
+                            }
+                            
                         </div>
                     }
                 </div>

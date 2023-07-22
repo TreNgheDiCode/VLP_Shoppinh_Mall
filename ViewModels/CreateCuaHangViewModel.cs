@@ -18,7 +18,10 @@ namespace VLPMall.ViewModels
         public string? DiaDiem { get; set; }
         public LoaiCuaHang LoaiCuaHang { get; set; }
 		public LoaiAmThuc? LoaiAmThuc { get; set; }
-		public LoaiRapChieuPhim? LoaiRapChieuPhim { get; set; }
+        public LoaiGiaiTri? LoaiGiaiTri { get; set; }
+        public LoaiDichVu? LoaiDichVu { get; set; }
+        public LoaiMuaSam? LoaiMuaSam { get; set; }
+        public LoaiTienIch? LoaiTienIch { get; set; }
         public ICollection<ChiNhanh>? ChiNhanhs { get; set; }
         public List<int>? SelectedChiNhanh { get; set; }
 	}

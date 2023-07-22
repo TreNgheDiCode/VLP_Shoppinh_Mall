@@ -3,7 +3,6 @@
     public enum LoaiCuaHang
     {
         AmThuc,
-        RapChieuPhim,
         GiaiTri,
         TienIch,
         DichVu,

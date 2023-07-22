@@ -56,6 +56,16 @@ namespace VLPMall.Repository
             return await _context.ChiNhanh.Include(a => a.DiaChi).AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
         }
 
+        public async Task<ChiNhanh> GetChiNhanh(int id)
+        {
+            return await _context.ChiNhanh.Where(a => a.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<ChiNhanh> GetChiNhanh(string name)
+        {
+            return await _context.ChiNhanh.Where(a => a.TenChiNhanh == name).FirstOrDefaultAsync();
+        }
+
         public List<CuaHang> GetCuaHangByChiNhanh(int id)
         {
             return _context.ChiNhanhCuaHang.Where(a => a.ChiNhanh.Id == id).Select(s => s.CuaHang).ToList();

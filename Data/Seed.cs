@@ -14,81 +14,138 @@ namespace VLPMall.Data
 
                 context?.Database.EnsureCreated();
 
-                if (!context.ChiNhanh.Any())
+                var chiNhanh1 = new ChiNhanh()
                 {
-                    context.ChiNhanh.AddRange(new List<ChiNhanh>()
+                    TenChiNhanh = "Chi nhánh Sư Vạn Hạnh",
+                    NoiDung = "Đây là chi nhánh Sư Vạn Hạnh",
+                    AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688934275/LogoMall_SVH_bvyvqu.jpg",
+                    Email = "gabayan170@gmail.com",
+                    SoDienThoai = "0763615414",
+                    NgayHoatDong = "Thứ Hai - Chủ Nhật",
+                    ThoiGianHoatDong = "9:00 - 16:00",
+                    DiaChi = new DiaChi()
                     {
-                        new ChiNhanh()
-                        {
-                            TenChiNhanh = "Chi nhánh Sư Vạn Hạnh",
-                            NoiDung = "Tọa lạc tại quận 10, chuyên cho thuê các cửa hàng lớn nhỏ theo mô hình doanh nghiệp...",
-                            AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688255253/p6o014rxqprsdnqxjvli.jpg",
-                            Email = "gabayan170@gmail.com",
-                            SoDienThoai = "0763615414",
-                            NgayHoatDong = "Thứ Hai - Chủ Nhật",
-                            ThoiGianHoatDong = "08:00 - 21:00",
-                            DiaChi = new DiaChi()
-                            {
-                                Duong = "828 Sư Vạn Hạnh",
-                                Phuong = "Phường 13",
-                                Quan = "Quận 10",
-                                ThanhPho = "Thành phố Hồ Chí Minh",
-                            },
-                            ChiNhanhCuaHang = new List<ChiNhanhCuaHang>()
-                            {
-                                new ChiNhanhCuaHang
-                                {
-                                    CuaHang = new CuaHang()
-                                    {
-                                        TenCuaHang = "Lotteria Việt Nam",
-                                        NoiDung = "Cửa hàng gà rán thơm ngon",
-                                        AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688909823/Chi%E1%BA%BFc_%C3%B4__11_aqmzoj.jpg",
-                                        Email = "gabayan170@gmail.com",
-                                        SoDienThoai = "0763615414",
-                                        NgayHoatDong = "Thứ Hai - Chủ Nhật",
-                                        ThoiGianHoatDong = "08:00 - 21:00",
-                                        LoaiCuaHang = LoaiCuaHang.AmThuc,
-                                        LoaiAmThuc = LoaiAmThuc.DoAnNhanh
-                                    }
-                                },
-                                new ChiNhanhCuaHang
-                                {
-                                    CuaHang = new CuaHang()
-                                    {
-                                        TenCuaHang = "CGV Vietnam",
-                                        NoiDung = "Đi xem phim khum",
-                                        AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688909823/Chi%E1%BA%BFc_%C3%B4__11_aqmzoj.jpg",
-                                        Email = "gabayan170@gmail.com",
-                                        SoDienThoai = "0763615414",
-                                        NgayHoatDong = "Thứ Hai - Chủ Nhật",
-                                        ThoiGianHoatDong = "08:00 - 21:00",
-                                        LoaiCuaHang = LoaiCuaHang.RapChieuPhim,
-                                        LoaiRapChieuPhim = LoaiRapChieuPhim.FullHD
-                                    }
-                                }
-                            }
-                        },
-                        new ChiNhanh()
-                        {
-                            TenChiNhanh = "Chi nhánh Hóc Môn",
-                            NoiDung = "Tọa lạc tại thị trấn Hóc Môn, chuyên cho thuê các cửa hàng lớn nhỏ theo mô hình doanh nghiệp...",
-                            AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688255253/p6o014rxqprsdnqxjvli.jpg",
-                            Email = "gabayan170@gmail.com",
-                            SoDienThoai = "0763615414",
-                            NgayHoatDong = "Thứ Hai - Chủ Nhật",
-                            ThoiGianHoatDong = "08:00 - 21:00",
-                            DiaChi = new DiaChi()
-                            {
-                                Duong = "10 Quốc lộ 22",
-                                Phuong = "Phường Tân Xuân",
-                                Quan = "Thị trấn Hóc Môn",
-                                ThanhPho = "Thành phố Hồ Chí Minh",
-                            }
-                        }
-                    });
+                        Duong = "828 Sư Vạn Hạnh",
+                        Phuong = "Phường 13",
+                        Quan = "Quận 10",
+                        ThanhPho = "Thành phố Hồ Chí Minh"
+                    }
+                };
 
-                    context.SaveChanges();
+                var chiNhanh2 = new ChiNhanh()
+                {
+                    TenChiNhanh = "Chi nhánh Hóc Môn",
+                    NoiDung = "Đây là chi nhánh Hóc Môn",
+                    AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688934275/LogoMall_SVH_bvyvqu.jpg",
+                    Email = "gabayan298@gmail.com",
+                    SoDienThoai = "0708611304",
+                    NgayHoatDong = "Thứ Hai - Thứ Bảy",
+                    ThoiGianHoatDong = "9:00 - 21:00",
+                    DiaChi = new DiaChi()
+                    {
+                        Duong = "10 QL22",
+                        Phuong = "Tân Xuân",
+                        Quan = "Hóc Môn",
+                        ThanhPho = "Thành phố Hồ Chí Minh"
+                    }
+                };
+
+                var cuaHang1 = new CuaHang()
+                {
+                    TenCuaHang = "Lotteria Việt Nam",
+                    NoiDung = "Đây là cửa hàng ẩm thực - đồ ăn nhanh",
+                    AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688895189/lotteria_logo_cmyouc.svg",
+                    Email = "lotteria@gmail.com",
+                    SoDienThoai = "0708611304",
+                    NgayHoatDong = "Thứ Hai - Thứ Sáu",
+                    ThoiGianHoatDong = "8:00 - 21:00",
+                    LoaiCuaHang = LoaiCuaHang.AmThuc,
+                    LoaiAmThuc = LoaiAmThuc.DoAnNhanh
+                };
+
+                var cuaHang2 = new CuaHang()
+                {
+                    TenCuaHang = "KFC Việt Nam",
+                    NoiDung = "Đây là cửa hàng ẩm thực - đồ ăn nhanh",
+                    AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688895189/lotteria_logo_cmyouc.svg",
+                    Email = "lotteria@gmail.com",
+                    SoDienThoai = "0763615414",
+                    NgayHoatDong = "Thứ Ba - Chủ Nhật",
+                    ThoiGianHoatDong = "9:00 - 22:00",
+                    LoaiCuaHang = LoaiCuaHang.AmThuc,
+                    LoaiAmThuc = LoaiAmThuc.DoAnNhanh
+                };
+
+                var cuaHang3 = new CuaHang()
+                {
+                    TenCuaHang = "CGV Việt Nam",
+                    NoiDung = "Đây là cửa hàng giải trí - rạp chiếu phim",
+                    AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688934543/chv_logo_v9dnx2.png",
+                    Email = "cgv@gmail.com",
+                    SoDienThoai = "0708611304",
+                    NgayHoatDong = "Thứ Hai - Thứ Sáu",
+                    ThoiGianHoatDong = "8:00 - 23:00",
+                    LoaiCuaHang = LoaiCuaHang.GiaiTri,
+                    LoaiGiaiTri = LoaiGiaiTri.RapChieuPhim
+                };
+
+                var cuaHang4 = new CuaHang()
+                {
+                    TenCuaHang = "Adidas",
+                    NoiDung = "Đây là cửa hàng mua sắm - giày dép",
+                    AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1689888964/805cd5b94b10db6156ef33c341b30631_pbtkot.webp",
+                    Email = "adidas@gmail.com",
+                    SoDienThoai = "0763615414",
+                    NgayHoatDong = "Thứ Hai - Chủ Nhật",
+                    ThoiGianHoatDong = "9:00 - 21:30",
+                    LoaiCuaHang = LoaiCuaHang.MuaSam,
+                    LoaiMuaSam = LoaiMuaSam.GiayDep
+                };
+
+                if (!context.ChiNhanhCuaHang.Any())
+                {
+                    context.ChiNhanhCuaHang.AddRange(new List<ChiNhanhCuaHang>()
+                    {
+                        new ChiNhanhCuaHang()
+                        {
+                            ChiNhanh = chiNhanh1,
+                            CuaHang = cuaHang1,
+                            DiaDiem = chiNhanh1.TenChiNhanh + " - Tầng 3"
+                        },
+                        new ChiNhanhCuaHang()
+                        {
+                            ChiNhanh = chiNhanh1,
+                            CuaHang = cuaHang2,
+                            DiaDiem = chiNhanh1.TenChiNhanh + " - Block B, Tầng 2"
+                        },
+                        new ChiNhanhCuaHang()
+                        {
+                            ChiNhanh = chiNhanh1,
+                            CuaHang = cuaHang3,
+                            DiaDiem = chiNhanh1.TenChiNhanh + "- Chưa có"
+                        },
+                        new ChiNhanhCuaHang()
+                        {
+                            ChiNhanh = chiNhanh1,
+                            CuaHang = cuaHang4,
+                            DiaDiem = chiNhanh1.TenChiNhanh + " - Khu Thời trang, Tầng 1"
+                        },
+                        new ChiNhanhCuaHang()
+                        {
+                            ChiNhanh = chiNhanh2,
+                            CuaHang = cuaHang1,
+                            DiaDiem = chiNhanh2.TenChiNhanh + " - Tầng 6"
+                        },
+                        new ChiNhanhCuaHang()
+                        {
+                            ChiNhanh = chiNhanh2,
+                            CuaHang = cuaHang4,
+                            DiaDiem = chiNhanh2.TenChiNhanh + " - Khu Phức hợp, Tầng 3"
+                        },
+                    });
                 }
+
+                context.SaveChanges();
             }
         }
         public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)

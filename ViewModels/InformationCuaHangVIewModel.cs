@@ -3,7 +3,7 @@ using VLPMall.Models;
 
 namespace VLPMall.ViewModels
 {
-    public class InformationCuaHangVIewModel
+    public class InformationCuaHangViewModel
     {
         public int Id { get; set; }
         public string TemCuaHang { get; set; }
@@ -16,5 +16,9 @@ namespace VLPMall.ViewModels
         public string? DiaDiem { get; set; }
         public LoaiCuaHang LoaiCuaHang { get; set; }
         public LoaiAmThuc? LoaiAmThuc { get; set; }
+        public LoaiGiaiTri? LoaiGiaiTri { get; set; }
+        public LoaiDichVu? LoaiDichVu { get; set; }
+        public LoaiTienIch? LoaiTienIch { get; set; }
+        public LoaiMuaSam? LoaiMuaSam { get; set; }
     }
 }

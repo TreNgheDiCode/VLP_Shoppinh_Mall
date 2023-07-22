@@ -23,12 +23,14 @@ namespace VLPMall.Data
             builder.Entity<ChiNhanhCuaHang>()
                 .HasOne(a => a.ChiNhanh)
                 .WithMany(_as => _as.ChiNhanhCuaHang)
-                .HasForeignKey(a => a.MaChiNhanh);
+                .HasForeignKey(a => a.MaChiNhanh)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<ChiNhanhCuaHang>()
                 .HasOne(s => s.CuaHang)
                 .WithMany(_as => _as.ChiNhanhCuaHangs)
-                .HasForeignKey(s => s.MaCuaHang);
+                .HasForeignKey(s => s.MaCuaHang)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
