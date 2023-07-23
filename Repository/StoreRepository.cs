@@ -17,7 +17,7 @@ namespace VLPMall.Repository
 
 		public bool Add(CuaHang cuaHang, int maChiNhanh)
 		{
-			var chiNhanh = _context.ChiNhanh.Where(a => a.Id == maChiNhanh).FirstOrDefault();
+			var chiNhanh = _context.ChiNhanhs.Where(a => a.Id == maChiNhanh).FirstOrDefault();
 
 			var chiNhanhCuaHang = new ChiNhanhCuaHang
 			{
@@ -39,27 +39,27 @@ namespace VLPMall.Repository
 
 		public IEnumerable<CuaHang> GetAll()
 		{
-			return _context.CuaHang.ToList();
+			return _context.CuaHangs.ToList();
 		}
 
 		public async Task<IEnumerable<CuaHang>> GetAllAsync()
         {
-            return await _context.CuaHang.ToListAsync();
+            return await _context.CuaHangs.ToListAsync();
         }
 
         public async Task<CuaHang> GetByIdAsync(int id)
         {
-            return await _context.CuaHang.FirstOrDefaultAsync(s => s.Id == id);
+            return await _context.CuaHangs.FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<CuaHang> GetByIdAsyncNoTracking(int id)
         {
-            return await _context.CuaHang.AsNoTracking().FirstOrDefaultAsync(s => s.Id == id);
+            return await _context.CuaHangs.AsNoTracking().FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<CuaHang> GetByNameAsync(string name)
         {
-            return await _context.CuaHang.FirstOrDefaultAsync(s => s.TenCuaHang == name);
+            return await _context.CuaHangs.FirstOrDefaultAsync(s => s.TenCuaHang == name);
         }
 
         public async Task<string> GetDiaDiemgById(int maChiNhanh, int maCuaHang)
@@ -83,23 +83,23 @@ namespace VLPMall.Repository
             {
                 case LoaiCuaHang.AmThuc:
                     {
-                        return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiAmThuc == (LoaiAmThuc)loaiDanhMuc)).ToListAsync();
+                        return await _context.CuaHangs.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiAmThuc == (LoaiAmThuc)loaiDanhMuc)).ToListAsync();
                     }
                 case LoaiCuaHang.GiaiTri:
                     {
-                        return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiGiaiTri == (LoaiGiaiTri)loaiDanhMuc)).ToListAsync();
+                        return await _context.CuaHangs.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiGiaiTri == (LoaiGiaiTri)loaiDanhMuc)).ToListAsync();
                     }
                 case LoaiCuaHang.TienIch:
                     {
-                        return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiTienIch == (LoaiTienIch)loaiDanhMuc)).ToListAsync();
+                        return await _context.CuaHangs.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiTienIch == (LoaiTienIch)loaiDanhMuc)).ToListAsync();
                     }
                 case LoaiCuaHang.DichVu:
                     {
-                        return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiDichVu == (LoaiDichVu)loaiDanhMuc)).ToListAsync();
+                        return await _context.CuaHangs.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiDichVu == (LoaiDichVu)loaiDanhMuc)).ToListAsync();
                     }
                 case LoaiCuaHang.MuaSam:
                     {
-                        return await _context.CuaHang.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiMuaSam == (LoaiMuaSam)loaiDanhMuc)).ToListAsync();
+                        return await _context.CuaHangs.Where(s => (s.LoaiCuaHang == loaiCuaHang) && (s.LoaiMuaSam == (LoaiMuaSam)loaiDanhMuc)).ToListAsync();
                     }
                 default: 
                     return null;
@@ -127,12 +127,12 @@ namespace VLPMall.Repository
 
         public bool CuaHangTonTai(int id)
         {
-            return _context.CuaHang.Any(s => s.Id == id);
+            return _context.CuaHangs.Any(s => s.Id == id);
         }
 
         public bool CuaHangTonTai(string name)
         {
-            return _context.CuaHang.Any(s => s.TenCuaHang == name);
+            return _context.CuaHangs.Any(s => s.TenCuaHang == name);
         }
     }
 }

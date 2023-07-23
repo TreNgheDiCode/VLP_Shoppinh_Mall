@@ -14,5 +14,6 @@ namespace VLPMall.Models
         public DateTime NgaySinh { get; set; }
         public ICollection<ChiNhanh>? ChiNhanh { get; set; }
         public ICollection<CuaHang>? CuaHang { get; set; }
+        public ICollection<SanPham>? SanPhams { get; set; }
     }
 }

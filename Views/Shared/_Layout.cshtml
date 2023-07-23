@@ -178,9 +178,9 @@
                     <li class="nav-item drop-down">
                         <a href="https://www.smsupermalls.com/#sm-malls" class="nav-link">Hoạt động <i class="fa fa-caret-down"></i></a>
                         <ul>
-                            @foreach (var item in Enum.GetValues(typeof(LoaiHoatDong)))
+                            @foreach (var item in Enum.GetValues(typeof(LoaiTinTuc)))
                             {
-                                var name = Enum.GetName(typeof(LoaiHoatDong), item);
+                                var name = Enum.GetName(typeof(LoaiTinTuc), item);
                                 <li class="drop-down">
                                     <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">@name</a>
                                 </li>
@@ -225,7 +225,7 @@
 
     <div class="b-example-divider"></div>
 
-    <footer class="mt-auto py-3 bg-light row">
+    <footer class="mt-auto py-3 bg-light row .bg-light.bg-gradient">
         <div class="col-lg-6 mh-100">
             <div class="mb-2">
                 <h6>Trung tâm thương mại VLP MALL</h6>

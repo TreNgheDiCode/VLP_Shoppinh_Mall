@@ -60,7 +60,55 @@ namespace VLPMall.Data
                     NgayHoatDong = "Thứ Hai - Thứ Sáu",
                     ThoiGianHoatDong = "8:00 - 21:00",
                     LoaiCuaHang = LoaiCuaHang.AmThuc,
-                    LoaiAmThuc = LoaiAmThuc.DoAnNhanh
+                    LoaiAmThuc = LoaiAmThuc.DoAnNhanh,
+                    SanPhams = new List<SanPham>()
+                    {
+                        new SanPham()
+                        {
+                            TenSanPham = "Gà rán cay",
+                            NoiDung = "Gà rán này cay",
+                            AnhDaiDien = "https://images.foody.vn/res/g1/1559/s400x400/a4f75…deb-4025-8f54-d0f2c5d4-d85c77e4-230706100809.jpeg",
+                            GiaThanh = 80000,
+                        },
+                        new SanPham()
+                        {
+                            TenSanPham = "Gà rán không cay",
+                            NoiDung = "Gà rán này không cay",
+                            AnhDaiDien = "https://images.foody.vn/res/g1/1559/s400x400/85987…e10-4ed5-9c1e-8b09bfd5-dcc552d8-210615111854.jpeg",
+                            GiaThanh = 100000
+                        }
+                    },
+                    KhuyenMais = new List<KhuyenMai>()
+                            {
+                                new KhuyenMai()
+                                {
+                                    TenKhuyenMai = "Giảm giá 10%",
+                                    NgayBatDau = DateTime.Now,
+                                    NgayKetThuc = new DateTime(2023, 8, 1, 16, 0, 0, DateTimeKind.Local),
+                                    ChietKhau = 0.1f,
+                                },
+                                new KhuyenMai()
+                                {
+                                    TenKhuyenMai = "Giảm giá 20%",
+                                    NgayBatDau = DateTime.Now,
+                                    NgayKetThuc = new DateTime(2023, 8, 1, 20, 30, 0, DateTimeKind.Local),
+                                    ChietKhau = 0.2f,
+                                },
+                                new KhuyenMai()
+                                {
+                                    TenKhuyenMai = "Giảm giá 15%",
+                                    NgayBatDau = DateTime.Now,
+                                    NgayKetThuc = new DateTime(2023, 8, 1, 20, 0, 0, DateTimeKind.Local),
+                                    ChietKhau = 0.15f,
+                                },
+                                new KhuyenMai()
+                                {
+                                    TenKhuyenMai = "Giảm giá 8%",
+                                    NgayBatDau = DateTime.Now,
+                                    NgayKetThuc = new DateTime(2023, 8, 1, 16, 0, 0, DateTimeKind.Local),
+                                    ChietKhau = 0.08f,
+                                }
+                            }
                 };
 
                 var cuaHang2 = new CuaHang()
@@ -100,6 +148,71 @@ namespace VLPMall.Data
                     ThoiGianHoatDong = "9:00 - 21:30",
                     LoaiCuaHang = LoaiCuaHang.MuaSam,
                     LoaiMuaSam = LoaiMuaSam.GiayDep
+                };
+
+                var tinTuc = new List<TinTuc>()
+                {
+                    new TinTuc()
+                    {
+                        TieuDe = "Đại hạ giá các món đồ cần hạ giá",
+                        NoiDung = "Đây là 1 đoạn văn bản cần được làm thành văn bản",
+                        AnhDaiDien = "https://contents.smsupermalls.com/data/uploads/2023/07/super_fur_moms_article_july_2023.png",
+                        LoaiTinTuc = LoaiTinTuc.BaiViet,
+                        TrangThai = false
+                    },
+                    new TinTuc()
+                    {
+                        TieuDe = "Khuyến mãi cho bạn thích ăn gà",
+                        NoiDung = "Đây là khuyến mãi dành cho gà",
+                        AnhDaiDien = "https://contents.smsupermalls.com/data/uploads/2023/07/super_fur_moms_article_july_2023.png",
+                        LoaiTinTuc = LoaiTinTuc.KhuyenMai,
+                        TrangThai = false
+                    }
+                };
+
+                var nhaTuyenDung = new List<NhaTuyenDung>()
+                {
+                    new NhaTuyenDung()
+                    {
+                        NganhNghe = LoaiNgheNghiep.CongNgheThongTin,
+                        SoDienThoai = "0763615414",
+                        Email = "gabayan170@gmail.com",
+                        MangXaHoi = "https://www.facebook.com/gabayan.long",
+                        TrangChu = "https://www.facebook.com/gabayan.long",
+                        DiaChi = new DiaChi()
+                        {
+                            Duong = "153 Nam Kỳ Khởi Nghĩa",
+                            Phuong = "Võ Thị Sáu",
+                            Quan = "3",
+                            ThanhPho = "Tp. Hồ Chí Minh"
+                        },
+                        TuyenDungs = new List<TuyenDung>()
+                        {
+                            new TuyenDung()
+                            {
+                                TenTuyenDung = "Bạn có muốn đi làm không?",
+                                NoiDung = "Đây là việc làm dành cho những người mê code",
+                                MucLuong = 2500000,
+                                NgayDang = DateTime.Now,
+                                NgayHetHan = new DateTime(2023, 8, 1, 16, 0, 0, DateTimeKind.Local),
+                                LoaiNgheNghiep = LoaiNgheNghiep.CongNgheThongTin,
+                                LoaiHinhTuyenDung = LoaiHinhTuyenDung.Internship,
+                                LoaiKinhNghiem = LoaiKinhNghiem.KhongYeuCau,
+                                LoaiTrinhDo = LoaiTrinhDo.PhoThong
+                            },
+                            new TuyenDung()
+                            {
+                                TenTuyenDung = "Tuyển dụng dành cho những người thích lập trình",
+                                NoiDung = "Bạn biết code? Bạn có niềm đam mê học hỏi với code? Bạn thích làm ra các dự án khác nhau? Hãy apply ngay!",
+                                NgayDang = DateTime.Now,
+                                NgayHetHan = new DateTime(2023, 8, 1, 16, 0, 0, DateTimeKind.Local),
+                                LoaiNgheNghiep = LoaiNgheNghiep.CongNgheThongTin,
+                                LoaiHinhTuyenDung = LoaiHinhTuyenDung.FullTime,
+                                LoaiKinhNghiem = LoaiKinhNghiem.Tu1Den2Nam,
+                                LoaiTrinhDo = LoaiTrinhDo.CuNhan
+                            }
+                        }
+                    }
                 };
 
                 if (!context.ChiNhanhCuaHang.Any())
@@ -143,6 +256,16 @@ namespace VLPMall.Data
                             DiaDiem = chiNhanh2.TenChiNhanh + " - Khu Phức hợp, Tầng 3"
                         },
                     });
+                }
+
+                if (!context.TinTucs.Any())
+                {
+                    context.TinTucs.AddRange(tinTuc);
+                }
+
+                if (!context.TuyenDungs.Any())
+                {
+                    context.NhaTuyenDungs.AddRange(nhaTuyenDung);
                 }
 
                 context.SaveChanges();

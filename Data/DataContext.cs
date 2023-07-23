@@ -8,9 +8,14 @@ namespace VLPMall.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<DiaChi> DiaChi { get; set; }
-        public DbSet<ChiNhanh>? ChiNhanh { get; set; }
-        public DbSet<CuaHang> CuaHang { get; set; }
+        public DbSet<DiaChi> DiaChis { get; set; }
+        public DbSet<ChiNhanh> ChiNhanhs { get; set; }
+        public DbSet<CuaHang> CuaHangs { get; set; }
+        public DbSet<SanPham> SanPhams { get; set; }
+        public DbSet<KhuyenMai> KhuyenMais { get; set; }
+        public DbSet<TinTuc> TinTucs { get; set; }
+        public DbSet<TuyenDung> TuyenDungs { get; set; }
+        public DbSet<NhaTuyenDung> NhaTuyenDungs { get; set; }
         public DbSet<ChiNhanhCuaHang> ChiNhanhCuaHang { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

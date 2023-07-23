@@ -16,7 +16,7 @@ namespace VLPMall.Repository
 
         public bool Add(ChiNhanh chiNhanh, int maCuaHang)
         {
-            var cuaHang = _context.CuaHang.Where(s => s.Id == maCuaHang).FirstOrDefault();
+            var cuaHang = _context.CuaHangs.Where(s => s.Id == maCuaHang).FirstOrDefault();
 
             var chiNhanhCuaHang = new ChiNhanhCuaHang
             {
@@ -31,12 +31,12 @@ namespace VLPMall.Repository
 
         public bool ChiNhanhTonTai(int id)
         {
-            return _context.ChiNhanh.Any(a => a.Id == id);
+            return _context.ChiNhanhs.Any(a => a.Id == id);
         }
 
         public bool ChiNhanhTonTai(string name)
         {
-            return _context.ChiNhanh.Any(a => a.TenChiNhanh == name);
+            return _context.ChiNhanhs.Any(a => a.TenChiNhanh == name);
         }
 
         public bool Delete(ChiNhanh chiNhanh)
@@ -48,22 +48,22 @@ namespace VLPMall.Repository
 
         public List<ChiNhanh> GetAll()
         {
-            return _context.ChiNhanh.ToList();
+            return _context.ChiNhanhs.ToList();
         }
 
         public async Task<IEnumerable<ChiNhanh>> GetAllAsync()
         {
-            return await _context.ChiNhanh.Include(a => a.DiaChi).ToListAsync();
+            return await _context.ChiNhanhs.Include(a => a.DiaChi).ToListAsync();
         }
 
         public async Task<ChiNhanh> GetByIdAsync(int id)
         {
-            return await _context.ChiNhanh.Include(a => a.DiaChi).FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.ChiNhanhs.Include(a => a.DiaChi).FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<ChiNhanh> GetByIdAsyncNoTracking(int id)
         {
-            return await _context.ChiNhanh.Include(a => a.DiaChi).AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.ChiNhanhs.Include(a => a.DiaChi).AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public List<CuaHang> GetCuaHangByChiNhanh(int id)

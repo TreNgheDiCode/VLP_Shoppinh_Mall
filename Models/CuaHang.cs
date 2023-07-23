@@ -27,6 +27,8 @@ namespace VLPMall.Models
         public LoaiTienIch? LoaiTienIch { get; set; }
 
         // Liên kết nhiều nhiều
+        public ICollection<SanPham>? SanPhams { get; set; }
+        public ICollection<KhuyenMai>? KhuyenMais { get; set; }
         public ICollection<ChiNhanhCuaHang>? ChiNhanhCuaHangs { get; set; }
     }
 }
