@@ -14,7 +14,7 @@ namespace VLPMall.Data
 
                 context?.Database.EnsureCreated();
 
-                if (!context.ChiNhanhCuaHang.Any())
+                if (!context.ChiNhanh.Any())
                 {
                     context.ChiNhanh.AddRange(new List<ChiNhanh>()
                     {
