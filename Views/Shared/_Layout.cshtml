@@ -182,9 +182,25 @@
                             {
                                 var name = Enum.GetName(typeof(LoaiTinTuc), item);
                                 <li class="drop-down">
-                                    <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">@name</a>
+                                    @switch (name)
+                                    {
+                                        case "BaiViet":
+                                            {
+                                                <a asp-controller="BaiViet" asp-action="Index" class="text-uppercase">Bài viết</a>
+                                                break;
+                                            }
+                                        case "KhuyenMai":
+                                            {
+                                                <a asp-controller="KhuyenMai" asp-action="Index" class="text-uppercase">Khuyến mãi</a>
+                                                break;
+                                            }
+                                    }
                                 </li>
+                                
                             }
+                            <li class="drop-down">
+                                <a asp-controller="TuyenDung" asp-action="Index" class="text-uppercase">Tuyển dụng</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">

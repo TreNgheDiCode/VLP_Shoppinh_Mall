@@ -1,0 +1,63 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container-fluid">
+    <div id="breadcrumbs">
+        <ul class="breadcrumb mt-3">
+            <li class="breadcrumb-item">
+                <a asp-controller="Home" asp-action="Index">
+                    <span class="fa fa-home"></span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="Home" asp-action="Index">Bài viết</a>
+            </li>
+        </ul>
+    </div>
+    <hr />
+</div>
+
+
+
+@*<div class="container mt-4 mb-4">
+    <!--Bootstrap classes arrange web page components into columns and rows in a grid -->
+    <div class="row justify-content-md-center">
+        <div class="col-md-12 col-lg-8">
+            <h1 class="h2 mb-4">Tạo tin tức mới</h1>
+            <label>Nội dung tin tức</label>
+            <div class="form-group">
+                <textarea id="editor"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Lưu</button>
+        </div>
+    </div>
+</div>
+
+<!-- TinyMCE CDN -->
+<script src="https://cdn.tiny.cloud/1/zpe1x8bdjjncr7qwsakzb1au924tgk1cgsptck5sgd5sg65g/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    tinymce.init({
+        selector: 'textarea#editor',
+        plugins: 'lists, link, image, media',
+        toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+        menubar: false,
+        setup: (editor) => {
+            // Apply the focus effect
+            editor.on("init", () => {
+                editor.getContainer().style.transition = "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out";
+            });
+            editor.on("focus", () => {
+                (editor.getContainer().style.boxShadow = "0 0 0 .2rem rgba(0, 123, 255, .25)"),
+                (editor.getContainer().style.borderColor = "#80bdff");
+            });
+            editor.on("blur", () => {
+                (editor.getContainer().style.boxShadow = ""),
+                    (editor.getContainer().style.borderColor = "");
+            });
+        },
+    });
+</script>*@
