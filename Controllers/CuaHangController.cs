@@ -30,7 +30,17 @@ namespace VLPMall.Controllers
 
         public async Task<IActionResult> Information(string name)
         {
+            if (!_storeRepository.CuaHangTonTai(name))
+            {
+                return NotFound("Không tìm thấy cửa hàng này, xin vui lòng thử lại");
+            }
+
             var cuaHang = await _storeRepository.GetByNameAsync(name);
+
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState + ", có lỗi đã xảy ra");
+			}
 
             var cuaHangVM = new InformationCuaHangViewModel
             {

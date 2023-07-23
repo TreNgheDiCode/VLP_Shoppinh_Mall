@@ -7,8 +7,6 @@ namespace VLPMall.Interfaces
     {
         IEnumerable<CuaHang> GetAll();
         Task<IEnumerable<CuaHang>> GetAllAsync();
-        Task<CuaHang> GetCuaHang(int id);
-        Task<CuaHang> GetCuaHang(string name);
         Task<CuaHang> GetByIdAsync(int id);
         Task<CuaHang> GetByIdAsyncNoTracking(int id);
         Task<CuaHang> GetByNameAsync(string name);
@@ -17,7 +15,8 @@ namespace VLPMall.Interfaces
         Task<IEnumerable<ChiNhanh>> GetChiNhanhByCuaHang(string name);
         Task<IEnumerable<CuaHang>> GetCuaHangByTheLoai(LoaiCuaHang loaiCuaHang);
         Task<IEnumerable<CuaHang>> GetCuaHangByDanhMuc(LoaiCuaHang loaiCuaHang, int loaiDanhMuc);
-
+        bool CuaHangTonTai(int id);
+        bool CuaHangTonTai(string name);
 		bool Add(CuaHang cuaHang, int maChiNhanh);
 		bool Update(CuaHang cuaHang);
 		bool Delete(CuaHang cuaHang);

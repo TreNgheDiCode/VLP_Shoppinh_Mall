@@ -125,14 +125,14 @@ namespace VLPMall.Repository
             return Save();
 		}
 
-        public async Task<CuaHang> GetCuaHang(int id)
+        public bool CuaHangTonTai(int id)
         {
-            return await _context.CuaHang.Where(s => s.Id == id).FirstOrDefaultAsync();
+            return _context.CuaHang.Any(s => s.Id == id);
         }
 
-        public async Task<CuaHang> GetCuaHang(string name)
+        public bool CuaHangTonTai(string name)
         {
-            return await _context.CuaHang.Where(s => s.TenCuaHang == name).FirstOrDefaultAsync();
+            return _context.CuaHang.Any(s => s.TenCuaHang == name);
         }
     }
 }

@@ -26,8 +26,17 @@ namespace VLPMall.Controllers
 
         public async Task<IActionResult> Information(int id)
         {
+            if (!_directoryRepository.ChiNhanhTonTai(id))
+            {
+                return NotFound("Không tìm thấy chi nhánh này, xin vui lòng thử lại");
+            }
             ChiNhanh chiNhanh = await _directoryRepository.GetByIdAsync(id);
             var cuaHang = _directoryRepository.GetCuaHangByChiNhanh(id);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState + ", có lỗi đã xảy ra");
+            }
 
             if (chiNhanh == null || cuaHang == null)
             {

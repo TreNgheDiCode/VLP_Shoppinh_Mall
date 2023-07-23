@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Mvc;
 using VLPMall.Data.Enum;
 using VLPMall.Interfaces;
 using VLPMall.Repository;
@@ -21,12 +22,80 @@ namespace VLPMall.Controllers
         [Route("CuaHang/[action]/")]
         public IActionResult Index(string danhmuc)
         {
+            if (!Enum.IsDefined(typeof(LoaiCuaHang), danhmuc))
+            {
+                return NotFound("Không tìm thấy loại cửa hàng này, xin vui lòng thử lại");
+            }
             return View("IndexDanhMuc", danhmuc);
         }
 
         [Route("CuaHang/[controller]/[action]")]
         public async Task<IActionResult> DanhSachCuaHang(LoaiCuaHang loaiCuaHang, int loaiDanhMuc)
         {
+            var request = HttpContext.Request;
+            var queryString = request.QueryString.ToUriComponent();
+            string[] subStr = queryString.Split(new string[] { "?", "=", "&" }, StringSplitOptions.RemoveEmptyEntries);
+
+            switch (loaiCuaHang)
+            {
+                case LoaiCuaHang.AmThuc:
+                    {
+                        
+                        if (!Enum.IsDefined(typeof(LoaiAmThuc), loaiDanhMuc) || !(loaiCuaHang.ToString() == subStr[1]))
+                        {
+                            return NotFound("Không tìm thấy loại cửa hàng hoặc loại danh mục này, xin vui lòng thử lại");
+                        }
+
+                        break;
+                    }
+                case LoaiCuaHang.GiaiTri:
+                    {
+                        if (!Enum.IsDefined(typeof(LoaiGiaiTri), loaiDanhMuc) || !(loaiCuaHang.ToString() == subStr[1]))
+                        {
+                            return NotFound("Không tìm thấy loại cửa hàng hoặc loại danh mục này, xin vui lòng thử lại");
+                        }
+
+                        break;
+                    }
+                case LoaiCuaHang.TienIch:
+                    {
+                        if (!Enum.IsDefined(typeof(LoaiTienIch), loaiDanhMuc) || !(loaiCuaHang.ToString() == subStr[1]))
+                        {
+                            return NotFound("Không tìm thấy loại cửa hàng hoặc loại danh mục này, xin vui lòng thử lại");
+                        }
+
+                        break;
+                    }
+                case LoaiCuaHang.DichVu:
+                    {
+                        if (!Enum.IsDefined(typeof(LoaiDichVu), loaiDanhMuc) || !(loaiCuaHang.ToString() == subStr[1]))
+                        {
+                            return NotFound("Không tìm thấy loại cửa hàng hoặc loại danh mục này, xin vui lòng thử lại");
+                        }
+
+                        break;
+                    }
+                case LoaiCuaHang.MuaSam:
+                    {
+                        if (!Enum.IsDefined(typeof(LoaiMuaSam), loaiDanhMuc) || !(loaiCuaHang.ToString() == subStr[1]))
+                        {
+                            return NotFound("Không tìm thấy loại cửa hàng hoặc loại danh mục này, xin vui lòng thử lại");
+                        }
+
+                        break;
+                    }
+                default:
+                    {
+                        return NotFound("Không tìm thấy loại cửa hàng hoặc loại danh mục này, xin vui lòng thử lại");
+                    }
+            }
+            
+
+            if (!Enum.IsDefined(typeof(LoaiCuaHang), loaiCuaHang))
+            {
+                return NotFound("Không tìm thấy loại cửa hàng hoặc loại danh mục này, xin vui lòng thử lại");
+            }
+
             var cuaHang = await _storeRepository.GetCuaHangByDanhMuc(loaiCuaHang, loaiDanhMuc);
 
             List<ListDanhMucViewModel> listDanhMucVM = new List<ListDanhMucViewModel>();
@@ -96,7 +165,6 @@ namespace VLPMall.Controllers
                             break;
                         }
                 }
-                
             }
 
 

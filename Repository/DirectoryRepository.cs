@@ -29,6 +29,16 @@ namespace VLPMall.Repository
             return Save();
         }
 
+        public bool ChiNhanhTonTai(int id)
+        {
+            return _context.ChiNhanh.Any(a => a.Id == id);
+        }
+
+        public bool ChiNhanhTonTai(string name)
+        {
+            return _context.ChiNhanh.Any(a => a.TenChiNhanh == name);
+        }
+
         public bool Delete(ChiNhanh chiNhanh)
         {
             _context.Remove(chiNhanh);
@@ -54,16 +64,6 @@ namespace VLPMall.Repository
         public async Task<ChiNhanh> GetByIdAsyncNoTracking(int id)
         {
             return await _context.ChiNhanh.Include(a => a.DiaChi).AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
-        }
-
-        public async Task<ChiNhanh> GetChiNhanh(int id)
-        {
-            return await _context.ChiNhanh.Where(a => a.Id == id).FirstOrDefaultAsync();
-        }
-
-        public async Task<ChiNhanh> GetChiNhanh(string name)
-        {
-            return await _context.ChiNhanh.Where(a => a.TenChiNhanh == name).FirstOrDefaultAsync();
         }
 
         public List<CuaHang> GetCuaHangByChiNhanh(int id)
