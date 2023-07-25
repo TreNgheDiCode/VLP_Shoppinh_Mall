@@ -1,8 +1,36 @@
-﻿@*
+﻿@model ICollection<TinTuc>;
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+
 }
+
+<style>
+	.baiviet.bg, .baiviet.active {
+		background-color: #6051E3 !important;
+		border-color: #6051E3 !important;
+	}
+
+	.khuyenmai.bg, .khuyenmai.active {
+		background-color: #C15669 !important;
+		border-color: #C15669 !important;
+	}
+
+	.bg-light-gray {
+		background-color: #f5f5f5 !important;
+		border-color: #f5f5f5 !important;
+	}
+
+	.list-group-item {
+		background-color: #f5f5f5 !important;
+		border-right: 0px !important;
+		border-left: 0px !important;
+	}
+</style>
+
+<link href="~/css/baiviet.css" rel="stylesheet" />
 
 <div class="container-fluid">
     <div id="breadcrumbs">
@@ -13,14 +41,220 @@
                 </a>
             </li>
             <li class="breadcrumb-item">
-                <a asp-controller="Home" asp-action="Index">Bài viết</a>
+                <a asp-controller="BaiViet" asp-action="Index">Bài viết</a>
             </li>
         </ul>
     </div>
     <hr />
 </div>
 
+<div class="container-fluid">
 
+	<div class="d-none">
+		<h1>
+			What's New
+		</h1>
+	</div>
+
+	<div class="row aos-init aos-animate" data-aos="fade-up">
+		<div class="col-md-12 col-lg-7 col-xl-9 d-block m-0 p-0 p-md-2">
+
+			<ul class="nav nav-pills justify-content-center mb-4 inner-page" id="category-posts-tab">
+				<li class="nav-item mx-0 mx-lg-4">
+					<a class="nav-link px-3 py-2 active baiviet" asp-controller="BaiViet" asp-action="Index" role="tab" aria-controls="pills-home" aria-selected="true">
+						<h5 class="m-0 p-0 d-none d-sm-block font-medium">Bài Viết</h5>
+						<h6 class="m-0 p-0 d-block d-sm-none font-medium">Bài Viết</h6>
+					</a>
+				</li>
+				<li class="nav-item mx-0 mx-lg-4">
+					<a class="nav-link px-3 py-2 khuyenmai" href="https://www.smsupermalls.com/mall-sale-events" role="tab" aria-controls="pills-profile" aria-selected="false">
+						<h5 class="m-0 p-0 d-none d-sm-block font-medium">Mall Sale &amp; Events</h5>
+						<h6 class="m-0 p-0 d-block d-sm-none font-medium">Mall Sale &amp; Events</h6>
+					</a>
+				</li>
+			</ul>
+
+
+			<div id="articlelist">
+				@foreach (var item in Model)
+				{
+					<div class="card card-shadow mb-3 article-card radius-tl-0 radius-bl-0">
+						<div class="card-body p-0">
+							<a asp-controller="TinTuc" asp-action="Information" class="text-black">
+								<div class="row m-0 p-0">
+									<div class="col-md-5 col-12 m-0 p-0 article-thumbnail-placeholder align-middle">
+										<img class="card-img-top article-thumbnail lazy" src="@item.AnhDaiDien" alt="@item.TieuDe">
+										<div class="article-thumbnail-image" style="background-image: url('@item.AnhDaiDien')"></div>
+										<div class="article-thumbnail-backdrop" style="background-image: url('@item.AnhDaiDien')"></div>
+									</div>
+									<div class="col-md-7 col-12 m-0 p-0 article-content-placeholder">
+										<div class="py-3 py-md-3 px-4 px-md-5 article-content">
+											<h5 class="card-title mt-3 mb-0"><strong>@item.TieuDe</strong></h5>
+											@switch (item.NgayDang.Month)
+											{
+												case 1:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Một @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 2:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Hai @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 3:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Ba @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 4:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Bốn @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 5:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Năm @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 6:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Sáu @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 7:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Bảy @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 8:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Tám @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 9:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Chín @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 10:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 11:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Một @item.NgayDang.Year</small></div>
+														break;
+													}
+												case 12:
+													{
+														<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Hai @item.NgayDang.Year</small></div>
+														break;
+													}
+											}
+											<p class="card-text mt-2">@item.NoiDung </p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				}
+			</div>
+			<div class="text-center"><ul class="pagination"><li class="active"><a href="#">1</a></li><li><a href="https://www.smsupermalls.com/whats-new?page=2" data-ci-pagination-page="2">2</a></li><li><a href="https://www.smsupermalls.com/whats-new?page=3" data-ci-pagination-page="3">3</a></li><li><a href="https://www.smsupermalls.com/whats-new?page=4" data-ci-pagination-page="4">4</a></li><a href="https://www.smsupermalls.com/whats-new?page=2" data-ci-pagination-page="2" rel="next"></a><a href="https://www.smsupermalls.com/whats-new?page=118" data-ci-pagination-page="118"></a></ul></div>
+		</div>
+
+		<div class="col-lg-5 col-xl-3 d-none d-lg-block">
+			<div class="bg-light-gray py-3 px-4">
+				<div>
+					<div class="h4 font-bold mb-3">Tin mới nhất</div>
+					<ul class="list-group latest-news">
+						@for (int i = 0; i < 2; i++)
+						{
+							<li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break">
+								<div class="py-2">
+									<a asp-controller="TinTuc" asp-action="Information" class="text-black font-bold">
+										@Model.ToList()[i].TieuDe
+									</a>
+									<br>
+									@switch (@Model.ToList()[i].NgayDang.Month)
+									{
+										case 1:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Một @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 2:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Hai @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 3:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Ba @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 4:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Bốn @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 5:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Năm @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 6:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Sáu @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 7:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Bảy @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 8:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Tám @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 9:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Chín @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 10:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Mười @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 11:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Mười Một @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+										case 12:
+											{
+												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Mười Hai @Model.ToList()[i].NgayDang.Year</small></div>
+												break;
+											}
+									}
+								</div>
+							</li>
+						}
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script>
+	document.getElementById('baiviet')
+</script>
 
 @*<div class="container mt-4 mb-4">
     <!--Bootstrap classes arrange web page components into columns and rows in a grid -->

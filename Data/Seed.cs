@@ -293,7 +293,10 @@ namespace VLPMall.Data
                     var newAdminUser = new User()
                     {
                         UserName = "QuangLong",
-                        Email = adminUserEmail,
+                        HoTen = "Phùng Quang Long",
+                        ProfileImageUrl = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1690320613/avatar_face_dh06ki.jpg",
+                        PhoneNumber = "0763615414",
+						Email = adminUserEmail,
                         EmailConfirmed = true,
                         MaDiaChi = 1
                     };
@@ -309,7 +312,9 @@ namespace VLPMall.Data
                     var newUser = new User()
                     {
                         UserName = "user-testing",
-                        Email = UserEmail,
+                        HoTen = "Người dùng thử nghiệm",
+                        ProfileImageUrl = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1690320613/avatar_face_dh06ki.jpg",
+						Email = UserEmail,
                         EmailConfirmed = true,
                         MaDiaChi = 2
                     };

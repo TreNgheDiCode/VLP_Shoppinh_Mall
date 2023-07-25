@@ -1,0 +1,22 @@
+﻿using Microsoft.EntityFrameworkCore;
+using VLPMall.Data;
+using VLPMall.Interfaces;
+using VLPMall.Models;
+
+namespace VLPMall.Repository
+{
+	public class CareerRepository : ICareerRepository
+	{
+		private readonly DataContext _context;
+
+		public CareerRepository(DataContext context)
+        {
+			_context = context;
+		}
+
+        public async Task<ICollection<TuyenDung>> GetAllAsync()
+		{
+			return await _context.TuyenDungs.ToListAsync();
+		}
+	}
+}

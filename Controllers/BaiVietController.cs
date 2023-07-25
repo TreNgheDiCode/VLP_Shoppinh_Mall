@@ -1,12 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VLPMall.Interfaces;
 
 namespace VLPMall.Controllers
 {
     public class BaiVietController : Controller
     {
-        public IActionResult Index()
+		private readonly IArticleRepository _articleRepository;
+
+		public BaiVietController(IArticleRepository articleRepository)
         {
-            return View("IndexBaiViet");
+			_articleRepository = articleRepository;
+		}
+
+        public async Task<IActionResult> Index()
+        {
+            var tinTuc = await _articleRepository.GetAllAsync();
+
+            return View("IndexBaiViet", tinTuc);
         }
     }
 }

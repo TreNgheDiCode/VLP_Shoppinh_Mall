@@ -24,5 +24,7 @@ namespace VLPMall.ViewModels
         public LoaiTienIch? LoaiTienIch { get; set; }
         public ICollection<ChiNhanh>? ChiNhanhs { get; set; }
         public List<int>? SelectedChiNhanh { get; set; }
+        public ICollection<SanPham> SanPhams { get; set; }
+		public List<SanPham>? SelectedSanPham { get; set; }
 	}
 }

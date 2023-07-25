@@ -20,5 +20,7 @@ namespace VLPMall.ViewModels
         public LoaiDichVu? LoaiDichVu { get; set; }
         public LoaiTienIch? LoaiTienIch { get; set; }
         public LoaiMuaSam? LoaiMuaSam { get; set; }
+
+        public ICollection<SanPham>? SanPhams { get; set; }
     }
 }

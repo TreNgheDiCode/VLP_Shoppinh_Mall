@@ -15,12 +15,14 @@ namespace VLPMall.Controllers
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly IPhotoService _photoService;
         private readonly IStoreRepository _storeRepository;
+		private readonly IProductRepository _productRepository;
 
-		public CuaHangController(IHttpContextAccessor httpContextAccessor, IPhotoService photoService, IStoreRepository storeRepository, IDirectoryRepository directoryRepository)
+		public CuaHangController(IHttpContextAccessor httpContextAccessor, IPhotoService photoService, IStoreRepository storeRepository, IProductRepository productRepository)
         {
 			_httpContextAccessor = httpContextAccessor;
 			_photoService = photoService;
             _storeRepository = storeRepository;
+			_productRepository = productRepository;
 		}
 
         public IActionResult Index()
@@ -36,23 +38,25 @@ namespace VLPMall.Controllers
             }
 
             var cuaHang = await _storeRepository.GetByNameAsync(name);
+			var sanPhams = await _productRepository.GetSanPhamByCuaHangId(cuaHang.Id);
 
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState + ", có lỗi đã xảy ra");
 			}
 
-            var cuaHangVM = new InformationCuaHangViewModel
-            {
-                Id = cuaHang.Id,
-                TemCuaHang = cuaHang.TenCuaHang,
-                NoiDung = cuaHang.NoiDung,
-                AnhDaiDien = cuaHang.AnhDaiDien,
-                Email = cuaHang.Email,
-                SoDienThoai = cuaHang.SoDienThoai,
-                NgayHoatDong = cuaHang.NgayHoatDong,
-                ThoiGianHoatDong = cuaHang.ThoiGianHoatDong,
-                LoaiCuaHang = cuaHang.LoaiCuaHang,
+			var cuaHangVM = new InformationCuaHangViewModel
+			{
+				Id = cuaHang.Id,
+				TemCuaHang = cuaHang.TenCuaHang,
+				NoiDung = cuaHang.NoiDung,
+				AnhDaiDien = cuaHang.AnhDaiDien,
+				Email = cuaHang.Email,
+				SoDienThoai = cuaHang.SoDienThoai,
+				NgayHoatDong = cuaHang.NgayHoatDong,
+				ThoiGianHoatDong = cuaHang.ThoiGianHoatDong,
+				LoaiCuaHang = cuaHang.LoaiCuaHang,
+				SanPhams = sanPhams
             };
 
             if(cuaHang.LoaiAmThuc != null)
@@ -81,6 +85,10 @@ namespace VLPMall.Controllers
 			var createAdminViewModel = new AdminViewModel
 			{
 				UserId = curUserId,
+				cuaHangViewModel = new CreateCuaHangViewModel
+				{
+					SanPhams = new List<SanPham>()
+				}
 			};
 
 			return RedirectToAction("Index", "Admin", createAdminViewModel);
@@ -93,7 +101,7 @@ namespace VLPMall.Controllers
 			{
 				var result = await _photoService.AddPhotoAsync(adminVM.cuaHangViewModel.AnhDaiDien);
 
-				var cuaHang = new CuaHang
+                var cuaHang = new CuaHang
 				{
 					TenCuaHang = adminVM.cuaHangViewModel.TenCuaHang,
 					NoiDung = adminVM.cuaHangViewModel.NoiDung,
@@ -158,8 +166,10 @@ namespace VLPMall.Controllers
 			var userCuaHang = await _storeRepository.GetByIdAsyncNoTracking(id);
 
 			var chiNhanh = _storeRepository.GetChiNhanhByCuaHang(id);
+            var sanPhams = await _productRepository.GetSanPhamByCuaHangId(cuaHangVM.Id);
 
-			cuaHangVM.ChiNhanhs = chiNhanh;
+
+            cuaHangVM.ChiNhanhs = chiNhanh;
 
 			if (userCuaHang != null)
 			{
@@ -186,6 +196,7 @@ namespace VLPMall.Controllers
 					ThoiGianHoatDong = cuaHangVM.ThoiGianHoatDong1 + " - " + cuaHangVM.ThoiGianHoatDong2,
 					LoaiCuaHang = cuaHangVM.LoaiCuaHang,
 					LoaiAmThuc = cuaHangVM.LoaiAmThuc,
+					SanPhams = sanPhams
                 };
 
 				return RedirectToAction("Index", "CuaHang");

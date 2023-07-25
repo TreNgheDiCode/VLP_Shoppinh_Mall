@@ -1,0 +1,96 @@
+﻿.nav .nav-item .nav-link {
+    color: var(--color-black);
+}
+
+    .nav .nav-item .nav-link.active {
+        color: white;
+        background-color: var(--color-electric-blue);
+    }
+
+.nav.nav-pills .nav-link {
+    padding: 15px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 3rem;
+}
+
+    .nav.nav-pills .nav-link.alpha {
+        padding: initial !important;
+    }
+
+.card.card-shadow {
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card.card-rounded {
+    border-radius: 18px !important;
+}
+
+.card.article-card {
+    overflow: hidden;
+}
+
+    .card.article-card .article-thumbnail-placeholder {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+        height: 280px;
+        overflow: hidden;
+        backdrop-filter: blur(2px);
+    }
+
+        .card.article-card .article-thumbnail-placeholder .article-thumbnail {
+            position: relative;
+            display: none;
+            z-index: 1;
+        }
+
+        .card.article-card .article-thumbnail-placeholder .article-thumbnail-image {
+            background-position: center center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .card.article-card .article-thumbnail-placeholder .article-thumbnail-backdrop {
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            filter: blur(10px);
+            opacity: 0.5;
+        }
+
+    .card.article-card .article-content-placeholder {
+        display: table;
+    }
+
+        .card.article-card .article-content-placeholder .article-content {
+            height: 100%;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+            .card.article-card .article-content-placeholder .article-content strong {
+                font-family: var(--font-family-henry-bold);
+                font-weight: normal;
+            }
+
+            .card.article-card .article-content-placeholder .article-content.article-content-border:after {
+                display: none;
+            }
