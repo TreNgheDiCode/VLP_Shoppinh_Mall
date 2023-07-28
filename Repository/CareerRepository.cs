@@ -5,7 +5,7 @@ using VLPMall.Models;
 
 namespace VLPMall.Repository
 {
-	public class CareerRepository : ICareerRepository
+    public class CareerRepository : ICareerRepository
 	{
 		private readonly DataContext _context;
 
@@ -16,7 +16,12 @@ namespace VLPMall.Repository
 
         public async Task<ICollection<TuyenDung>> GetAllAsync()
 		{
-			return await _context.TuyenDungs.ToListAsync();
+			return await _context.TuyenDungs.Include(c => c.NhaTuyenDung).ToListAsync();
 		}
-	}
+
+        public async Task<TuyenDung> GetTuyenDungByName(string name)
+        {
+            return await _context.TuyenDungs.Include(c => c.NhaTuyenDung).FirstOrDefaultAsync(c => c.TenTuyenDung == name);
+        }
+    }
 }

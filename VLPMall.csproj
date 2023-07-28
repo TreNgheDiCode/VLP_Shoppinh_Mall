@@ -21,6 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\BaiViet\" />
+    <Folder Include="Views\KhuyenMai\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\lib\jquery-validation-unobtrusive\" />
     <Folder Include="wwwroot\lib\jquery-validation\" />

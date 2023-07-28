@@ -1,0 +1,144 @@
+﻿@using VLPMall.ViewModels;
+@model InformationTuyenDungViewModel;
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<style>
+    .container {
+        max-width: 100% !important;
+        padding: 0;
+    }
+</style>
+
+<div class="row text-black p-5 align-items-center" style="background-color: lightgray">
+    <div class="col-2">
+        <img class="img-fluid" src="@Model.NhaTuyenDung.AnhDaiDien" />
+    </div>
+    <div class="col-7">
+        <a asp-controller="TuyenDung" asp-action="Information" asp-route-name="@Model.TenTuyenDung" class="link-dark">
+            <h3 class="text-capitalize">@Model.TenTuyenDung</h3>
+        </a>
+        <div class="d-flex">
+            <div class="pe-2">
+                <i class="fa-solid fa-suitcase"></i>
+                <a asp-controller="TuyenDung" asp-action="DanhSachTuyenDungTheoNgheNghiep" asp-route-nghenghiep="@Model.LoaiNgheNghiep" class="link-dark">
+                    <span>@Model.LoaiNgheNghiep</span>
+                </a>
+            </div>
+            <div class="pe-2">
+                <i class="fa-regular fa-clock"></i>
+                <span>Ngày đăng: @Model.NgayDang.Day/@Model.NgayDang.Month/@Model.NgayDang.Year</span>
+            </div>
+            <div class="pe-2">
+                <i class="fa-solid fa-coins"></i>
+                @if (Model.MucLuong == null)
+                {
+                    <span>Thỏa thuận</span>
+                }
+                else
+                {
+                    <span>@Model.MucLuong VNĐ</span>
+                }
+            </div>
+        </div>
+        <div class="d-flex mt-2">
+            @if (Model.LoaiHinhTuyenDung != null)
+            {
+                <a asp-controller="TuyenDung" asp-action="DanhSachTuyenDungTheoLoaiHinh" asp-route-loaihinh="@Model.LoaiHinhTuyenDung" class="btn btn-sm btn-outline-primary rounded-5 px-3">
+                    @Model.LoaiHinhTuyenDung
+                </a>
+            }
+            @if (Model.LoaiKinhNghiem != null)
+            {
+                <a asp-controller="TuyenDung" asp-action="DanhSachTuyenDungTheoLoaiHinh" asp-route-loaihinh="@Model.LoaiKinhNghiem" class="btn btn-sm btn-outline-primary rounded-5 px-2 mx-2">
+                    @Model.LoaiKinhNghiem
+                </a>
+            }
+            @if (Model.LoaiTrinhDo != null)
+            {
+                <a asp-controller="TuyenDung" asp-action="DanhSachTuyenDungTheoLoaiHinh" asp-route-loaihinh="@Model.LoaiTrinhDo" class="btn btn-sm btn-outline-primary rounded-5 px-3">
+                    @Model.LoaiTrinhDo
+                </a>
+            }
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="mb-3">
+            <span>Ngày hết hạn ứng tuyển:</span>
+            @switch (Model.NgayDang.Month)
+            {
+                case 1:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Một @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 2:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Hai @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 3:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Ba @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 4:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Bốn @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 5:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Năm @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 6:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Sáu @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 7:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Bảy @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 8:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Tám @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 9:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Chín @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 10:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Mười @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 11:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Mười Một @Model.NgayDang.Year</span>
+                        break;
+                    }
+                case 12:
+                    {
+                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Mười Hai @Model.NgayDang.Year</span>
+                        break;
+                    }
+            }
+            
+        </div>
+        <div class="d-flex align-self-center justify-content-center">
+            <a asp-controller="TuyenDung" asp-action="UngTuyen" class="btn btn-lg btn-primary me-3">Nộp hồ sơ</a>
+            <a asp-controller="YeuThich" asp-action="TuyenDung" class="align-self-center link-dark btn btn-lg btn-outline-secondary ms-3">
+                <i class="fa-regular fa-bookmark "></i>
+            </a>
+        </div>
+    </div>
+</div>

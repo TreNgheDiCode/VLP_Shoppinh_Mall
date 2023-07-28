@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VLPMall.Data.Enum;
 using VLPMall.Interfaces;
 
 namespace VLPMall.Controllers
@@ -14,9 +15,9 @@ namespace VLPMall.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var tinTuc = await _articleRepository.GetAllAsync();
+            var tinTuc = await _articleRepository.GetTinTucByLoaiTinTUc(LoaiTinTuc.BaiViet);
 
-            return View("IndexBaiViet", tinTuc);
+            return View("_IndexTinTuc", tinTuc);
         }
     }
 }

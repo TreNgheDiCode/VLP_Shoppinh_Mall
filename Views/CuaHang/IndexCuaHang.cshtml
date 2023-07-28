@@ -1,16 +1,33 @@
 ﻿@using VLPMall.Data.Enum;
+@using VLPMall.Interfaces;
+
+@inject IArticleRepository ArticleRepository;
+
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    var articles = await ArticleRepository.GetAllAsync();
 }
 <link href="~/css/shops.css" rel="stylesheet" />
+<link href="~/css/baiviet.css" rel="stylesheet" />
 
 <style>
     .container {
         margin: 0;
         padding: 0;
         max-width: 100%;
+    }
+
+    .bg-light-gray {
+        background-color: #f5f5f5 !important;
+        border-color: #f5f5f5 !important;
+    }
+
+    .list-group-item {
+        background-color: #f5f5f5 !important;
+        border-right: 0px !important;
+        border-left: 0px !important;
     }
 </style>
 
@@ -70,13 +87,13 @@
     <div class="row">
         <div class="col-md-10 offset-md-1 px-0 px-md-1">
             <div id="breadcrumbs" class="container-fluid">
-                <ul class="breadcrumb"><li><a href="https://www.smsupermalls.com/"><span class="fa fa-home"></span></a> </li><li><a href="https://www.smsupermalls.com/shops">Shops</a> </li></ul>
+                <ul class="breadcrumb"><li><a href=""><span class="fa fa-home"></span></a> </li><li><a href=""></a> </li></ul>
             </div>
 
             <div class="container-fluid">
                 <div class="row">
                     <div class="d-none">
-                        <h1>Shops</h1>
+                        <h1>Cửa hàng</h1>
                     </div>
                     <div class="col-lg-8 col-xl-9">
 
@@ -184,7 +201,80 @@
                     </div>
                     <div class="col-lg-4 col-xl-3 d-none d-lg-block">
                         <div class="bg-light-gray py-3 px-4">
-                            <div><div class="h4 font-bold mb-3">Latest</div><ul class="list-group latest-news"><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/flash-deals-alert-here-are-the-best-treats-you-can-get-at-sm-deals-birthday-blowout" class="text-black font-bold">Flash Deals Alert: Here are the Best Treats You Can Get at SM Deals Birthday Blowout</a><br><small class="text-muted">13 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/experience-how-to-live-like-barbie-in-barbie-land-at-sm-mall-of-asia" class="text-black font-bold">EXPERIENCE HOW TO LIVE LIKE “BARBIE” IN BARBIE LAND AT SM MALL OF ASIA </a><br><small class="text-muted">13 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/mall-sale-events/3-day-sale-july14-16" class="text-black font-bold">3 Day Sale: July 14 - 16</a><br><small class="text-muted">11 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/sm-city-baguio-set-to-convert-rainwater-to-potable-water" class="text-black font-bold">SM City Baguio set to convert rainwater to potable water</a><br><small class="text-muted">8 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/let-your-kids-shine-the-brightest-at-sm-little-stars-2023" class="text-black font-bold">Let your kids shine the brightest at SM Little Stars 2023</a><br><small class="text-muted">7 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/auro-world-chocolate-fair-is-back-at-s-maison-at-conrad-manila" class="text-black font-bold">Auro World Chocolate Fair is back at S Maison at Conrad Manila</a><br><small class="text-muted">7 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/movie-guide-experience-awe-sm-thrills-at-sm-cinema-this-july" class="text-black font-bold">MOVIE GUIDE: Experience AweSM thrills at SM Cinema this July!</a><br><small class="text-muted">7 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/where-to-buy-10-yummy-eats-to-pair-with-your-coffee" class="text-black font-bold">Where to Buy: 10 Yummy Eats to Pair with Your Coffee</a><br><small class="text-muted">7 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/whats-hot-parachute-cargo-and-denims" class="text-black font-bold">What's HOT: Parachute, Cargo, and Denims</a><br><small class="text-muted">6 Jul 2023</small></div></li><li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break"><div class="py-2"><a href="https://www.smsupermalls.com/whats-new/5-must-try-cafes-at-sm-city-clark" class="text-black font-bold">5 Must-Try Cafes at SM City Clark</a><br><small class="text-muted">5 Jul 2023</small></div></li></ul></div>
+                            <div><div class="h4 font-bold mb-3">Tin mới nhất</div>
+                                <ul class="list-group latest-news">
+                                        @foreach(var item in articles)
+                                        {
+                                        <li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break">
+                                            <div class="py-2">
+                                                <a href="#" class="text-black font-bold">@item.TieuDe</a><br>@switch (item.NgayDang.Month)
+                                                {
+                                                    case 1:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Một @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 2:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Hai @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 3:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Ba @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 4:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Bốn @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 5:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Năm @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 6:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Sáu @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 7:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Bảy @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 8:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Tám @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 9:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Chín @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 10:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 11:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Một @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                    case 12:
+                                                        {
+                                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Hai @item.NgayDang.Year</small></div>
+                                                            break;
+                                                        }
+                                                }
+                                            </div>
+                                        </li>
+                                        }
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

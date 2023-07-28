@@ -59,7 +59,7 @@ namespace VLPMall.Repository
 
         public async Task<CuaHang> GetByNameAsync(string name)
         {
-            return await _context.CuaHangs.FirstOrDefaultAsync(s => s.TenCuaHang == name);
+            return await _context.CuaHangs.Include(s => s.ChiNhanhCuaHangs).FirstOrDefaultAsync(s => s.TenCuaHang == name);
         }
 
         public async Task<string> GetDiaDiemgById(int maChiNhanh, int maCuaHang)

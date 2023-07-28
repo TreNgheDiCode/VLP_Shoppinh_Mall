@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using VLPMall.Data;
+using VLPMall.Data.Enum;
 using VLPMall.Interfaces;
 using VLPMall.Models;
 
@@ -25,6 +26,11 @@ namespace VLPMall.Repository
 		public async Task<TinTuc> GetTinTucById(int id)
 		{
 			return await _context.TinTucs.FirstOrDefaultAsync(a => a.Id == id);
+		}
+
+		public async Task<ICollection<TinTuc>> GetTinTucByLoaiTinTUc(LoaiTinTuc loaiTinTuc)
+		{
+			return await _context.TinTucs.Where(s => s.LoaiTinTuc == loaiTinTuc).ToListAsync();
 		}
 	}
 }

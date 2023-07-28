@@ -106,7 +106,7 @@
                                             {
                                                 case "AmThuc": 
                                                     {
-                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Ẩm thực</a>
+                                                        <a asp-controller="DanhMucCuaHang" asp-action="Index" asp-route-danhmuc="@name" class="text-uppercase">Ẩm thực</a>
                                                         <ul>
                                                             @foreach (var amThucItem in Enum.GetValues(typeof (LoaiAmThuc)))
                                                             {
@@ -120,7 +120,7 @@
                                                     }
                                                 case "RapChieuPhim":
                                                     {
-                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Rạp chiếu phim</a>
+                                                        <a asp-controller="DanhMucCuaHang" asp-action="Index" asp-route-danhmuc="@name" class="text-uppercase">Rạp chiếu phim</a>
                                                         <ul>
                                                             <li class="">
                                                                 <a href="" class="text-uppercase">Đồ ăn nhanh</a>
@@ -130,7 +130,7 @@
                                                     }
                                                 case "GiaiTri":
                                                     {
-                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Giải trí</a>
+                                                        <a asp-controller="DanhMucCuaHang" asp-action="Index" asp-route-danhmuc="@name" class="text-uppercase">Giải trí</a>
                                                         <ul>
                                                             <li class="">
                                                                 <a href="" class="text-uppercase">Đồ ăn nhanh</a>
@@ -140,7 +140,7 @@
                                                     }
                                                 case "TienIch":
                                                     {
-                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Tiện ích</a>
+                                                        <a asp-controller="DanhMucCuaHang" asp-action="Index" asp-route-danhmuc="@name" class="text-uppercase">Tiện ích</a>
                                                         <ul>
                                                             <li class="">
                                                                 <a href="" class="text-uppercase">Đồ ăn nhanh</a>
@@ -150,7 +150,7 @@
                                                     }
                                                 case "DichVu":
                                                     {
-                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Dịch vụ</a>
+                                                        <a asp-controller="DanhMucCuaHang" asp-action="Index" asp-route-danhmuc="@name" class="text-uppercase">Dịch vụ</a>
                                                         <ul>
                                                             <li class="">
                                                                 <a href="" class="text-uppercase">Đồ ăn nhanh</a>
@@ -160,7 +160,7 @@
                                                     }
                                                 case "MuaSam":
                                                     {
-                                                        <a href="https://www.smsupermalls.com/shops/entertainment" class="text-uppercase">Mua sắm</a>
+                                                        <a asp-controller="DanhMucCuaHang" asp-action="Index" asp-route-danhmuc="@name" class="text-uppercase">Mua sắm</a>
                                                         <ul>
                                                             <li class="">
                                                                 <a href="" class="text-uppercase">Đồ ăn nhanh</a>
@@ -176,7 +176,7 @@
                         </ul>
                     </li>
                     <li class="nav-item drop-down">
-                        <a href="https://www.smsupermalls.com/#sm-malls" class="nav-link">Hoạt động <i class="fa fa-caret-down"></i></a>
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">Hoạt động<i class="fa fa-caret-down"></i></a>
                         <ul>
                             @foreach (var item in Enum.GetValues(typeof(LoaiTinTuc)))
                             {
@@ -212,7 +212,7 @@
                     {
                         <li class="nav-item">
                             <form method="post">
-                                @if (User.IsInRole("admin"))
+                                @if (User.IsInRole("super-admin"))
                                 {
                                     <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-light">Bảng điều khiển</a>
                                 }
@@ -223,7 +223,6 @@
                     } else
                     {
                         <li class="nav-item">
-                            <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-light">Bảng điều khiển</a>
                             <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Login">Đăng nhập</a>
                             <span>&nbsp;hoặc&nbsp;</span>
                             <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Register">Đăng ký</a>

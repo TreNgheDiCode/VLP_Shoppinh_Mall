@@ -174,6 +174,8 @@ namespace VLPMall.Data
                 {
                     new NhaTuyenDung()
                     {
+                        TenNhaTuyenDung = "VLP Mall",
+                        AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688895189/lotteria_logo_cmyouc.svg",
                         NganhNghe = LoaiNgheNghiep.CongNgheThongTin,
                         SoDienThoai = "0763615414",
                         Email = "gabayan170@gmail.com",
@@ -282,27 +284,155 @@ namespace VLPMall.Data
                     await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
                 if (!await roleManager.RoleExistsAsync(UserRoles.User))
                     await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+				if (!await roleManager.RoleExistsAsync(UserRoles.QuanLyNguoiDung))
+					await roleManager.CreateAsync(new IdentityRole(UserRoles.QuanLyNguoiDung));
+				if (!await roleManager.RoleExistsAsync(UserRoles.QuanLyChiNhanh))
+					await roleManager.CreateAsync(new IdentityRole(UserRoles.QuanLyChiNhanh));
+				if (!await roleManager.RoleExistsAsync(UserRoles.QuanLyCuaHang))
+					await roleManager.CreateAsync(new IdentityRole(UserRoles.QuanLyCuaHang));
+				if (!await roleManager.RoleExistsAsync(UserRoles.QuanLyTruyenThong))
+					await roleManager.CreateAsync(new IdentityRole(UserRoles.QuanLyTruyenThong));
+				if (!await roleManager.RoleExistsAsync(UserRoles.QuanLyNhanSu))
+					await roleManager.CreateAsync(new IdentityRole(UserRoles.QuanLyNhanSu));
+				if (!await roleManager.RoleExistsAsync(UserRoles.QuanLyDoanhNghiep))
+					await roleManager.CreateAsync(new IdentityRole(UserRoles.QuanLyDoanhNghiep));
 
-                //Users
-                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<User>>();
-                string adminUserEmail = "gabayan170@gmail.com";
+				//Users
+				var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<User>>();
+                string superAdminEmail = "super-admin@gmai.com";
+                string userAdminEmail = "user-admin@gmail.com";
+                string chiNhanhAdminEmail = "chinhanh-admin@gmail.com";
+                string cuaHangAdminEmail = "cuahang-admin@gmail.com";
+                string truyenThongAdminEmail = "truyenthong-admin@gmail.com";
+                string nhanSuAdminEmail = "nhansu-admin@gmail.com";
+                string doanhNghiepAdminEmail = "doanhnghiep-admin@gmail.com";
 
-                var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
-                if (adminUser == null)
+                var superAdmin = await userManager.FindByEmailAsync(superAdminEmail);
+                var userAdmin = await userManager.FindByEmailAsync(userAdminEmail);
+				var chiNhanhAdmin = await userManager.FindByEmailAsync(chiNhanhAdminEmail);
+				var cuaHangAdmin = await userManager.FindByEmailAsync(cuaHangAdminEmail);
+				var truyenThongAdmin = await userManager.FindByEmailAsync(truyenThongAdminEmail);
+				var nhanSuAdmin = await userManager.FindByEmailAsync(nhanSuAdminEmail);
+				var doanhNghiepAdmin = await userManager.FindByEmailAsync(doanhNghiepAdminEmail);
+
+				if (superAdmin == null)
                 {
                     var newAdminUser = new User()
                     {
-                        UserName = "QuangLong",
+                        UserName = "SuperAdmin",
                         HoTen = "Phùng Quang Long",
                         ProfileImageUrl = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1690320613/avatar_face_dh06ki.jpg",
                         PhoneNumber = "0763615414",
-						Email = adminUserEmail,
+						Email = superAdminEmail,
                         EmailConfirmed = true,
                         MaDiaChi = 1
                     };
+
                     await userManager.CreateAsync(newAdminUser, "Test!1234@");
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
+
+                if (userAdmin == null)
+                {
+					var newAdminUser = new User()
+					{
+						UserName = "UserAdmin",
+						HoTen = "Phùng Quang Long",
+						ProfileImageUrl = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1690320613/avatar_face_dh06ki.jpg",
+						PhoneNumber = "0763615414",
+						Email = userAdminEmail,
+						EmailConfirmed = true,
+						MaDiaChi = 1
+					};
+
+					await userManager.CreateAsync(newAdminUser, "Test!1234@");
+					await userManager.AddToRoleAsync(newAdminUser, UserRoles.QuanLyNguoiDung);
+				}
+
+                if (chiNhanhAdmin == null)
+                {
+					var newAdminUser = new User()
+					{
+						UserName = "ChiNhanhAdmin",
+						HoTen = "Phùng Quang Long",
+						ProfileImageUrl = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1690320613/avatar_face_dh06ki.jpg",
+						PhoneNumber = "0763615414",
+						Email = chiNhanhAdminEmail,
+						EmailConfirmed = true,
+						MaDiaChi = 1
+					};
+
+					await userManager.CreateAsync(newAdminUser, "Test!1234@");
+					await userManager.AddToRoleAsync(newAdminUser, UserRoles.QuanLyChiNhanh);
+				}
+
+                if (cuaHangAdmin == null)
+                {
+					var newAdminUser = new User()
+					{
+						UserName = "CuaHangAdmin",
+						HoTen = "Phùng Quang Long",
+						ProfileImageUrl = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1690320613/avatar_face_dh06ki.jpg",
+						PhoneNumber = "0763615414",
+						Email = cuaHangAdminEmail,
+						EmailConfirmed = true,
+						MaDiaChi = 1
+					};
+
+					await userManager.CreateAsync(newAdminUser, "Test!1234@");
+					await userManager.AddToRoleAsync(newAdminUser, UserRoles.QuanLyCuaHang);
+				}
+
+                if (truyenThongAdmin == null)
+                {
+					var newAdminUser = new User()
+					{
+						UserName = "TruyenThongAdmin",
+						HoTen = "Phùng Quang Long",
+						ProfileImageUrl = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1690320613/avatar_face_dh06ki.jpg",
+						PhoneNumber = "0763615414",
+						Email = truyenThongAdminEmail,
+						EmailConfirmed = true,
+						MaDiaChi = 1
+					};
+
+					await userManager.CreateAsync(newAdminUser, "Test!1234@");
+					await userManager.AddToRoleAsync(newAdminUser, UserRoles.QuanLyTruyenThong);
+				}
+
+                if(nhanSuAdmin == null)
+                {
+					var newAdminUser = new User()
+					{
+						UserName = "NhanSuAdmin",
+						HoTen = "Phùng Quang Long",
+						ProfileImageUrl = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1690320613/avatar_face_dh06ki.jpg",
+						PhoneNumber = "0763615414",
+						Email = nhanSuAdminEmail ,
+						EmailConfirmed = true,
+						MaDiaChi = 1
+					};
+
+					await userManager.CreateAsync(newAdminUser, "Test!1234@");
+					await userManager.AddToRoleAsync(newAdminUser, UserRoles.QuanLyNhanSu);
+				}
+
+                if (doanhNghiepAdmin == null)
+                {
+					var newAdminUser = new User()
+					{
+						UserName = "DoanhNghiepAdmin",
+						HoTen = "Phùng Quang Long",
+						ProfileImageUrl = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1690320613/avatar_face_dh06ki.jpg",
+						PhoneNumber = "0763615414",
+						Email = doanhNghiepAdminEmail,
+						EmailConfirmed = true,
+						MaDiaChi = 1
+					};
+
+					await userManager.CreateAsync(newAdminUser, "Test!1234@");
+					await userManager.AddToRoleAsync(newAdminUser, UserRoles.QuanLyDoanhNghiep);
+				}
 
                 string UserEmail = "user@gmail.com";
 

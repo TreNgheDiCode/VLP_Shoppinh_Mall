@@ -1,12 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VLPMall.Data.Enum;
+using VLPMall.Interfaces;
 
 namespace VLPMall.Controllers
 {
     public class KhuyenMaiController : Controller
     {
-        public IActionResult Index()
+		private readonly IArticleRepository _articleRepository;
+
+		public KhuyenMaiController(IArticleRepository articleRepository)
         {
-            return View("IndexKhuyenMai");
+			_articleRepository = articleRepository;
+		}
+
+        public async Task<IActionResult> IndexAsync()
+        {
+            var khuyenMais = await _articleRepository.GetTinTucByLoaiTinTUc(LoaiTinTuc.KhuyenMai);
+
+            return View("_IndexTinTuc", khuyenMais);
         }
     }
 }

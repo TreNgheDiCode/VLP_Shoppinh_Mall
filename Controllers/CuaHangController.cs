@@ -30,7 +30,7 @@ namespace VLPMall.Controllers
             return View("IndexCuaHang");
         }
 
-        public async Task<IActionResult> Information(string name)
+        public async Task<IActionResult> Information(int maChiNhanh, string name)
         {
             if (!_storeRepository.CuaHangTonTai(name))
             {
@@ -56,8 +56,9 @@ namespace VLPMall.Controllers
 				NgayHoatDong = cuaHang.NgayHoatDong,
 				ThoiGianHoatDong = cuaHang.ThoiGianHoatDong,
 				LoaiCuaHang = cuaHang.LoaiCuaHang,
-				SanPhams = sanPhams
-            };
+				SanPhams = sanPhams,
+				DiaDiem = await _storeRepository.GetDiaDiemgById(maChiNhanh, cuaHang.Id)
+			};
 
             if(cuaHang.LoaiAmThuc != null)
             {

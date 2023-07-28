@@ -7,6 +7,7 @@ namespace VLPMall.Models
     {
         public int Id { get; set; }
         public string? TenNhaTuyenDung { get; set; }
+        public string? AnhDaiDien { get; set; }
         public LoaiNgheNghiep? NganhNghe { get; set; }
         public string? SoDienThoai { get; set; }
         public string? Email { get; set; }

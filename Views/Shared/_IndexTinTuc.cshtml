@@ -1,11 +1,16 @@
-﻿@model ICollection<TinTuc>;
+﻿@using VLPMall.Interfaces;
+@model ICollection<TinTuc>;
+
+@inject IArticleRepository ArticleRepository;
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-
+	var articles = await ArticleRepository.GetAllAsync();
 }
+
+<link href="~/css/baiviet.css" rel="stylesheet" />
 
 <style>
 	.baiviet.bg, .baiviet.active {
@@ -30,29 +35,33 @@
 	}
 </style>
 
-<link href="~/css/baiviet.css" rel="stylesheet" />
-
 <div class="container-fluid">
-    <div id="breadcrumbs">
-        <ul class="breadcrumb mt-3">
-            <li class="breadcrumb-item">
-                <a asp-controller="Home" asp-action="Index">
-                    <span class="fa fa-home"></span>
-                </a>
-            </li>
-            <li class="breadcrumb-item">
-                <a asp-controller="BaiViet" asp-action="Index">Bài viết</a>
-            </li>
-        </ul>
-    </div>
-    <hr />
+	<div id="breadcrumbs">
+		<ul class="breadcrumb mt-3">
+			<li class="breadcrumb-item">
+				<a asp-controller="Home" asp-action="Index">
+					<span class="fa fa-home"></span>
+				</a>
+			</li>
+			<li class="breadcrumb-item">
+				@if (ViewContext.RouteData.Values["controller"].ToString() == "KhuyenMai")
+				{
+					<a asp-controller="KhuyenMai" asp-action="Index">Khuyến mãi</a>
+				} else
+				{
+					<a asp-controller="BaiViet" asp-action="Index">Bài viết</a>
+				}
+			</li>
+		</ul>
+	</div>
+	<hr />
 </div>
 
 <div class="container-fluid">
 
 	<div class="d-none">
 		<h1>
-			What's New
+			Bài viết
 		</h1>
 	</div>
 
@@ -61,16 +70,36 @@
 
 			<ul class="nav nav-pills justify-content-center mb-4 inner-page" id="category-posts-tab">
 				<li class="nav-item mx-0 mx-lg-4">
-					<a class="nav-link px-3 py-2 active baiviet" asp-controller="BaiViet" asp-action="Index" role="tab" aria-controls="pills-home" aria-selected="true">
-						<h5 class="m-0 p-0 d-none d-sm-block font-medium">Bài Viết</h5>
-						<h6 class="m-0 p-0 d-block d-sm-none font-medium">Bài Viết</h6>
-					</a>
+					@if (ViewContext.RouteData.Values["controller"].ToString() == "BaiViet")
+					{
+						<a  id="baiviet" class="nav-link px-3 py-2 active baiviet" asp-controller="BaiViet" asp-action="Index" role="tab" aria-controls="pills-home" aria-selected="true">
+							<h5 class="m-0 p-0 d-none d-sm-block font-medium">Bài Viết</h5>
+							<h6 class="m-0 p-0 d-block d-sm-none font-medium">Bài Viết</h6>
+						</a>
+					} else
+					{
+						<a id="khuyenmai" class="nav-link px-3 py-2 baiviet text-black" style="color: black !important" asp-controller="BaiViet" asp-action="Index" role="tab" aria-controls="pills-home" aria-selected="true">
+							<h5 class="m-0 p-0 d-none d-sm-block font-medium">Bài Viết</h5>
+							<h6 class="m-0 p-0 d-block d-sm-none font-medium">Bài Viết</h6>
+						</a>
+					}
 				</li>
+				
 				<li class="nav-item mx-0 mx-lg-4">
-					<a class="nav-link px-3 py-2 khuyenmai" href="https://www.smsupermalls.com/mall-sale-events" role="tab" aria-controls="pills-profile" aria-selected="false">
-						<h5 class="m-0 p-0 d-none d-sm-block font-medium">Mall Sale &amp; Events</h5>
-						<h6 class="m-0 p-0 d-block d-sm-none font-medium">Mall Sale &amp; Events</h6>
-					</a>
+					@if (ViewContext.RouteData.Values["controller"].ToString() == "KhuyenMai")
+					{
+						<a class="nav-link px-3 py-2 active khuyenmai" asp-controller="KhuyenMai" asp-action="Index" role="tab" aria-controls="pills-profile" aria-selected="false">
+							<h5 class="m-0 p-0 d-none d-sm-block font-medium">Khuyến Mãi</h5>
+							<h6 class="m-0 p-0 d-block d-sm-none font-medium">Khuyến Mãi</h6>
+						</a>
+					} else
+					{
+						<a class="nav-link px-3 py-2 khuyenmai" style="color: black !important" asp-controller="KhuyenMai" asp-action="Index" role="tab" aria-controls="pills-profile" aria-selected="false">
+							<h5 class="m-0 p-0 d-none d-sm-block font-medium">Khuyến Mãi</h5>
+							<h6 class="m-0 p-0 d-block d-sm-none font-medium">Khuyến Mãi</h6>
+						</a>
+					}
+					
 				</li>
 			</ul>
 
@@ -162,7 +191,7 @@
 					</div>
 				}
 			</div>
-			<div class="text-center"><ul class="pagination"><li class="active"><a href="#">1</a></li><li><a href="https://www.smsupermalls.com/whats-new?page=2" data-ci-pagination-page="2">2</a></li><li><a href="https://www.smsupermalls.com/whats-new?page=3" data-ci-pagination-page="3">3</a></li><li><a href="https://www.smsupermalls.com/whats-new?page=4" data-ci-pagination-page="4">4</a></li><a href="https://www.smsupermalls.com/whats-new?page=2" data-ci-pagination-page="2" rel="next"></a><a href="https://www.smsupermalls.com/whats-new?page=118" data-ci-pagination-page="118"></a></ul></div>
+			<div class="text-center"><ul class="pagination"><li class="active"><a href="#">1</a></li><li><a href="#" data-ci-pagination-page="2">2</a></li><li><a href="" data-ci-pagination-page="3">3</a></li><li><a href="" data-ci-pagination-page="4">4</a></li><a href="" data-ci-pagination-page="2" rel="next"></a><a href="#" data-ci-pagination-page="118"></a></ul></div>
 		</div>
 
 		<div class="col-lg-5 col-xl-3 d-none d-lg-block">
@@ -170,74 +199,74 @@
 				<div>
 					<div class="h4 font-bold mb-3">Tin mới nhất</div>
 					<ul class="list-group latest-news">
-						@for (int i = 0; i < 2; i++)
+						@foreach(var item in articles)
 						{
 							<li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break">
 								<div class="py-2">
 									<a asp-controller="TinTuc" asp-action="Information" class="text-black font-bold">
-										@Model.ToList()[i].TieuDe
+										@item.TieuDe
 									</a>
 									<br>
-									@switch (@Model.ToList()[i].NgayDang.Month)
+									@switch (@item.NgayDang.Month)
 									{
 										case 1:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Một @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Một @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 2:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Hai @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Hai @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 3:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Ba @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Ba @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 4:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Bốn @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Bốn @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 5:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Năm @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Năm @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 6:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Sáu @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Sáu @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 7:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Bảy @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Bảy @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 8:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Tám @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Tám @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 9:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Chín @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Chín @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 10:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Mười @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 11:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Mười Một @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Một @item.NgayDang.Year</small></div>
 												break;
 											}
 										case 12:
 											{
-												<div><small>Đăng vào @Model.ToList()[i].NgayDang.Day, Tháng Mười Hai @Model.ToList()[i].NgayDang.Year</small></div>
+												<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Hai @item.NgayDang.Year</small></div>
 												break;
 											}
 									}
@@ -253,7 +282,7 @@
 </div>
 
 <script>
-	document.getElementById('baiviet')
+	
 </script>
 
 @*<div class="container mt-4 mb-4">
