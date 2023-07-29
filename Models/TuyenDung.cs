@@ -8,6 +8,12 @@ namespace VLPMall.Models
         public int Id { get; set; }
         public string? TenTuyenDung { get; set; }
         public string? NoiDung { get; set; }
+        public string? YeuCau { get; set; }
+        public string? QuyenLoi { get; set; }
+        public int SoLuong { get; set; } = 0;
+        [ForeignKey("DiaChi")]
+        public int MaDiaChi { get; set; }
+        public DiaChi DiaChi { get; set; }
         public int? MucLuong { get; set; }
         public DateTime NgayDang { get; set; } = DateTime.Now;
         public DateTime NgayHetHan { get; set; }

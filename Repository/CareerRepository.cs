@@ -19,9 +19,14 @@ namespace VLPMall.Repository
 			return await _context.TuyenDungs.Include(c => c.NhaTuyenDung).ToListAsync();
 		}
 
+        public async Task<ICollection<TuyenDung>> GetTop6Async()
+        {
+            return await _context.TuyenDungs.Include(c => c.NhaTuyenDung).OrderByDescending(c => c.NgayDang).Take(6).ToListAsync();
+        }
+
         public async Task<TuyenDung> GetTuyenDungByName(string name)
         {
-            return await _context.TuyenDungs.Include(c => c.NhaTuyenDung).FirstOrDefaultAsync(c => c.TenTuyenDung == name);
+            return await _context.TuyenDungs.Include(c => c.DiaChi).Include(c => c.NhaTuyenDung).FirstOrDefaultAsync(c => c.TenTuyenDung == name);
         }
     }
 }

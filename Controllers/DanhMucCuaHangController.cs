@@ -20,7 +20,7 @@ namespace VLPMall.Controllers
         }
 
         [Route("CuaHang/[action]/")]
-        public IActionResult Index(string danhmuc)
+        public IActionResult Index(LoaiCuaHang danhmuc)
         {
             if (!Enum.IsDefined(typeof(LoaiCuaHang), danhmuc))
             {

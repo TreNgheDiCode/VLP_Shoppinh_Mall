@@ -9,15 +9,13 @@ namespace VLPMall.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IDirectoryRepository _directoryRepository;
 
-        public HomeController(ILogger<HomeController> logger, IDirectoryRepository directoryRepository)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _directoryRepository = directoryRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }

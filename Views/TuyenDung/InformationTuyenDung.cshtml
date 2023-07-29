@@ -14,7 +14,7 @@
     }
 </style>
 
-<div class="row text-black p-5 align-items-center" style="background-color: lightgray">
+<div class="row text-black p-5 align-items-center" style="background-color: azure">
     <div class="col-2">
         <img class="img-fluid" src="@Model.NhaTuyenDung.AnhDaiDien" />
     </div>
@@ -25,10 +25,17 @@
         <div class="d-flex">
             <div class="pe-2">
                 <i class="fa-solid fa-suitcase"></i>
-                <a asp-controller="TuyenDung" asp-action="DanhSachTuyenDungTheoNgheNghiep" asp-route-nghenghiep="@Model.LoaiNgheNghiep" class="link-dark">
+                <a asp-controller="TuyenDung" asp-action="LoaiNgheNghiep" asp-route-nghenghiep="@Model.LoaiNgheNghiep" class="link-dark">
                     <span>@Model.LoaiNgheNghiep</span>
                 </a>
             </div>
+            <div class="pe-2">
+                <i class="fa-solid fa-location-dot"></i>
+                <a asp-controller="TuyenDung" asp-action="Quan" asp-route-thanhpho="@Model.DiaChi.ThanhPho" asp-route-quan="@Model.DiaChi.Quan" class="link-dark">
+                    <span>@Model.DiaChi.Quan</span>
+                </a>
+            </div>
+            
             <div class="pe-2">
                 <i class="fa-regular fa-clock"></i>
                 <span>Ngày đăng: @Model.NgayDang.Day/@Model.NgayDang.Month/@Model.NgayDang.Year</span>
@@ -44,6 +51,7 @@
                     <span>@Model.MucLuong VNĐ</span>
                 }
             </div>
+
         </div>
         <div class="d-flex mt-2">
             @if (Model.LoaiHinhTuyenDung != null)
@@ -69,76 +77,353 @@
     <div class="col-3">
         <div class="mb-3">
             <span>Ngày hết hạn ứng tuyển:</span>
-            @switch (Model.NgayDang.Month)
+            @switch (Model.NgayHetHan.Month)
             {
                 case 1:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Một @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Một @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 2:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Hai @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Hai @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 3:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Ba @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Ba @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 4:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Bốn @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Bốn @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 5:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Năm @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Năm @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 6:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Sáu @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Sáu @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 7:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Bảy @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Bảy @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 8:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Tám @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Tám @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 9:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Chín @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Chín @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 10:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Mười @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Mười @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 11:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Mười Một @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Mười Một @Model.NgayHetHan.Year</span>
                         break;
                     }
                 case 12:
                     {
-                        <span class="text-danger"> @Model.NgayDang.Day, Tháng Mười Hai @Model.NgayDang.Year</span>
+                        <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Mười Hai @Model.NgayHetHan.Year</span>
                         break;
                     }
             }
-            
         </div>
         <div class="d-flex align-self-center justify-content-center">
             <a asp-controller="TuyenDung" asp-action="UngTuyen" class="btn btn-lg btn-primary me-3">Nộp hồ sơ</a>
             <a asp-controller="YeuThich" asp-action="TuyenDung" class="align-self-center link-dark btn btn-lg btn-outline-secondary ms-3">
                 <i class="fa-regular fa-bookmark "></i>
             </a>
+        </div>
+    </div>
+</div>
+
+<div class="row text-black p-5">
+    <div class="col col-md-8 p-4">
+        <div class="mb-2">
+            <h5>Mô tả công việc</h5>
+            <div>
+                @Model.NoiDung
+            </div>
+        </div>
+        <div class="mb-2">
+            <h5>Yêu cầu công việc</h5>
+            <div>
+                @Model.YeuCau
+            </div>
+        </div>
+        <div class="mb-2">
+            <h5>Quyền lợi - Phúc lợi</h5>
+            <div>
+                @Model.QuyenLoi
+            </div>
+        </div>
+        <div class="mb-2">
+            <h5>Số lượng cần tuyển</h5>
+            <div>
+                @Model.SoLuong
+            </div>
+        </div>
+        <div class="mb-2">
+            <h5>Địa chỉ làm việc</h5>
+            <div>
+                @Model.DiaChi.Duong, @Model.DiaChi.Phuong, @Model.DiaChi.Quan, @Model.DiaChi.ThanhPho
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-4">
+        <div class="mb-4 p-4" style="background-color: azure;">
+            <h5 class="mb-2">Thông tin công việc</h5>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <i class="fa-regular fa-calendar"></i>
+                </div>
+                <div class="col-10">
+                    <h6>Ngày đăng tin</h6>
+                    @switch (Model.NgayDang.Month)
+                    {
+                        case 1:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Một @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 2:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Hai @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 3:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Ba @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 4:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Bốn @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 5:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Năm @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 6:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Sáu @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 7:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Bảy @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 8:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Tám @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 9:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Chín @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 10:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Mười @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 11:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Mười Một @Model.NgayDang.Year</span>
+                                break;
+                            }
+                        case 12:
+                            {
+                                <span class="text-danger"> @Model.NgayDang.Day, Tháng Mười Hai @Model.NgayDang.Year</span>
+                                break;
+                            }
+                    }
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="col-10">
+                    <a asp-controller="TuyenDung" asp-action="DanhSachTuyenDungTheoQuan" asp-route-thanhpho="@Model.DiaChi.ThanhPho" asp-route-quan="@Model.DiaChi.Quan" class="link-dark">
+                        <h6>@Model.DiaChi.Quan</h6>
+                    </a>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <i class="fa-solid fa-coins"></i>
+                </div>
+                <div class="col-10">
+                    <h6>Mức lương</h6>
+                    @if (Model.MucLuong == null)
+                    {
+                        <span>Thỏa thuận</span>
+                    }
+                    else
+                    {
+                        <span>@Model.MucLuong VNĐ</span>
+                    }
+                </div>
+
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2">
+                    <i class="fa-solid fa-hourglass-start"></i>
+                </div>
+                <div class="col-10">
+                    <h6>Ngày tin tuyển dụng hết hạn</h6>
+                    @switch (Model.NgayHetHan.Month)
+                    {
+                        case 1:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Một @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 2:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Hai @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 3:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Ba @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 4:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Bốn @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 5:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Năm @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 6:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Sáu @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 7:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Bảy @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 8:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Tám @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 9:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Chín @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 10:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Mười @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 11:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Mười Một @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                        case 12:
+                            {
+                                <span class="text-danger"> @Model.NgayHetHan.Day, Tháng Mười Hai @Model.NgayHetHan.Year</span>
+                                break;
+                            }
+                    }
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <i class="fa-solid fa-person"></i>
+                </div>
+                <div class="col-10">
+                    <h6>Yêu cầu kinh nghiệm</h6>
+                    <span>@Model.LoaiKinhNghiem</span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+                <div class="col-10">
+                    <h6>Trình độ</h6>
+                    <span>@Model.LoaiTrinhDo</span>
+                </div>
+            </div>
+        </div>
+        <div class="mb-4 p-4" style="background-color: azure;">
+            <div class="row mb-2">
+                <div class="col-4">
+                    <img class="img-fluid" src="@Model.NhaTuyenDung.AnhDaiDien" />
+                </div>
+                <div class="col-8 align-self-center">
+                    <h5>@Model.NhaTuyenDung.TenNhaTuyenDung</h5>
+                    <a asp-controller="NhaTuyenDung" asp-action="Information" asp-route-name="@Model.NhaTuyenDung.TenNhaTuyenDung">Xem hồ sơ công ty</a>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4">
+                    <h6>Ngành nghề:</h6>
+                </div>
+                <div class="col-8 text-end">
+                    <span>@Model.NhaTuyenDung.NganhNghe</span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4">
+                    <h6>Số điện thoại:</h6>
+                </div>
+                <div class="col-8 text-end">
+                    <span>@Model.NhaTuyenDung.SoDienThoai</span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4">
+                    <h6>Email</h6>
+                </div>
+                <div class="col-8 text-end">
+                    <span>@Model.NhaTuyenDung.Email</span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4">
+                    <h6>Mạng xã hội:</h6>
+                </div>
+                <div class="col-8 text-end">
+                    <a href="@Model.NhaTuyenDung.MangXaHoi" class="link-dark">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <a href="@Model.NhaTuyenDung.TrangChu" class="btn btn-lg fluid btn-outline-primary w-100"><small>@Model.NhaTuyenDung.TrangChu</small></a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -34,7 +34,7 @@
                             </a>
                             <div>
                                 <i class="fa-solid fa-suitcase"></i>
-                                <a asp-controller="TuyenDung" asp-action="DanhSachTuyenDungTheoNgheNghiep" asp-route-nghenghiep="@item.LoaiNgheNghiep" class="link-dark">
+                                <a asp-controller="TuyenDung" asp-action="LoaiNgheNghiep" asp-route-nghenghiep="@item.LoaiNgheNghiep" class="link-dark">
                                     <span>@item.LoaiNgheNghiep</span>
                                 </a>
                             </div>
@@ -55,19 +55,19 @@
                             <div class="d-flex">
                                 @if (item.LoaiHinhTuyenDung != null)
                                 {
-                                    <a asp-controller="TuyenDung" asp-action="DanhSachTuyenDungTheoLoaiHinh" asp-route-loaihinh="@item.LoaiHinhTuyenDung" class="btn btn-sm btn-outline-primary rounded-5 px-3">
+                                    <a asp-controller="TuyenDung" asp-action="LoaiHinhTuyenDung" asp-route-loaihinh="@item.LoaiHinhTuyenDung" class="btn btn-sm btn-outline-primary rounded-5 px-3">
                                         @item.LoaiHinhTuyenDung
                                     </a>
                                 }
                                 @if (item.LoaiKinhNghiem != null)
                                 {
-                                    <a asp-controller="TuyenDung" asp-action="DanhSachTuyenDungTheoLoaiHinh" asp-route-loaihinh="@item.LoaiKinhNghiem" class="btn btn-sm btn-outline-primary rounded-5 px-2 mx-2">
+                                    <a asp-controller="TuyenDung" asp-action="LoaiKinhNghiem" asp-route-loaihinh="@item.LoaiKinhNghiem" class="btn btn-sm btn-outline-primary rounded-5 px-2 mx-2">
                                         @item.LoaiKinhNghiem
                                     </a>
                                 }
                                 @if (item.LoaiTrinhDo != null)
                                 {
-                                    <a asp-controller="TuyenDung" asp-action="DanhSachTuyenDungTheoLoaiHinh" asp-route-loaihinh="@item.LoaiTrinhDo" class="btn btn-sm btn-outline-primary rounded-5 px-3">
+                                    <a asp-controller="TuyenDung" asp-action="LoaiTrinhDo" asp-route-loaihinh="@item.LoaiTrinhDo" class="btn btn-sm btn-outline-primary rounded-5 px-3">
                                         @item.LoaiTrinhDo
                                     </a>
                                 }

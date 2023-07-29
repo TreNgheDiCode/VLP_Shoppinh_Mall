@@ -1,7 +1,7 @@
 ﻿@using VLPMall.Data.Enum;
 @using VLPMall.Interfaces;
 
-@model string;
+@model LoaiCuaHang;
 
 @inject IArticleRepository ArticleRepository;
 
@@ -19,6 +19,17 @@
         margin: 0;
         padding: 0;
         max-width: 100%;
+    }
+
+    .bg-light-gray {
+        background-color: #f5f5f5 !important;
+        border-color: #f5f5f5 !important;
+    }
+
+    .list-group-item {
+        background-color: #f5f5f5 !important;
+        border-right: 0px !important;
+        border-left: 0px !important;
     }
 </style>
 
@@ -88,7 +99,7 @@
                     </div>
                     @switch (Model)
                     {
-                        case "AmThuc":
+                        case LoaiCuaHang.AmThuc:
                             {
                                 <div class="col-lg-8 col-xl-9">
 
@@ -128,7 +139,7 @@
 
                                 break;
                             }
-                        case "GiaiTri":
+                        case LoaiCuaHang.GiaiTri:
                             {
                                 <div class="col-lg-8 col-xl-9">
 
@@ -148,7 +159,7 @@
                                     </div>
 
                                     <h1 class="text-black text-uppercase p-0 mx-0 mt-0 mb-3 align-middle h3 shop-title">
-                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-dining.png" class="img-fluid mr-2" style="width: 32px; height: auto;">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-entertainment.png" class="img-fluid mr-2" style="width: 32px; height: auto;">
                                         Danh mục giải trí
                                     </h1>
 
@@ -168,7 +179,7 @@
 
                                 break;   
                             }
-                        case "TienIch":
+                        case LoaiCuaHang.TienIch:
                             {
                                 <div class="col-lg-8 col-xl-9">
 
@@ -188,7 +199,7 @@
                                     </div>
 
                                     <h1 class="text-black text-uppercase p-0 mx-0 mt-0 mb-3 align-middle h3 shop-title">
-                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-dining.png" class="img-fluid mr-2" style="width: 32px; height: auto;">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-gadgets.png" class="img-fluid mr-2" style="width: 32px; height: auto;">
                                         Danh mục tiện ích
                                     </h1>
 
@@ -208,7 +219,7 @@
 
                                 break;
                             }
-                        case "DichVu":
+                        case LoaiCuaHang.DichVu:
                             {
                                 <div class="col-lg-8 col-xl-9">
 
@@ -228,7 +239,7 @@
                                     </div>
 
                                     <h1 class="text-black text-uppercase p-0 mx-0 mt-0 mb-3 align-middle h3 shop-title">
-                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-dining.png" class="img-fluid mr-2" style="width: 32px; height: auto;">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-services.png" class="img-fluid mr-2" style="width: 32px; height: auto;">
                                         Danh mục dịch vụ
                                     </h1>
 
@@ -248,7 +259,7 @@
 
                                 break;
                             }
-                        case "MuaSam":
+                        case LoaiCuaHang.MuaSam:
                             {
                                 <div class="col-lg-8 col-xl-9">
 
@@ -268,7 +279,7 @@
                                     </div>
 
                                     <h1 class="text-black text-uppercase p-0 mx-0 mt-0 mb-3 align-middle h3 shop-title">
-                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-dining.png" class="img-fluid mr-2" style="width: 32px; height: auto;">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/icon-shopping.png" class="img-fluid mr-2" style="width: 32px; height: auto;">
                                         Danh mục mua sắm
                                     </h1>
 

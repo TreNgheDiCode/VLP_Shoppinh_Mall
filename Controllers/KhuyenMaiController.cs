@@ -13,7 +13,7 @@ namespace VLPMall.Controllers
 			_articleRepository = articleRepository;
 		}
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             var khuyenMais = await _articleRepository.GetTinTucByLoaiTinTUc(LoaiTinTuc.KhuyenMai);
 

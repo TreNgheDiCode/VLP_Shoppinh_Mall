@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using VLPMall.Data.Enum;
+﻿using VLPMall.Data.Enum;
+using VLPMall.Models;
 
-namespace VLPMall.Models
+namespace VLPMall.ViewModels
 {
-    public class NhaTuyenDung
+    public class InformationNhaTuyenDungViewModel
     {
         public int Id { get; set; }
         public string? TenNhaTuyenDung { get; set; }
@@ -14,10 +14,7 @@ namespace VLPMall.Models
         public string? Email { get; set; }
         public string? MangXaHoi { get; set; }
         public string? TrangChu { get; set; }
-		[ForeignKey("DiaChi")]
-		public int? MaDiaChi { get; set; }
-		public DiaChi? DiaChi { get; set; }
-
+        public DiaChi? DiaChi { get; set; }
         public ICollection<TuyenDung>? TuyenDungs { get; set; }
     }
 }

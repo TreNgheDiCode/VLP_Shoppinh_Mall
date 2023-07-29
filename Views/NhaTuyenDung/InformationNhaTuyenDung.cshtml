@@ -1,0 +1,108 @@
+﻿@using VLPMall.ViewModels;
+
+@model InformationNhaTuyenDungViewModel;
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="row">
+    <div class="col col-md-8 p-3 my-3">
+        <h5>Giới thiệu về nhà tuyển dụng</h5>
+        <p>
+            @Model.GioiThieu
+        </p>
+        <div class="p-4 rounded" style="background-color: azure;">
+            <span class="text-black px-3">Mạng xã hội:</span>
+            <a href="@Model.MangXaHoi" class="link-dark">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col col-md-4 p-3 my-3">
+        <div class="d-flex gap-3 p-3 mb-3">
+            <a asp-controller="NhaTuyenDung" asp-action="GuiTinNhan" class="btn btn-lg btn-primary w-100">
+                Gửi tin nhắn
+            </a>
+            <a asp-controller="YeuThich" asp-action="TuyenDung" class="btn btn-lg btn-outline-primary ms-3">
+                <i class="fa-regular fa-bookmark "></i>
+            </a>
+        </div>
+        <div class="mb-3 p-3" style="background-color: azure;">
+            <div class="row mb-2">
+                <div class="col-4">
+                    <img class="img-fluid" src="@Model.AnhDaiDien" />
+                </div>
+                <div class="col-8 align-self-center">
+                    <h5>@Model.TenNhaTuyenDung</h5>
+                    <a asp-controller="NhaTuyenDung" asp-action="Information" asp-route-name="@Model.TenNhaTuyenDung">Xem hồ sơ công ty</a>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-5">
+                    <h6>Ngành nghề:</h6>
+                </div>
+                <div class="col-7 text-end">
+                    <span>@Model.NganhNghe</span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-5">
+                    <h6>Số điện thoại:</h6>
+                </div>
+                <div class="col-7 text-end">
+                    <span>@Model.SoDienThoai</span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-5">
+                    <h6>Email</h6>
+                </div>
+                <div class="col-7 text-end">
+                    <span>@Model.Email</span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-5">
+                    <h6>Mạng xã hội:</h6>
+                </div>
+                <div class="col-7 text-end">
+                    <a href="@Model.MangXaHoi" class="link-dark">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <a href="@Model.TrangChu" class="btn btn-lg fluid btn-outline-primary text-center"><small>@Model.TrangChu</small></a>
+                </div>
+            </div>
+        </div>
+        <form method="post" class="p-4 form-group form-outline mb-4" style="background-color: azure;">
+            <h5>Liên hệ @Model.TenNhaTuyenDung</h5>
+            <div class="my-3">
+                <div>
+                    <label class="form-label">Tiêu đề</label>
+                    <input class="rounded form-control form-control-lg" type="text" placeholder="Nhập tiêu đề" required />
+                </div>
+                <div>
+                    <label class="form-label">Email liên hệ</label>
+                    <input class="rounded form-control form-control-lg" type="text" placeholder="Nhập email của bạn" required />
+                </div>
+                <div>
+                    <label class="form-label">Số điện thoại</label>
+                    <input class="rounded form-control form-control-lg" type="text" placeholder="Số điện thoại" required />
+                </div>
+                <div>
+                    <label class="form-label">Nội dung</label>
+                    <textarea class="rounded form-control form-control-lg" placeholder="Hãy để lại câu hỏi, chúng tôi sẽ trả lời trong thời gian sớm nhất"></textarea>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <a type="submit" asp-controller="NhaTuyenDung" asp-action="LienHe" class="btn btn-lg btn-primary w-100">Gửi Email</a>
+            </div>
+        </form>
+    </div>
+</div>

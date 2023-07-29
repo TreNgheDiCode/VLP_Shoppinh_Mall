@@ -18,5 +18,15 @@ namespace VLPMall.Repository
 		{
 			return await _context.NhaTuyenDungs.ToListAsync();
 		}
-	}
+
+        public async Task<NhaTuyenDung> GetNhaTuyenDungByName(string name)
+        {
+			return await _context.NhaTuyenDungs.Include(c => c.TuyenDungs).Include(c => c.DiaChi).FirstOrDefaultAsync(c => c.TenNhaTuyenDung == name);
+        }
+
+        public async Task<ICollection<TuyenDung>> GetTuyenDungByNhaTuyenDung(int id)
+        {
+            return await _context.TuyenDungs.Where(c => c.MaNhaTuyenDung == id).ToListAsync();
+        }
+    }
 }

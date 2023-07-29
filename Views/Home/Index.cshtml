@@ -1,5 +1,14 @@
-﻿@{
+﻿@using VLPMall.Data.Enum;
+@using VLPMall.Interfaces;
+
+@inject IArticleRepository ArticleRepository;
+@inject ICareerRepository CareerRepository;
+
+@{
     ViewData["Title"] = "Trang chủ";
+
+    var articles = await ArticleRepository.GetTop6Async();
+    var careers = await CareerRepository.GetTop6Async();
 }
 
 <style>
@@ -11,6 +20,28 @@
 
     .carousel-item {
         height: 32rem;
+    }
+
+    .card.card-shadow {
+        border: none;
+        border-radius: 18px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .baiviet.bg, .baiviet.active {
+        background-color: #6051E3 !important;
+        border-color: #6051E3 !important;
+    }
+
+    .khuyenmai.bg, .khuyenmai.active {
+        background-color: #C15669 !important;
+        border-color: #C15669 !important;
+    }
+
+    .card-body {
+        min-height: 300px;
+        max-height: 300px;
     }
 </style>
 
@@ -63,4 +94,280 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+</div>
+
+<section class="services d-none d-sm-block section-bg pt-3 pb-5 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100" data-aos-offset="50">
+    <!-- <section class="services d-none d-sm-block section-bg pt-3 pb-5"> -->
+    <div class="container-fluid d-block">
+        <div class="row">
+
+            <div class="col col-lg-10 offset-lg-1">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="col p-0 m-0 icon-box-lg">
+                        <div class="text-center">
+                            <a asp-controller="ChiNhanh" asp-action="GioLamViec" class="text-black">
+                                <div class="px-2">
+                                    <div class="icon-box shadow p-3 mb-5 bg-white rounded">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/mall-hours.svg">
+                                    </div>
+                                </div>
+                                <div class="px-2">
+                                    <h4 class="title font-regular">Giờ làm việc</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 icon-box-lg">
+                        <div class="text-center">
+                            <a asp-controller="ChiNhanh" asp-action="Index" class="text-black">
+                                <div class="px-2">
+                                    <div class="icon-box shadow p-3 mb-5 bg-white rounded">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/mall-directory.png" width="90" height="90">
+                                    </div>
+                                </div>
+                                <div class="px-2">
+                                    <h4 class="title font-regular">Chi nhánh</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 icon-box-lg">
+                        <div class="text-center">
+                            <!-- <a href="https://www.smdeals.com/" class="text-black" target="_blank"> -->
+                            <a asp-controller="KhuyenMai" asp-action="Index" class="text-black">
+                                <div class="px-2">
+                                    <div class="icon-box shadow p-3 mb-5 bg-white rounded">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/sm-deals.svg">
+                                    </div>
+                                </div>
+                                <div class="px-2">
+                                    <h4 class="title font-regular">Ưu đãi VLP</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col p-0 m-0 icon-box-lg">
+                        <div class="text-center">
+                            <a asp-controller="DanhMucCuaHang" asp-action="Index" asp-route-danhmuc="@LoaiCuaHang.MuaSam" class="text-black">
+                                <!-- <a href="https://www.smsupermalls.com/smdeals" class="text-black"> -->
+                                <div class="px-2">
+                                    <div class="icon-box shadow p-3 mb-5 bg-white rounded">
+                                        <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/shop-awesm.svg">
+                                    </div>
+                                </div>
+                                <div class="px-2">
+                                    <h4 class="title font-regular">Mua sắm tại VLP</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="col col-lg-10 offset-1">
+    <div class="row">
+        @foreach (var item in articles)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card card-shadow">
+                    @if (item.LoaiTinTuc == LoaiTinTuc.BaiViet)
+                    {
+                        <a asp-controller="BaiViet" asp-action="Information" asp-route-name="@item.TieuDe" a class="text-black article-thumbnail-placeholder" style="background-image: url(@item.AnhDaiDien)">
+                            <img class="card-img-top article-thumbnail " src="@item.AnhDaiDien" alt="@item.TieuDe">
+                        </a>
+                        <div class="card-body">
+                            <a asp-controller="BaiViet" asp-action="Index" class="text-black">
+                                <span class="btn btn-primary button-round button-secondary baiviet active bg button-xs py-1 rounded-5">Bài Viết</span>
+                            </a>
+                            <a asp-controller="BaiViet" asp-action="Information" asp-route-name="@item.TieuDe" class="text-black">
+                                <h5 class="card-title mt-3 mb-0 font-medium text-capitalize">@item.TieuDe</h5>
+                                @switch (item.NgayDang.Month)
+                                {
+                                    case 1:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Một @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Hai @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Ba @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Bốn @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 5:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Năm @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 6:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Sáu @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 7:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Bảy @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 8:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Tám @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 9:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Chín @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 10:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 11:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Một @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 12:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Hai @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                }
+                                <p class="card-text mt-2">@item.NoiDung</p>
+
+                                <div class="text-black text-uppercase font-medium"><strong>Đọc thêm </strong><i class="fa-solid fa-caret-right"></i></div>
+                            </a>
+                        </div>
+                    } else
+                    {
+                        <a asp-controller="KhuyenMai" asp-action="Information" asp-route-name="@item.TieuDe" a class="text-black article-thumbnail-placeholder" style="background-image: url(@item.AnhDaiDien)">
+                            <img class="card-img-top article-thumbnail" src="@item.AnhDaiDien" alt="@item.TieuDe">
+                        </a>
+                        <div class="card-body">
+                            <a asp-controller="KhuyenMai" asp-action="Index" class="text-black">
+                                <span class="btn btn-primary button-round button-secondary khuyenmai active bg button-xs py-1 rounded-5">Khuyến Mãi</span>
+                            </a>
+                            <a asp-controller="KhuyenMai" asp-action="Information" asp-route-name="@item.TieuDe" class="text-black">
+                                <h5 class="card-title mt-3 mb-0 font-medium text-capitalize">@item.TieuDe</h5>
+                                @switch (item.NgayDang.Month)
+                                {
+                                    case 1:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Một @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Hai @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Ba @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Bốn @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 5:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Năm @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 6:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Sáu @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 7:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Bảy @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 8:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Tám @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 9:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Chín @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 10:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 11:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Một @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                    case 12:
+                                        {
+                                            <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Hai @item.NgayDang.Year</small></div>
+                                            break;
+                                        }
+                                }
+                                <p class="card-text mt-2">@item.NoiDung</p>
+
+                                <div class="text-black text-uppercase font-medium"><strong>Đọc thêm </strong><i class="fa-solid fa-caret-right"></i></div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <h3 class="text-uppercase text-black text-center mb-4"><strong>Gia nhập cùng chúng tôi</strong></h3>
+            <div class="row clearfix">
+                @foreach (var item in careers)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div class="card card-shadow">
+                            <a asp-controller="TuyenDung" asp-action="Information" asp-route-name="@item.TenTuyenDung" a class="text-black article-thumbnail-placeholder" style="background-image: url(@item.NhaTuyenDung.AnhDaiDien)">
+                                <img class="card-img-top article-thumbnail " src="@item.NhaTuyenDung.AnhDaiDien" alt="@item.TenTuyenDung">
+                            </a>
+                            <div class="card-body">
+                                <a asp-controller="TuyenDung" asp-action="Information" asp-route-name="@item.TenTuyenDung" class="text-black">
+                                    <h5 class="card-title mt-3 mb-0 font-medium text-capitalize">@item.TenTuyenDung</h5>
+                                    <p class="card-text mt-2">@item.NoiDung</p>
+
+                                    <div class="text-black text-uppercase font-medium"><strong>Đọc thêm </strong><i class="fa-solid fa-caret-right"></i></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>

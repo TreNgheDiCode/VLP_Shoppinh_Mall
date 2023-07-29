@@ -32,5 +32,15 @@ namespace VLPMall.Repository
 		{
 			return await _context.TinTucs.Where(s => s.LoaiTinTuc == loaiTinTuc).ToListAsync();
 		}
-	}
+
+        public async Task<ICollection<TinTuc>> GetTop10Async()
+        {
+            return await _context.TinTucs.OrderByDescending(a => a.NgayDang).Take(10).ToListAsync();
+        }
+
+        public async Task<ICollection<TinTuc>> GetTop6Async()
+        {
+            return await _context.TinTucs.OrderByDescending(a => a.NgayDang).Take(6).ToListAsync();
+        }
+    }
 }

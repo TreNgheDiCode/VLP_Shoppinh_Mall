@@ -194,6 +194,16 @@ namespace VLPMall.Data
                             {
                                 TenTuyenDung = "Bạn có muốn đi làm không?",
                                 NoiDung = "Đây là việc làm dành cho những người mê code",
+                                YeuCau = "Đây là yêu cầu của công việc này",
+                                QuyenLoi = "Đây là quyền lợi - phúc lợi của công việc này",
+                                SoLuong = 20,
+                                DiaChi = new DiaChi
+                                {
+                                    Duong = "Etown5, 364 Cộng Hòa",
+                                    Phuong = "",
+                                    Quan = "Tân Bình",
+                                    ThanhPho = "Tp. Hồ Chí Minh"
+                                },
                                 MucLuong = 2500000,
                                 NgayDang = DateTime.Now,
                                 NgayHetHan = new DateTime(2023, 8, 1, 16, 0, 0, DateTimeKind.Local),
@@ -206,6 +216,16 @@ namespace VLPMall.Data
                             {
                                 TenTuyenDung = "Tuyển dụng dành cho những người thích lập trình",
                                 NoiDung = "Bạn biết code? Bạn có niềm đam mê học hỏi với code? Bạn thích làm ra các dự án khác nhau? Hãy apply ngay!",
+                                YeuCau = "Đây là yêu cầu của công việc này",
+                                QuyenLoi = "Đây là quyền lợi - phúc lợi của công việc này",
+                                SoLuong = 15,
+                                DiaChi = new DiaChi
+                                {
+                                    Duong = "Tầng 8, tòa nhà Cantavil An Phú",
+                                    Phuong = "An Phú",
+                                    Quan = "Quận 2",
+                                    ThanhPho = "Tp. Hồ Chí Minh"
+                                },
                                 NgayDang = DateTime.Now,
                                 NgayHetHan = new DateTime(2023, 8, 1, 16, 0, 0, DateTimeKind.Local),
                                 LoaiNgheNghiep = LoaiNgheNghiep.CongNgheThongTin,
