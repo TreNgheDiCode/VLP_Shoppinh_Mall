@@ -20,7 +20,10 @@ namespace VLPMall.Models
         [ForeignKey("NhaTuyenDung")]
         public int MaNhaTuyenDung { get; set; }
         public NhaTuyenDung NhaTuyenDung { get; set; }
-        public LoaiNgheNghiep? LoaiNgheNghiep { get; set; }
+		[ForeignKey("User")]
+		public string? UserId { get; set; }
+		public User? User { get; set; }
+		public LoaiNgheNghiep? LoaiNgheNghiep { get; set; }
         public LoaiHinhTuyenDung? LoaiHinhTuyenDung { get; set; }
         public LoaiKinhNghiem? LoaiKinhNghiem { get; set; }
         public LoaiTrinhDo? LoaiTrinhDo { get; set; }

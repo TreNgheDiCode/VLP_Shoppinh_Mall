@@ -208,11 +208,11 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    @if (SignInManager.IsSignedIn(User))
+                    @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
                             <form method="post">
-                                @if (User.IsInRole("super-admin"))
+                                @if (User.IsInRole("super-admin") || User.IsInRole("qlcn") || User.IsInRole("qlch") || User.IsInRole("user-admin") || User.IsInRole("qltt") || User.IsInRole("qlns") || User.IsInRole("qldn") || User.IsInRole("doanhnghiep"))
                                 {
                                     <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-light">Bảng điều khiển</a>
                                 }

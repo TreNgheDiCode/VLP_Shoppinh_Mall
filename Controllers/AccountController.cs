@@ -43,6 +43,7 @@ namespace VLPMall.Controllers
                 {
                     // Password correct, sign in
                     var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                    await _signInManager.SignInAsync(user, false);
 
                     if (result.Succeeded)
                     {

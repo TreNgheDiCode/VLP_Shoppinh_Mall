@@ -8,16 +8,43 @@ namespace VLPMall.Controllers
 	{
 		private readonly IPhotoService _photoService;
 		private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly IAdminRepository _adminRepository;
 
-		public AdminController(IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
+		public AdminController(IAdminRepository adminRepository, IHttpContextAccessor httpContextAccessor)
         {
-			_photoService = photoService;
+			_adminRepository = adminRepository;
 			_httpContextAccessor = httpContextAccessor;
 		}
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
 		{
-			return View("IndexAdmin");
+			var curUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
+			var userChiNhanhs = await _adminRepository.GetAllUserChiNhanh();
+			var userCuaHangs = await _adminRepository.GetAllUserCuaHang();
+			var userTinTucs = await _adminRepository.GetAllUserTinTuc();
+			var userTuyenDungs = await _adminRepository.GetAllUserTuyenDung();
+			var userNhaTuyenDungs = await _adminRepository.GetAllUserNhaTuyenDung();
+			var userSanPhams = await _adminRepository.GetAllUserSanPham();
+			var userKhuyenMais = await _adminRepository.GetAllUserKhuyenMai();
+			var userViews = new AdminViewModel()
+			{
+				ChiNhanhs = userChiNhanhs,
+				CuaHangs = userCuaHangs,
+				TinTucs = userTinTucs,
+				TuyenDungs = userTuyenDungs,
+				NhaTuyenDungs = userNhaTuyenDungs,
+				SanPhams = userSanPhams,
+				KhuyenMais = userKhuyenMais,
+				chiNhanhViewModel = new CreateChiNhanhViewModel()
+				{
+					UserId = curUserId
+				},
+				cuaHangViewModel = new CreateCuaHangViewModel()
+				{
+					UserId = curUserId,
+				}
+			};
+			return View("IndexAdmin", userViews);
 		}
 	}
 }

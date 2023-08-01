@@ -16,6 +16,7 @@ builder.Services.AddHttpClient();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDirectoryRepository, DirectoryRepository>();
 builder.Services.AddScoped<IStoreRepository, StoreRepository>();
@@ -27,6 +28,7 @@ builder.Services.AddScoped<ICareerRepository, CareerRepository>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+builder.Services.Configure<MiddlewareSettings>(builder.Configuration.GetSection("MiddlewareSettings"));
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -58,6 +60,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+//app.UseMiddleware<VLPMall.Services.Middleware>();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -67,12 +71,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}"
-    );
-app.MapControllerRoute(
-    name: "CuaHang",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{name?}"
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
     );
 
 app.Run();

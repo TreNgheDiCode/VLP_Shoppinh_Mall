@@ -12,6 +12,8 @@ namespace VLPMall.Models
         [ForeignKey("CuaHang")]
         public int MaCuaHang { get; set; }
         public CuaHang CuaHang { get; set; }
-
-    }
+		[ForeignKey("User")]
+		public string? UserId { get; set; }
+		public User? User { get; set; }
+	}
 }

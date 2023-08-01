@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VLPMall.Data;
 
@@ -11,9 +12,11 @@ using VLPMall.Data;
 namespace VLPMall.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230801211142_fixDiaChi")]
+    partial class fixDiaChi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,14 +337,9 @@ namespace VLPMall.Migrations
                     b.Property<string>("TenKhuyenMai")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("MaCuaHang");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("KhuyenMais");
                 });
@@ -381,14 +379,9 @@ namespace VLPMall.Migrations
                     b.Property<string>("TrangChu")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("MaDiaChi");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("NhaTuyenDungs");
                 });
@@ -518,9 +511,6 @@ namespace VLPMall.Migrations
                     b.Property<string>("TenTuyenDung")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("YeuCau")
                         .HasColumnType("nvarchar(max)");
 
@@ -529,8 +519,6 @@ namespace VLPMall.Migrations
                     b.HasIndex("MaDiaChi");
 
                     b.HasIndex("MaNhaTuyenDung");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("TuyenDungs");
                 });
@@ -721,13 +709,7 @@ namespace VLPMall.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VLPMall.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("CuaHang");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("VLPMall.Models.NhaTuyenDung", b =>
@@ -736,13 +718,7 @@ namespace VLPMall.Migrations
                         .WithMany("NhaTuyenDungs")
                         .HasForeignKey("MaDiaChi");
 
-                    b.HasOne("VLPMall.Models.User", "User")
-                        .WithMany("NhaTuyenDungs")
-                        .HasForeignKey("UserId");
-
                     b.Navigation("DiaChi");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("VLPMall.Models.SanPham", b =>
@@ -785,15 +761,9 @@ namespace VLPMall.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VLPMall.Models.User", "User")
-                        .WithMany("TuyenDungs")
-                        .HasForeignKey("UserId");
-
                     b.Navigation("DiaChi");
 
                     b.Navigation("NhaTuyenDung");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("VLPMall.Models.User", b =>
@@ -839,11 +809,7 @@ namespace VLPMall.Migrations
 
                     b.Navigation("CuaHang");
 
-                    b.Navigation("NhaTuyenDungs");
-
                     b.Navigation("SanPhams");
-
-                    b.Navigation("TuyenDungs");
                 });
 #pragma warning restore 612, 618
         }

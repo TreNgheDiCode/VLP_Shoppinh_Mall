@@ -17,7 +17,10 @@ namespace VLPMall.Models
 		[ForeignKey("DiaChi")]
 		public int? MaDiaChi { get; set; }
 		public DiaChi? DiaChi { get; set; }
+		[ForeignKey("User")]
+		public string? UserId { get; set; }
+		public User? User { get; set; }
 
-        public ICollection<TuyenDung>? TuyenDungs { get; set; }
+		public ICollection<TuyenDung>? TuyenDungs { get; set; }
     }
 }

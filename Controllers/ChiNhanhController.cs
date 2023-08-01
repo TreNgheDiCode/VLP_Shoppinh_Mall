@@ -63,7 +63,13 @@ namespace VLPMall.Controllers
 		public IActionResult Create()
 		{
 			var curUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
-			var createAdminViewModel = new AdminViewModel { UserId = curUserId };
+            var createAdminViewModel = new AdminViewModel()
+            {
+                chiNhanhViewModel = new CreateChiNhanhViewModel()
+                {
+                    UserId = curUserId,
+                }
+            };
 
 			return RedirectToAction("Index", "Admin", createAdminViewModel);
 		}
@@ -77,6 +83,7 @@ namespace VLPMall.Controllers
 
                 var chiNhanh = new ChiNhanh
                 {
+                    UserId=adminVM.chiNhanhViewModel.UserId,
                     TenChiNhanh = adminVM.chiNhanhViewModel.TenChiNhanh,
                     NoiDung = adminVM.chiNhanhViewModel.NoiDung,
                     AnhDaiDien = result.Url.ToString(),

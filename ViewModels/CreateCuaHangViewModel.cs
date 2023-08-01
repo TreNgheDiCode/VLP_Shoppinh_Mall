@@ -16,6 +16,7 @@ namespace VLPMall.ViewModels
         public string? ThoiGianHoatDong1 { get; set; }
         public string? ThoiGianHoatDong2 { get; set; }
         public string? DiaDiem { get; set; }
+        public string? UserId { get; set; }
         public LoaiCuaHang LoaiCuaHang { get; set; }
 		public LoaiAmThuc? LoaiAmThuc { get; set; }
         public LoaiGiaiTri? LoaiGiaiTri { get; set; }

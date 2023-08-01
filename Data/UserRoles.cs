@@ -10,5 +10,6 @@
         public const string QuanLyTruyenThong = "qltt";
         public const string QuanLyNhanSu = "qlns";
         public const string QuanLyDoanhNghiep = "qldn";
+        public const string DoanhNghiep = "doanhnghiep";
     }
 }

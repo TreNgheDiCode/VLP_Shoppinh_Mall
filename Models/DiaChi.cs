@@ -15,8 +15,8 @@ namespace VLPMall.Models
         [Required(ErrorMessage = "Vui lòng nhập thành phố")]
         public string? ThanhPho { get; set; }
 
-        public ICollection<ChiNhanh> ChiNhanhs { get; set; }
-        public ICollection<NhaTuyenDung> NhaTuyenDungs { get; set; }
-        public ICollection<User> Users { get; set; }
+        public ICollection<ChiNhanh>? ChiNhanhs { get; set; }
+        public ICollection<NhaTuyenDung>? NhaTuyenDungs { get; set; }
+        public ICollection<User>? Users { get; set; }
     }
 }

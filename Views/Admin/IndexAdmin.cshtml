@@ -292,12 +292,15 @@
 										}
 										<th>@item.NgaySinh</th>
 										<th>
-											<a asp-controller="User" asp-action="Edit" asp-route-id="@item.Id" class="edit">
-												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
-											</a>
-											<a href="#deleteUserModal" class="delete" data-toggle="modal">
-												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
-											</a>
+											@if (User.Identity.IsAuthenticated && User.IsInRole("super-admin"))
+											{
+												<a asp-controller="User" asp-action="Edit" asp-route-id="@item.Id" class="edit">
+													<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
+												</a>
+												<a href="#deleteUserModal" class="delete" data-toggle="modal">
+													<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+												</a>
+											}
 											<!----delete-modal start--------->
 											<div class="modal fade" tabindex="-1" id="deleteUserModal" role="dialog">
 												<div class="modal-dialog" role="document">
@@ -352,7 +355,7 @@
 								</button>
 							</div>
 							<form method="post" class="modal-body" asp-controller="ChiNhanh" asp-action="Create" enctype="multipart/form-data">
-								<input type="hidden" asp-for="UserId" />
+								<input type="hidden" asp-for="@Model.chiNhanhViewModel.UserId" />
 
 								<div class="my-2 form-group">
 									<label asp-for="@Model.chiNhanhViewModel.TenChiNhanh">Tên chi nhánh</label>
@@ -550,54 +553,109 @@
 							</thead>
 
 							<tbody>
-								@foreach(var item in directories)
+								@if (User.Identity.IsAuthenticated && User.IsInRole("super-admin"))
 								{
-									<tr>
-										<th>
-											<span class="custom-checkbox">
-												<input type="checkbox" id="checkbox1" name="option[]" value="1">
-												<label for="checkbox1"></label>
-											</span>
-										</th>
-										<th>@item.TenChiNhanh</th>
-										<th>@item.NoiDung</th>
-										<th>@item.AnhDaiDien</th>
-										<th>@item.Email</th>
-										<th>@item.SoDienThoai</th>
-										<th>@item.NgayHoatDong</th>
-										<th>@item.ThoiGianHoatDong</th>
-										<th>@item.DiaChi?.Duong, @item.DiaChi?.Phuong, @item.DiaChi?.Quan, @item.DiaChi?.ThanhPho</th>
-										<th>
-											<a asp-controller="ChiNhanh" asp-action="Edit" asp-route-id="@item.Id" class="edit">
-												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
-											</a>
-											<a href ="#deleteDirectoryModal" class="delete" data-toggle="modal">
-												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
-											</a>
-											<!----delete-modal start--------->
-											<div class="modal fade" tabindex="-1" id="deleteDirectoryModal" role="dialog">
-												<div class="modal-dialog" role="document">
-													<form method="post" asp-action="Delete" enctype="multipart/form-data" class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title">Xóa chi nhánh</h5>
-															<button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
-																<span aria-hidden="true">&times;</span>
-															</button>
-														</div>
-														<div class="modal-body">
-															<p>Bạn có chắc chắn muốn xóa chi nhánh này không?</p>
-															<p class="text-dander"><strong>Hành động này không thể VÃN HỒI</strong></p>
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-															<button asp-controller="ChiNhanh" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
-														</div>
-													</form>
+									@foreach (var item in directories)
+									{
+										<tr>
+											<th>
+												<span class="custom-checkbox">
+													<input type="checkbox" id="checkbox1" name="option[]" value="1">
+													<label for="checkbox1"></label>
+												</span>
+											</th>
+											<th>@item.TenChiNhanh</th>
+											<th>@item.NoiDung</th>
+											<th>@item.AnhDaiDien</th>
+											<th>@item.Email</th>
+											<th>@item.SoDienThoai</th>
+											<th>@item.NgayHoatDong</th>
+											<th>@item.ThoiGianHoatDong</th>
+											<th>@item.DiaChi?.Duong, @item.DiaChi?.Phuong, @item.DiaChi?.Quan, @item.DiaChi?.ThanhPho</th>
+											<th>
+												<a asp-controller="ChiNhanh" asp-action="Edit" asp-route-id="@item.Id" class="edit">
+													<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
+												</a>
+												<a href="#deleteDirectoryModal" class="delete" data-toggle="modal">
+													<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+												</a>
+												<!----delete-modal start--------->
+												<div class="modal fade" tabindex="-1" id="deleteDirectoryModal" role="dialog">
+													<div class="modal-dialog" role="document">
+														<form method="post" asp-action="Delete" enctype="multipart/form-data" class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title">Xóa chi nhánh</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<p>Bạn có chắc chắn muốn xóa chi nhánh này không?</p>
+																<p class="text-dander"><strong>Hành động này không thể VÃN HỒI</strong></p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+																<button asp-controller="ChiNhanh" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
+															</div>
+														</form>
+													</div>
 												</div>
-											</div>
-											<!----delete-modal end--------->
-										</th>
-									</tr>
+												<!----delete-modal end--------->
+											</th>
+										</tr>
+									}
+								}
+								else if (User.Identity.IsAuthenticated && User.IsInRole("qlcn"))
+								{
+									@foreach (var item in Model.ChiNhanhs)
+									{
+										<tr>
+											<th>
+												<span class="custom-checkbox">
+													<input type="checkbox" id="checkbox1" name="option[]" value="1">
+													<label for="checkbox1"></label>
+												</span>
+											</th>
+											<th>@item.TenChiNhanh</th>
+											<th>@item.NoiDung</th>
+											<th>@item.AnhDaiDien</th>
+											<th>@item.Email</th>
+											<th>@item.SoDienThoai</th>
+											<th>@item.NgayHoatDong</th>
+											<th>@item.ThoiGianHoatDong</th>
+											<th>@item.DiaChi?.Duong, @item.DiaChi?.Phuong, @item.DiaChi?.Quan, @item.DiaChi?.ThanhPho</th>
+											<th>
+												<a asp-controller="ChiNhanh" asp-action="Edit" asp-route-id="@item.Id" class="edit">
+													<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
+												</a>
+												<a href="#deleteDirectoryModal" class="delete" data-toggle="modal">
+													<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+												</a>
+												<!----delete-modal start--------->
+												<div class="modal fade" tabindex="-1" id="deleteDirectoryModal" role="dialog">
+													<div class="modal-dialog" role="document">
+														<form method="post" asp-action="Delete" enctype="multipart/form-data" class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title">Xóa chi nhánh</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<p>Bạn có chắc chắn muốn xóa chi nhánh này không?</p>
+																<p class="text-dander"><strong>Hành động này không thể VÃN HỒI</strong></p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+																<button asp-controller="ChiNhanh" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
+															</div>
+														</form>
+													</div>
+												</div>
+												<!----delete-modal end--------->
+											</th>
+										</tr>
+									}
 								}
 							</tbody>
 						</table>
@@ -628,7 +686,7 @@
 								</button>
 							</div>
 							<form method="post" class="modal-body" asp-controller="ChiNhanh" asp-action="Create" enctype="multipart/form-data">
-								<input type="hidden" asp-for="UserId" />
+								<input type="hidden" asp-for="@Model.chiNhanhViewModel.UserId" />
 
 								<div class="my-2 form-group">
 									<label asp-for="@Model.chiNhanhViewModel.TenChiNhanh">Tên chi nhánh</label>
@@ -850,12 +908,15 @@
 										<th>@item.ThoiGianHoatDong</th>
 										<th>@item</th>
 										<th>
-											<a asp-controller="CuaHang" asp-action="Edit" asp-route-maChiNhanh="@item.Id" asp-route-maCuaHang="" class="edit">
-												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
-											</a>
-											<a href="#deleteStoreModal" class="delete" data-toggle="modal">
-												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
-											</a>
+											@if (User.Identity.IsAuthenticated && User.IsInRole("super-admin"))
+											{
+												<a asp-controller="CuaHang" asp-action="Edit" asp-route-maChiNhanh="@item.Id" asp-route-maCuaHang="" class="edit">
+													<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
+												</a>
+												<a href="#deleteStoreModal" class="delete" data-toggle="modal">
+													<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+												</a>
+											}
 											<!----delete-modal start--------->
 											<div class="modal fade" tabindex="-1" id="deleteStoreModal" role="dialog">
 												<div class="modal-dialog" role="document">
@@ -910,7 +971,7 @@
 								</button>
 							</div>
 							<form method="post" class="modal-body" asp-controller="CuaHang" asp-action="Create" enctype="multipart/form-data">
-								<input type="hidden" asp-for="UserId" />
+								<input type="hidden" asp-for="@Model.cuaHangViewModel.UserId" />
 
 								<div class="my-2 form-group">
 									<label asp-for="@Model.cuaHangViewModel.TenCuaHang">Tên cửa hàng</label>
@@ -1125,12 +1186,15 @@
 										<th>@item.LuotYeuThich</th>
 										<th>@item.MaCuaHang</th>
 										<th>
-											<a asp-controller="SanPham" asp-action="Edit" asp-route-id="@item.Id" class="edit">
-												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
-											</a>
-											<a href="#deleteProductModal" class="delete" data-toggle="modal">
-												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
-											</a>
+											@if (User.Identity.IsAuthenticated && User.IsInRole("super-admin"))
+											{
+												<a asp-controller="SanPham" asp-action="Edit" asp-route-id="@item.Id" class="edit">
+													<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
+												</a>
+												<a href="#deleteProductModal" class="delete" data-toggle="modal">
+													<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+												</a>
+											}
 											<!----delete-modal start--------->
 											<div class="modal fade" tabindex="-1" id="deleteProductModal" role="dialog">
 												<div class="modal-dialog" role="document">
@@ -1185,7 +1249,7 @@
 								</button>
 							</div>
 							<form method="post" class="modal-body" asp-controller="SanPham" asp-action="Create" enctype="multipart/form-data">
-								<input type="hidden" asp-for="UserId" />
+								@*<input type="hidden" asp-for="UserId" />*@
 
 								<div class="my-2 form-group">
 									<label asp-for="@Model.chiNhanhViewModel.TenChiNhanh">Tên chi nhánh</label>
@@ -1394,12 +1458,15 @@
 										<th>@item.ChietKhau</th>
 										<th>@item.MaCuaHang</th>
 										<th>
-											<a asp-controller="KhuyenMai" asp-action="Edit" asp-route-id="@item.Id" class="edit">
-												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
-											</a>
-											<a href="#deleteSaleModal" class="delete" data-toggle="modal">
-												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
-											</a>
+											@if (User.Identity.IsAuthenticated && User.IsInRole("super-admin"))
+											{
+												<a asp-controller="KhuyenMai" asp-action="Edit" asp-route-id="@item.Id" class="edit">
+													<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
+												</a>
+												<a href="#deleteSaleModal" class="delete" data-toggle="modal">
+													<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+												</a>
+											}
 											<!----delete-modal start--------->
 											<div class="modal fade" tabindex="-1" id="deleteSaleModal" role="dialog">
 												<div class="modal-dialog" role="document">
@@ -1454,7 +1521,7 @@
 								</button>
 							</div>
 							<form method="post" class="modal-body" asp-controller="SanPham" asp-action="Create" enctype="multipart/form-data">
-								<input type="hidden" asp-for="UserId" />
+								@*<input type="hidden" asp-for="UserId" />*@
 
 								<div class="my-2 form-group">
 									<label asp-for="@Model.chiNhanhViewModel.TenChiNhanh">Tên chi nhánh</label>
@@ -1665,12 +1732,15 @@
 										<th>@item.LoaiTinTuc</th>
 										<th>@item.TrangThai</th>
 										<th>
-											<a asp-controller="BaiViet" asp-action="Edit" asp-route-id="@item.Id" class="edit">
-												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
-											</a>
-											<a href="#deleteArticleModal" class="delete" data-toggle="modal">
-												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
-											</a>
+											@if (User.Identity.IsAuthenticated && User.IsInRole("super-admin"))
+											{
+												<a asp-controller="BaiViet" asp-action="Edit" asp-route-id="@item.Id" class="edit">
+													<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
+												</a>
+												<a href="#deleteArticleModal" class="delete" data-toggle="modal">
+													<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+												</a>
+											}
 											<!----delete-modal start--------->
 											<div class="modal fade" tabindex="-1" id="deleteArticleModal" role="dialog">
 												<div class="modal-dialog" role="document">
@@ -1725,7 +1795,7 @@
 								</button>
 							</div>
 							<form method="post" class="modal-body" asp-controller="SanPham" asp-action="Create" enctype="multipart/form-data">
-								<input type="hidden" asp-for="UserId" />
+								@*<input type="hidden" asp-for="UserId" />*@
 
 								<div class="my-2 form-group">
 									<label asp-for="@Model.chiNhanhViewModel.TenChiNhanh">Tên chi nhánh</label>
@@ -1935,12 +2005,15 @@
 										<th>@item.TrangChu</th>
 										<th>@item.DiaChi?.Duong, @item.DiaChi?.Phuong, @item.DiaChi?.Quan, @item.DiaChi?.ThanhPho</th>
 										<th>
-											<a asp-controller="NhaTuyenDung" asp-action="Edit" asp-route-id="@item.Id" class="edit">
-												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
-											</a>
-											<a href="#deleteCompanyModal" class="delete" data-toggle="modal">
-												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
-											</a>
+											@if (User.Identity.IsAuthenticated && User.IsInRole("super-admin"))
+											{
+												<a asp-controller="NhaTuyenDung" asp-action="Edit" asp-route-id="@item.Id" class="edit">
+													<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
+												</a>
+												<a href="#deleteCompanyModal" class="delete" data-toggle="modal">
+													<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+												</a>
+											}
 											<!----delete-modal start--------->
 											<div class="modal fade" tabindex="-1" id="deleteCompanyModal" role="dialog">
 												<div class="modal-dialog" role="document">
@@ -1995,7 +2068,7 @@
 								</button>
 							</div>
 							<form method="post" class="modal-body" asp-controller="SanPham" asp-action="Create" enctype="multipart/form-data">
-								<input type="hidden" asp-for="UserId" />
+								@*<input type="hidden" asp-for="UserId" />*@
 
 								<div class="my-2 form-group">
 									<label asp-for="@Model.chiNhanhViewModel.TenChiNhanh">Tên chi nhánh</label>
@@ -2219,12 +2292,15 @@
 										<th>@item.LoaiKinhNghiem</th>
 										<th>@item.LoaiTrinhDo</th>
 										<th>
-											<a asp-controller="NhaTuyenDung" asp-action="Edit" asp-route-id="@item.Id" class="edit">
-												<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
-											</a>
-											<a href="#deleteCompanyModal" class="delete" data-toggle="modal">
-												<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
-											</a>
+											@if (User.Identity.IsAuthenticated && User.IsInRole("super-admin"))
+											{
+												<a asp-controller="NhaTuyenDung" asp-action="Edit" asp-route-id="@item.Id" class="edit">
+													<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
+												</a>
+												<a href="#deleteCompanyModal" class="delete" data-toggle="modal">
+													<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+												</a>
+											}
 											<!----delete-modal start--------->
 											<div class="modal fade" tabindex="-1" id="deleteCompanyModal" role="dialog">
 												<div class="modal-dialog" role="document">
@@ -2279,7 +2355,7 @@
 								</button>
 							</div>
 							<form method="post" class="modal-body" asp-controller="SanPham" asp-action="Create" enctype="multipart/form-data">
-								<input type="hidden" asp-for="UserId" />
+								@*<input type="hidden" asp-for="UserId" />*@
 
 								<div class="my-2 form-group">
 									<label asp-for="@Model.chiNhanhViewModel.TenChiNhanh">Tên chi nhánh</label>

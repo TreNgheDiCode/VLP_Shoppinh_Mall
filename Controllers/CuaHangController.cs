@@ -85,9 +85,9 @@ namespace VLPMall.Controllers
 			var curUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
 			var createAdminViewModel = new AdminViewModel
 			{
-				UserId = curUserId,
 				cuaHangViewModel = new CreateCuaHangViewModel
 				{
+					UserId = curUserId,
 					SanPhams = new List<SanPham>()
 				}
 			};
@@ -104,6 +104,7 @@ namespace VLPMall.Controllers
 
                 var cuaHang = new CuaHang
 				{
+					UserId = adminVM.cuaHangViewModel.UserId,
 					TenCuaHang = adminVM.cuaHangViewModel.TenCuaHang,
 					NoiDung = adminVM.cuaHangViewModel.NoiDung,
 					AnhDaiDien = result.Url.ToString(),
