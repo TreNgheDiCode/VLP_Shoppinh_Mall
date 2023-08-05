@@ -16,13 +16,15 @@ namespace VLPMall.Controllers
 		private readonly IPhotoService _photoService;
         private readonly IStoreRepository _storeRepository;
 		private readonly IProductRepository _productRepository;
+		private readonly IDirectoryRepository _directoryRepository;
 
-		public CuaHangController(IHttpContextAccessor httpContextAccessor, IPhotoService photoService, IStoreRepository storeRepository, IProductRepository productRepository)
+		public CuaHangController(IHttpContextAccessor httpContextAccessor, IPhotoService photoService, IStoreRepository storeRepository, IDirectoryRepository directoryRepository, IProductRepository productRepository)
         {
 			_httpContextAccessor = httpContextAccessor;
 			_photoService = photoService;
             _storeRepository = storeRepository;
 			_productRepository = productRepository;
+			_directoryRepository = directoryRepository;
 		}
 
         public IActionResult Index()
@@ -38,7 +40,7 @@ namespace VLPMall.Controllers
             }
 
             var cuaHang = await _storeRepository.GetByNameAsync(name);
-			var sanPhams = await _productRepository.GetSanPhamByCuaHangId(cuaHang.Id);
+			var sanPhams = await _storeRepository.GetSanPhamByCuaHang(name);
 
 			if (!ModelState.IsValid)
 			{
@@ -98,38 +100,52 @@ namespace VLPMall.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(AdminViewModel adminVM)
 		{
-			if (ModelState.IsValid)
+			var result = await _photoService.AddPhotoAsync(adminVM.cuaHangViewModel.AnhDaiDien);
+
+            var cuaHang = new CuaHang
 			{
-				var result = await _photoService.AddPhotoAsync(adminVM.cuaHangViewModel.AnhDaiDien);
+				UserId = adminVM.cuaHangViewModel.UserId,
+				TenCuaHang = adminVM.cuaHangViewModel.TenCuaHang,
+				NoiDung = adminVM.cuaHangViewModel.NoiDung,
+				AnhDaiDien = result.Url.ToString(),
+				Email = adminVM.cuaHangViewModel.Email,
+				SoDienThoai = adminVM.cuaHangViewModel	.SoDienThoai,
+				NgayHoatDong = adminVM.cuaHangViewModel.NgayHoatDong1 + " - " + adminVM.cuaHangViewModel.NgayHoatDong2,
+				ThoiGianHoatDong = adminVM.cuaHangViewModel.ThoiGianHoatDong1 + " - " + adminVM.cuaHangViewModel.ThoiGianHoatDong2,
+				LoaiCuaHang = adminVM.cuaHangViewModel.LoaiCuaHang,
+			};
 
-                var cuaHang = new CuaHang
-				{
-					UserId = adminVM.cuaHangViewModel.UserId,
-					TenCuaHang = adminVM.cuaHangViewModel.TenCuaHang,
-					NoiDung = adminVM.cuaHangViewModel.NoiDung,
-					AnhDaiDien = result.Url.ToString(),
-					Email = adminVM.cuaHangViewModel.Email,
-					SoDienThoai = adminVM.cuaHangViewModel	.SoDienThoai,
-					NgayHoatDong = adminVM.cuaHangViewModel.NgayHoatDong1 + " - " + adminVM.cuaHangViewModel.NgayHoatDong2,
-					ThoiGianHoatDong = adminVM.cuaHangViewModel.ThoiGianHoatDong1 + " - " + adminVM.cuaHangViewModel.ThoiGianHoatDong2,
-					LoaiCuaHang = adminVM.cuaHangViewModel.LoaiCuaHang,
-				};
+			if (adminVM.cuaHangViewModel.LoaiAmThuc != null)
+				cuaHang.LoaiAmThuc = adminVM.cuaHangViewModel.LoaiAmThuc;
+			else if (adminVM.cuaHangViewModel.LoaiGiaiTri != null)
+				cuaHang.LoaiGiaiTri = adminVM.cuaHangViewModel.LoaiGiaiTri;
+			else if (adminVM.cuaHangViewModel.LoaiTienIch != null)
+				cuaHang.LoaiTienIch = adminVM.cuaHangViewModel.LoaiTienIch;
+			else if (adminVM.cuaHangViewModel.LoaiDichVu != null)
+				cuaHang.LoaiDichVu = adminVM.cuaHangViewModel.LoaiDichVu;
+			else if (adminVM.cuaHangViewModel.LoaiMuaSam != null)
+				cuaHang.LoaiMuaSam = adminVM.cuaHangViewModel.LoaiMuaSam;
 
-				var chiNhanhId = adminVM.cuaHangViewModel.SelectedChiNhanh;
+			var chiNhanhId = adminVM.cuaHangViewModel.SelectedChiNhanh;
+			var sanPhamId = adminVM.cuaHangViewModel.SelectedSanPham;
 
-				foreach (var item in chiNhanhId)
-				{
-					_storeRepository.Add(cuaHang, item);
-				}
-
-				return RedirectToAction("Index", "CuaHang");
-			}
-			else
+			foreach (var item in chiNhanhId)
 			{
-				ModelState.AddModelError("", "Lỗi không xác định xảy ra");
+				var chiNhanh = await _directoryRepository.GetByIdAsync(item);
+
+				var diaDiem = adminVM.cuaHangViewModel.DiaDiem;
+
+				_storeRepository.Add(cuaHang, chiNhanh, diaDiem);
 			}
 
-			return RedirectToAction("Index", "Admin", adminVM);
+			foreach (var item in sanPhamId)
+			{
+				var sanPham = await _productRepository.GetByIdAsync(item);
+
+				_storeRepository.Add(cuaHang, sanPham);
+			}
+
+			return RedirectToAction("Index", "CuaHang");
 		}
 
 		public async Task<IActionResult> Edit(int maChiNhanh, int maCuaHang)
@@ -168,10 +184,10 @@ namespace VLPMall.Controllers
 			var userCuaHang = await _storeRepository.GetByIdAsyncNoTracking(id);
 
 			var chiNhanh = _storeRepository.GetChiNhanhByCuaHang(id);
-            var sanPhams = await _productRepository.GetSanPhamByCuaHangId(cuaHangVM.Id);
-
+			var sanPham = _storeRepository.GetSanPhamByCuaHang(id);
 
             cuaHangVM.ChiNhanhs = chiNhanh;
+			cuaHangVM.SanPhams = sanPham;
 
 			if (userCuaHang != null)
 			{
@@ -198,7 +214,6 @@ namespace VLPMall.Controllers
 					ThoiGianHoatDong = cuaHangVM.ThoiGianHoatDong1 + " - " + cuaHangVM.ThoiGianHoatDong2,
 					LoaiCuaHang = cuaHangVM.LoaiCuaHang,
 					LoaiAmThuc = cuaHangVM.LoaiAmThuc,
-					SanPhams = sanPhams
                 };
 
 				return RedirectToAction("Index", "CuaHang");

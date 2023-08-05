@@ -147,8 +147,8 @@
                 @foreach (var item in Model.SanPhams)
                 {
                     <div class="col-md-2 mx-1">
-                        <a>
-                            <img class="img-fluid" src="https://res.cloudinary.com/drv0jpgyx/image/upload/v1689613707/zvqlqe9redxbvxggjasr.jpg" />
+                        <a asp-controller="SanPham" asp-action="Information" asp-route-name="@item.TenSanPham">
+                            <img class="img-fluid" src="@item.AnhDaiDien" />
                             <span>@item.TenSanPham</span>
                             <div class="d-flex">
                                 <small>đ</small><span>@item.GiaThanh</span>

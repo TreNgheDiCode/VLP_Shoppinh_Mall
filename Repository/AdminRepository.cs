@@ -32,36 +32,36 @@ namespace VLPMall.Repository
 
 		public async Task<ICollection<KhuyenMai>> GetAllUserKhuyenMai()
 		{
-			var currentUser = _httpContextAccessor.HttpContext?.User;
+			var currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
 			var userKhuyenMais = _context.KhuyenMais.Where(s => s.User.Id == currentUser.ToString());
 			return userKhuyenMais.ToList();
 		}
 
 		public async Task<ICollection<NhaTuyenDung>> GetAllUserNhaTuyenDung()
 		{
-			var currentUser = _httpContextAccessor.HttpContext?.User;
-			var userNhaTuyenDungs = _context.NhaTuyenDungs.Where(s => s.User.Id == currentUser.ToString());
+			var currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
+			var userNhaTuyenDungs = _context.NhaTuyenDungs.Where(c => c.User.Id == currentUser.ToString());
 			return userNhaTuyenDungs.ToList();
 		}
 
 
 		public async Task<ICollection<SanPham>> GetAllUserSanPham()
 		{
-			var currentUser = _httpContextAccessor.HttpContext?.User;
+			var currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
 			var userSanPhams = _context.SanPhams.Where(p => p.User.Id == currentUser.ToString());
 			return userSanPhams.ToList();
 		}
 
 		public async Task<ICollection<TinTuc>> GetAllUserTinTuc()
 		{
-			var currentUser = _httpContextAccessor.HttpContext?.User;
+			var currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
 			var userTinTucs = _context.TinTucs.Where(a => a.User.Id == currentUser.ToString());
 			return userTinTucs.ToList();
 		}
 
 		public async Task<ICollection<TuyenDung>> GetAllUserTuyenDung()
 		{
-			var currentUser = _httpContextAccessor.HttpContext?.User;
+			var currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
 			var userTuyenDungs = _context.TuyenDungs.Where(c => c.User.Id == currentUser.ToString());
 			return userTuyenDungs.ToList();
 		}

@@ -17,6 +17,7 @@ namespace VLPMall.Data
         public DbSet<TuyenDung> TuyenDungs { get; set; }
         public DbSet<NhaTuyenDung> NhaTuyenDungs { get; set; }
         public DbSet<ChiNhanhCuaHang> ChiNhanhCuaHang { get; set; }
+        public DbSet<CuaHangSanPham> CuaHangSanPham { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -27,7 +28,7 @@ namespace VLPMall.Data
 
             builder.Entity<ChiNhanhCuaHang>()
                 .HasOne(a => a.ChiNhanh)
-                .WithMany(_as => _as.ChiNhanhCuaHang)
+                .WithMany(_as => _as.ChiNhanhCuaHangs)
                 .HasForeignKey(a => a.MaChiNhanh)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -35,6 +36,21 @@ namespace VLPMall.Data
                 .HasOne(s => s.CuaHang)
                 .WithMany(_as => _as.ChiNhanhCuaHangs)
                 .HasForeignKey(s => s.MaCuaHang)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<CuaHangSanPham>()
+                .HasKey(_as => new { _as.MaCuaHang, _as.MaSanPham });
+
+            builder.Entity<CuaHangSanPham>()
+                .HasOne(s => s.CuaHang)
+                .WithMany(_as => _as.CuaHangSanPhams)
+                .HasForeignKey(s => s.MaCuaHang)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<CuaHangSanPham>()
+                .HasOne(p => p.SanPham)
+                .WithMany(_as => _as.CuaHangSanPhams)
+                .HasForeignKey(p => p.MaSanPham)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

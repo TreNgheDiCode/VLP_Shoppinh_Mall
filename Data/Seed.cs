@@ -61,21 +61,27 @@ namespace VLPMall.Data
                     ThoiGianHoatDong = "8:00 - 21:00",
                     LoaiCuaHang = LoaiCuaHang.AmThuc,
                     LoaiAmThuc = LoaiAmThuc.DoAnNhanh,
-                    SanPhams = new List<SanPham>()
+                    CuaHangSanPhams = new List<CuaHangSanPham>()
                     {
-                        new SanPham()
+                        new CuaHangSanPham()
                         {
-                            TenSanPham = "Gà rán cay",
-                            NoiDung = "Gà rán này cay",
-                            AnhDaiDien = "https://images.foody.vn/res/g1/1559/s400x400/a4f75…deb-4025-8f54-d0f2c5d4-d85c77e4-230706100809.jpeg",
-                            GiaThanh = 80000,
+                            SanPham = new SanPham()
+                            {
+                                TenSanPham = "Gà rán cay",
+                                NoiDung = "Gà rán này cay",
+                                AnhDaiDien = "https://images.foody.vn/res/g1/1559/s400x400/a4f75…deb-4025-8f54-d0f2c5d4-d85c77e4-230706100809.jpeg",
+                                GiaThanh = 80000
+                            }
                         },
-                        new SanPham()
+                        new CuaHangSanPham()
                         {
-                            TenSanPham = "Gà rán không cay",
-                            NoiDung = "Gà rán này không cay",
-                            AnhDaiDien = "https://images.foody.vn/res/g1/1559/s400x400/85987…e10-4ed5-9c1e-8b09bfd5-dcc552d8-210615111854.jpeg",
-                            GiaThanh = 100000
+                            SanPham = new SanPham()
+                            {
+                                TenSanPham = "Gà rán không cay",
+                                NoiDung = "Gà rán này không cay",
+                                AnhDaiDien = "https://images.foody.vn/res/g1/1559/s400x400/85987…e10-4ed5-9c1e-8b09bfd5-dcc552d8-210615111854.jpeg",
+                                GiaThanh = 100000
+                            }
                         }
                     },
                     KhuyenMais = new List<KhuyenMai>()

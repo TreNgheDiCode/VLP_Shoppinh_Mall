@@ -14,7 +14,21 @@ namespace VLPMall.Repository
 			_context = context;
 		}
 
-        public async Task<ICollection<TuyenDung>> GetAllAsync()
+		public bool Add(TuyenDung tuyenDung)
+		{
+			_context.Add(tuyenDung);
+
+			return Save();
+		}
+
+		public bool Delete(TuyenDung tuyenDung)
+		{
+			_context.Remove(tuyenDung);
+
+			return Save();
+		}
+
+		public async Task<ICollection<TuyenDung>> GetAllAsync()
 		{
 			return await _context.TuyenDungs.Include(c => c.NhaTuyenDung).ToListAsync();
 		}
@@ -28,5 +42,19 @@ namespace VLPMall.Repository
         {
             return await _context.TuyenDungs.Include(c => c.DiaChi).Include(c => c.NhaTuyenDung).FirstOrDefaultAsync(c => c.TenTuyenDung == name);
         }
-    }
+
+		public bool Save()
+		{
+			var saved = _context.SaveChanges();
+
+			return saved > 0 ? true : false;
+		}
+
+		public bool Update(TuyenDung tuyenDung)
+		{
+			_context.Update(tuyenDung);
+
+			return Save();
+		}
+	}
 }

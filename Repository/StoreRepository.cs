@@ -15,19 +15,31 @@ namespace VLPMall.Repository
             _context = dataContext;
         }
 
-		public bool Add(CuaHang cuaHang, int maChiNhanh)
+		public bool Add(CuaHang cuaHang, ChiNhanh chiNhanh, string diaDiem)
 		{
-			var chiNhanh = _context.ChiNhanhs.Where(a => a.Id == maChiNhanh).FirstOrDefault();
-
-			var chiNhanhCuaHang = new ChiNhanhCuaHang
-			{
-				ChiNhanh = chiNhanh,
-				CuaHang = cuaHang
+            var chiNhanhCuaHang = new ChiNhanhCuaHang
+            {
+                ChiNhanh = chiNhanh,
+                CuaHang = cuaHang,
+                DiaDiem = chiNhanh.TenChiNhanh + " - " + diaDiem
 			};
 
 			_context.Add(chiNhanhCuaHang);
 
             return Save();
+		}
+
+		public bool Add(CuaHang cuaHang, SanPham sanPham)
+		{
+			var cuaHangSanPham = new CuaHangSanPham
+			{
+				CuaHang = cuaHang,
+                SanPham = sanPham,
+			};
+
+			_context.Add(cuaHangSanPham);
+
+			return Save();
 		}
 
 		public bool Delete(CuaHang cuaHang)
@@ -44,7 +56,7 @@ namespace VLPMall.Repository
 
 		public async Task<IEnumerable<CuaHang>> GetAllAsync()
         {
-            return await _context.CuaHangs.ToListAsync();
+            return await _context.CuaHangs.Include(s => s.CuaHangSanPhams).ToListAsync();
         }
 
         public async Task<CuaHang> GetByIdAsync(int id)
@@ -133,6 +145,16 @@ namespace VLPMall.Repository
         public bool CuaHangTonTai(string name)
         {
             return _context.CuaHangs.Any(s => s.TenCuaHang == name);
+        }
+
+        public async Task<IEnumerable<SanPham>> GetSanPhamByCuaHang(int id)
+        {
+            return await _context.CuaHangSanPham.Where(s => s.CuaHang.Id == id).Select(s => s.SanPham).ToListAsync();
+        }
+
+        public async Task<IEnumerable<SanPham>> GetSanPhamByCuaHang(string name)
+        {
+            return await _context.CuaHangSanPham.Where(s => s.CuaHang.TenCuaHang == name).Select(s => s.SanPham).ToListAsync();
         }
     }
 }

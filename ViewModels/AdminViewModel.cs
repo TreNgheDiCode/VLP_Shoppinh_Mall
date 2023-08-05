@@ -13,5 +13,9 @@ namespace VLPMall.ViewModels
         public ICollection<NhaTuyenDung>? NhaTuyenDungs { get; set; }
         public CreateChiNhanhViewModel? chiNhanhViewModel { get; set; }
         public CreateCuaHangViewModel? cuaHangViewModel { get; set; }
+        public CreateSanPhamViewModel? sanPhamViewModel { get; set; }
+        public CreateKhuyenMaiViewModel? khuyenMaiViewModel { get; set; }
+        public CreateNhaTuyenDungViewModel? nhaTuyenDungViewModel { get; set; }
+        public CreateTuyenDungViewModel? tuyenDungViewModel { get; set; }
     }
 }

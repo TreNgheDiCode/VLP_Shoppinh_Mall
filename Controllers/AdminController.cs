@@ -6,7 +6,6 @@ namespace VLPMall.Controllers
 {
 	public class AdminController : Controller
 	{
-		private readonly IPhotoService _photoService;
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly IAdminRepository _adminRepository;
 
@@ -40,6 +39,22 @@ namespace VLPMall.Controllers
 					UserId = curUserId
 				},
 				cuaHangViewModel = new CreateCuaHangViewModel()
+				{
+					UserId = curUserId,
+				},
+				sanPhamViewModel = new CreateSanPhamViewModel()
+				{
+					UserId = curUserId,
+				},
+				khuyenMaiViewModel = new CreateKhuyenMaiViewModel()
+				{
+					UserId = curUserId,
+				},
+				nhaTuyenDungViewModel = new CreateNhaTuyenDungViewModel()
+				{
+					UserId = curUserId,
+				},
+				tuyenDungViewModel = new CreateTuyenDungViewModel()
 				{
 					UserId = curUserId,
 				}

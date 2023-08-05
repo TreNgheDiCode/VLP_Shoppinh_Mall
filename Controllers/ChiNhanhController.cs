@@ -108,12 +108,11 @@ namespace VLPMall.Controllers
                 }
 
                 return RedirectToAction("Index", "ChiNhanh");
-            } else
-            {
-                ModelState.AddModelError("", "Lỗi không xác định xảy ra");
-            }
+            } 
 
-            return RedirectToAction("Index", "Admin", adminVM);
+
+            ModelState.AddModelError("", "Lỗi không xác định xảy ra");
+            return BadRequest(ModelState);
         }
 
         public async Task<IActionResult> Edit(int id)

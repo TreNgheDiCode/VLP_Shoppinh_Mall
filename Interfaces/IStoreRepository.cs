@@ -13,11 +13,14 @@ namespace VLPMall.Interfaces
         Task<string> GetDiaDiemgById(int maChiNhanh, int maCuaHang);
         Task<IEnumerable<ChiNhanh>> GetChiNhanhByCuaHang(int id);
         Task<IEnumerable<ChiNhanh>> GetChiNhanhByCuaHang(string name);
+        Task<IEnumerable<SanPham>> GetSanPhamByCuaHang(int id);
+        Task<IEnumerable<SanPham>> GetSanPhamByCuaHang(string name);
         Task<IEnumerable<CuaHang>> GetCuaHangByTheLoai(LoaiCuaHang loaiCuaHang);
         Task<IEnumerable<CuaHang>> GetCuaHangByDanhMuc(LoaiCuaHang loaiCuaHang, int loaiDanhMuc);
         bool CuaHangTonTai(int id);
         bool CuaHangTonTai(string name);
-		bool Add(CuaHang cuaHang, int maChiNhanh);
+		bool Add(CuaHang cuaHang, ChiNhanh chiNhanh, string diaDiem);
+		bool Add(CuaHang cuaHang, SanPham sanPham);
 		bool Update(CuaHang cuaHang);
 		bool Delete(CuaHang cuaHang);
 		bool Save();

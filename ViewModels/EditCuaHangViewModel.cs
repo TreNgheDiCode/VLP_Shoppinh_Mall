@@ -23,7 +23,7 @@ namespace VLPMall.ViewModels
 		public LoaiAmThuc? LoaiAmThuc { get; set; }
 		public Task<IEnumerable<ChiNhanh>>? ChiNhanhs { get; set; }
 		public List<int>? SelectedChiNhanh { get; set; }
-        public Task<ICollection<SanPham>>? SanPhams { get; set; }
+        public Task<IEnumerable<SanPham>>? SanPhams { get; set; }
         public List<int>? SelectedSanPham { get; set; }
     }
 }

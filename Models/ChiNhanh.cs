@@ -23,6 +23,6 @@ namespace VLPMall.Models
         public User? User { get; set; }
 
         // Liên kết nhiều nhiều
-        public ICollection<ChiNhanhCuaHang>? ChiNhanhCuaHang { get; set; }
+        public ICollection<ChiNhanhCuaHang>? ChiNhanhCuaHangs { get; set; }
     }
 }
