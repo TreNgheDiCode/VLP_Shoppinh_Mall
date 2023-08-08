@@ -10,6 +10,7 @@ namespace VLPMall.Interfaces
 		Task<SanPham> GetSanPhamByName(string name);
 		bool UpdateFavorite();
         bool Add(CuaHang cuaHang, SanPham sanPham);
+        bool Add(SanPham sanPham);
         bool Update(SanPham sanPham);
         bool Delete(SanPham sanPham);
         bool Save();

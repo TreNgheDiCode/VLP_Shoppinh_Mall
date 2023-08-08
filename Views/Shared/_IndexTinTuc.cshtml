@@ -1,4 +1,5 @@
-﻿@using VLPMall.Interfaces;
+﻿@using System.Web;
+@using VLPMall.Interfaces;
 @model ICollection<TinTuc>;
 
 @inject IArticleRepository ArticleRepository;
@@ -7,7 +8,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-	var articles = await ArticleRepository.GetAllAsync();
+	var articles = await ArticleRepository.GetTop10Async();
 }
 
 <link href="~/css/baiviet.css" rel="stylesheet" />
@@ -107,91 +108,93 @@
 			<div id="articlelist">
 				@foreach (var item in Model)
 				{
-					<div class="card card-shadow mb-3 article-card radius-tl-0 radius-bl-0">
-						<div class="card-body p-0">
-							<a asp-controller="TinTuc" asp-action="Information" class="text-black">
-								<div class="row m-0 p-0">
-									<div class="col-md-5 col-12 m-0 p-0 article-thumbnail-placeholder align-middle">
-										<img class="card-img-top article-thumbnail lazy" src="@item.AnhDaiDien" alt="@item.TieuDe">
-										<div class="article-thumbnail-image" style="background-image: url('@item.AnhDaiDien')"></div>
-										<div class="article-thumbnail-backdrop" style="background-image: url('@item.AnhDaiDien')"></div>
-									</div>
-									<div class="col-md-7 col-12 m-0 p-0 article-content-placeholder">
-										<div class="py-3 py-md-3 px-4 px-md-5 article-content">
-											<h5 class="card-title mt-3 mb-0"><strong>@item.TieuDe</strong></h5>
-											@switch (item.NgayDang.Month)
-											{
-												case 1:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Một @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 2:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Hai @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 3:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Ba @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 4:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Bốn @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 5:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Năm @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 6:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Sáu @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 7:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Bảy @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 8:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Tám @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 9:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Chín @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 10:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 11:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Một @item.NgayDang.Year</small></div>
-														break;
-													}
-												case 12:
-													{
-														<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Hai @item.NgayDang.Year</small></div>
-														break;
-													}
-											}
-											<p class="card-text mt-2">@item.NoiDung </p>
+					@if (item.TrangThai)
+					{
+						<div class="card card-shadow mb-3 article-card radius-tl-0 radius-bl-0">
+							<div class="card-body p-0">
+								<a asp-controller="TinTuc" asp-action="Information" class="text-black">
+									<div class="row m-0 p-0">
+										<div class="col-md-5 col-12 m-0 p-0 article-thumbnail-placeholder align-middle">
+											<img class="card-img-top article-thumbnail lazy" src="@item.AnhDaiDien" alt="@item.TieuDe">
+											<div class="article-thumbnail-image" style="background-image: url('@item.AnhDaiDien')"></div>
+											<div class="article-thumbnail-backdrop" style="background-image: url('@item.AnhDaiDien')"></div>
+										</div>
+										<div class="col-md-7 col-12 m-0 p-0 article-content-placeholder">
+											<div class="py-3 py-md-3 px-4 px-md-5 article-content">
+												<h5 class="card-title mt-3 mb-0"><strong>@item.TieuDe</strong></h5>
+												@switch (item.NgayDang.Month)
+												{
+													case 1:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Một @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 2:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Hai @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 3:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Ba @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 4:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Bốn @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 5:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Năm @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 6:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Sáu @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 7:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Bảy @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 8:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Tám @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 9:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Chín @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 10:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 11:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Một @item.NgayDang.Year</small></div>
+															break;
+														}
+													case 12:
+														{
+															<div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Hai @item.NgayDang.Year</small></div>
+															break;
+														}
+												}
+												@Html.Raw(HttpUtility.HtmlDecode(HttpUtility.HtmlEncode("<div class=\"card-text mt-2 text-truncate\" style=\"max-width: 100%;max-height: 200px;\">" + item.NoiDung + "</div>")))
+											</div>
 										</div>
 									</div>
-								</div>
-							</a>
+								</a>
+							</div>
 						</div>
-					</div>
+					}
 				}
 			</div>
-			<div class="text-center"><ul class="pagination"><li class="active"><a href="#">1</a></li><li><a href="#" data-ci-pagination-page="2">2</a></li><li><a href="" data-ci-pagination-page="3">3</a></li><li><a href="" data-ci-pagination-page="4">4</a></li><a href="" data-ci-pagination-page="2" rel="next"></a><a href="#" data-ci-pagination-page="118"></a></ul></div>
 		</div>
 
 		<div class="col-lg-5 col-xl-3 d-none d-lg-block">

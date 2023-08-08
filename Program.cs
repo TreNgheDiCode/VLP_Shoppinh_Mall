@@ -27,6 +27,8 @@ builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<ICareerRepository, CareerRepository>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 
+builder.Services.AddScoped<UserManager<User>, UserManager<User>>();
+
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 builder.Services.Configure<MiddlewareSettings>(builder.Configuration.GetSection("MiddlewareSettings"));
 builder.Services.AddDbContext<DataContext>(options =>
@@ -34,9 +36,14 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<DataContext>();
+    .AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    options.AppId = "690461609573548";
+    options.AppSecret = "2196f7727e8896b07eaaabbe2f3a4409";
+});
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
 

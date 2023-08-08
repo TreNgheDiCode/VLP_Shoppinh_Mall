@@ -236,10 +236,6 @@
 											<i class="material-icons">&#xE147;</i>
 											<span>Thêm người dùng mới</span>
 										</a>
-										<a href="#deleteUserModal" class="btn btn-danger" data-toggle="modal">
-											<i class="material-icons">&#xE15C;</i>
-											<span>Xóa tất cả</span>
-										</a>
 									</div>
 								</div>
 							</div>
@@ -531,10 +527,6 @@
 									<a href="#addDirectoryModal" class="btn btn-success" data-toggle="modal">
 										<i class="material-icons">&#xE147;</i>
 										<span>Thêm chi nhánh mới</span>
-									</a>
-									<a href="#deleteDirectoryModal" class="btn btn-danger" data-toggle="modal">
-										<i class="material-icons">&#xE15C;</i>
-										<span>Xóa tất cả</span>
 									</a>
 								</div>
 							</div>
@@ -865,10 +857,6 @@
 									<a href="#CapNhatCuaHang" class="btn btn-success" data-toggle="modal">
 										<i class="material-icons">&#xE147;</i>
 										<span>Thêm cửa hàng mới</span>
-									</a>
-									<a href="#deleteStoreModal" class="btn btn-danger" data-toggle="modal">
-										<i class="material-icons">&#xE15C;</i>
-										<span>Xóa tất cả</span>
 									</a>
 								</div>
 							</div>
@@ -1270,10 +1258,6 @@
 										<i class="material-icons">&#xE147;</i>
 										<span>Thêm sản phẩm mới</span>
 									</a>
-									<a href="#deleteDirectoryModal" class="btn btn-danger" data-toggle="modal">
-										<i class="material-icons">&#xE15C;</i>
-										<span>Xóa tất cả</span>
-									</a>
 								</div>
 							</div>
 						</div>
@@ -1537,10 +1521,6 @@
 										<i class="material-icons">&#xE147;</i>
 										<span>Thêm khuyến mãi mới</span>
 									</a>
-									<a href="#deleteDirectoryModal" class="btn btn-danger" data-toggle="modal">
-										<i class="material-icons">&#xE15C;</i>
-										<span>Xóa tất cả</span>
-									</a>
 								</div>
 							</div>
 						</div>
@@ -1628,15 +1608,12 @@
 											<th>@item.ChietKhau</th>
 											<th>@item.MaCuaHang</th>
 											<th>
-												@if (User.Identity.IsAuthenticated && User.IsInRole("super-admin"))
-												{
-													<a asp-controller="KhuyenMai" asp-action="Edit" asp-route-id="@item.Id" class="edit">
-														<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
-													</a>
-													<a href="#deleteSaleModal" class="delete" data-toggle="modal">
-														<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
-													</a>
-												}
+												<a asp-controller="KhuyenMai" asp-action="Edit" asp-route-id="@item.Id" class="edit">
+													<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
+												</a>
+												<a href="#deleteSaleModal" class="delete" data-toggle="modal">
+													<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+												</a>
 												<!----delete-modal start--------->
 												<div class="modal fade" tabindex="-1" id="deleteSaleModal" role="dialog">
 													<div class="modal-dialog" role="document">
@@ -1804,10 +1781,6 @@
 										<i class="material-icons">&#xE147;</i>
 										<span>Thêm tin tức mới</span>
 									</a>
-									<a href="#deleteDirectoryModal" class="btn btn-danger" data-toggle="modal">
-										<i class="material-icons">&#xE15C;</i>
-										<span>Xóa tất cả</span>
-									</a>
 								</div>
 							</div>
 						</div>
@@ -1878,7 +1851,7 @@
 															</div>
 															<div class="modal-footer">
 																<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-																<button asp-controller="BaiViet" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
+																<button asp-controller="TinTuc" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
 															</div>
 														</form>
 													</div>
@@ -1911,7 +1884,7 @@
 													<th>Đã đăng</th>
 												}
 												<th>
-													<a asp-controller="BaiViet" asp-action="Edit" asp-route-id="@item.Id" class="edit">
+													<a asp-controller="TinTuc" asp-action="Edit" asp-route-id="@item.Id" class="edit">
 														<i class="material-icons" data-toggle="tooltip" title="Cập nhật">&#xE254;</i>
 													</a>
 													<a href="#deleteArticleModal" class="delete" data-toggle="modal">
@@ -1933,7 +1906,7 @@
 																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-																	<button asp-controller="BaiViet" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
+																	<button asp-controller="TinTuc" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
 																</div>
 															</form>
 														</div>
@@ -1962,116 +1935,51 @@
 				</div>
 
 				<!----add-modal start--------->
-				<div class="modal fade" tabindex="-1" id="addProductModal" role="dialog">
+				<div class="modal fade" tabindex="-1" id="addArticleModal" role="dialog">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">Thêm sản phẩm</h5>
+								<h5 class="modal-title">Thêm tin tức</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<form method="post" class="modal-body" asp-controller="SanPham" asp-action="Create" enctype="multipart/form-data">
-								@*<input type="hidden" asp-for="UserId" />*@
+							<form method="post" class="modal-body" asp-controller="TinTuc" asp-action="Create" enctype="multipart/form-data">
+								<input type="hidden" asp-for="@Model.tinTucViewModel.UserId" />
 
 								<div class="my-2 form-group">
-									<label asp-for="@Model.chiNhanhViewModel.TenChiNhanh">Tên chi nhánh</label>
-									<input asp-for="@Model.chiNhanhViewModel.TenChiNhanh" type="text" class="form-control" placeholder="Tên chi nhánh">
-									<span asp-validation-for="@Model.chiNhanhViewModel.TenChiNhanh" class="text-danger"></span>
+									<label asp-for="@Model.tinTucViewModel.TieuDe">Tiêu đề</label>
+									<input asp-for="@Model.tinTucViewModel.TieuDe" type="text" class="form-control" placeholder="Tiêu đề">
+										<span asp-validation-for="@Model.tinTucViewModel.TieuDe" class="text-danger"></span>
 								</div>
 								<div class="my-2 form-group">
-									<label asp-for="@Model.chiNhanhViewModel.NoiDung">Nội dung</label>
-									<input asp-for="@Model.chiNhanhViewModel.NoiDung" type="text" class="form-control" placeholder="Nội dung">
-									<span asp-validation-for="@Model.chiNhanhViewModel.NoiDung" class="text-danger"></span>
+									<label asp-for="@Model.tinTucViewModel.NoiDung">Nội dung</label>
+									<textarea id="tinTucTextArea" asp-for="@Model.tinTucViewModel.NoiDung" type="text" class="form-control" placeholder="Nội dung"></textarea>
+										<span asp-validation-for="@Model.tinTucViewModel.NoiDung" class="text-danger"></span>
 								</div>
 								<div class="my-2 form-group">
-									<label asp-for="@Model.chiNhanhViewModel.AnhDaiDien">Ảnh đại diện</label>
-									<input asp-for="@Model.chiNhanhViewModel.AnhDaiDien" type="file" class="form-control" placeholder="Ảnh đại diện">
-									<span asp-validation-for="@Model.chiNhanhViewModel.AnhDaiDien" class="text-danger"></span>
+									<label asp-for="@Model.tinTucViewModel.AnhDaiDien">Ảnh đại diện</label>
+									<input asp-for="@Model.tinTucViewModel.AnhDaiDien" type="file" class="form-control" placeholder="Ảnh đại diện">
+										<span asp-validation-for="@Model.tinTucViewModel.AnhDaiDien" class="text-danger"></span>
 								</div>
 								<div class="my-2 form-group">
-									<label asp-for="@Model.chiNhanhViewModel.Email">Email</label>
-									<input asp-for="@Model.chiNhanhViewModel.Email" type="email" class="form-control" placeholder="Email">
-									<span asp-validation-for="@Model.chiNhanhViewModel.Email" class="text-danger"></span>
+									<label asp-for="@Model.tinTucViewModel.NgayDang">Ngày đăng</label>
+									<input asp-for="@Model.tinTucViewModel.NgayDang" type="date" class="form-control" />
+										<span asp-validation-for="@Model.tinTucViewModel.NgayDang" class="text-danger"></span>
 								</div>
 								<div class="my-2 form-group">
-									<label asp-for="@Model.chiNhanhViewModel.SoDienThoai">Số điện thoại</label>
-									<input asp-for="@Model.chiNhanhViewModel.SoDienThoai" type="text" class="form-control" placeholder="Số điện thoại">
-									<span asp-validation-for="@Model.chiNhanhViewModel.SoDienThoai" class="text-danger"></span>
-								</div>
-								<div class="my-2 form-group">
-									<label asp-for="@Model.chiNhanhViewModel.NgayHoatDong1">Từ</label>
-									<select asp-for="@Model.chiNhanhViewModel.NgayHoatDong1">
+									<label asp-for="@Model.tinTucViewModel.LoaiTinTuc">Loại tin tức</label>
+									<select asp-for="@Model.tinTucViewModel.LoaiTinTuc" asp-items="@Html.GetEnumSelectList<LoaiTinTuc>()">
 										<option>--Chọn--</option>
-										<option>Thứ Hai</option>
-										<option>Thứ Ba</option>
-										<option>Thứ Tư</option>
-										<option>Thứ Năm</option>
-										<option>Thứ Sàu</option>
-										<option>Thứ Bảy</option>
-										<option>Chủ Nhật</option>
 									</select>
-									<span asp-validation-for="@Model.chiNhanhViewModel.NgayHoatDong1" class="text-danger"></span>
-									<span>&nbsp;-&nbsp;</span>
-									<label asp-for="@Model.chiNhanhViewModel.NgayHoatDong2">Đến</label>
-									<select asp-for="@Model.chiNhanhViewModel.NgayHoatDong2">
-										<option>--Chọn--</option>
-										<option>Thứ Hai</option>
-										<option>Thứ Ba</option>
-										<option>Thứ Tư</option>
-										<option>Thứ Năm</option>
-										<option>Thứ Sàu</option>
-										<option>Thứ Bảy</option>
-										<option>Chủ Nhật</option>
-									</select>
-									<span asp-validation-for="@Model.chiNhanhViewModel.NgayHoatDong2" class="text-danger"></span>
+									<span asp-validation-for="@Model.tinTucViewModel.LoaiTinTuc" class="text-danger"></span>
 								</div>
 								<div class="my-2 form-group">
-									<label>Thời gian hoạt động</label>
-									<div>Từ</div>
-									<input asp-for="@Model.chiNhanhViewModel.ThoiGianHoatDong1" type="time" class="form-control">
-									Đến
-									<input asp-for="@Model.chiNhanhViewModel.ThoiGianHoatDong2" type="time" class="form-control">
+									<label asp-for="@Model.tinTucViewModel.TrangThai">Trạng thái</label>
+										<input asp-for="@Model.tinTucViewModel.TrangThai" type="checkbox" checked="@Model.tinTucViewModel.TrangThai" />
+										<span asp-validation-for="@Model.tinTucViewModel.TrangThai" class="text-danger"></span>
 								</div>
-								<div class="my-2 form-group">
-									<label>Địa chỉ</label>
-									<div class="row">
-										<div class="col-12">
-											<label asp-for="@Model.chiNhanhViewModel.DiaChi.Duong">Tên đường &amp; Số nhà</label>
-											<input asp-for="@Model.chiNhanhViewModel.DiaChi.Duong" type="text" class="form-control" placeholder="Tên đường &amp; Số nhà">
-											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.Duong" class="text-danger"></span>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-6">
-											<label asp-for="@Model.chiNhanhViewModel.DiaChi.Phuong">Phường</label>
-											<input asp-for="@Model.chiNhanhViewModel.DiaChi.Phuong" type="text" class="form-control" placeholder="Phường">
-											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.Phuong" class="text-danger"></span>
-										</div>
-										<div class="col-6">
-											<label asp-for="@Model.chiNhanhViewModel.DiaChi.Quan">Quận</label>
-											<input asp-for="@Model.chiNhanhViewModel.DiaChi.Quan" type="text" class="form-control" placeholder="Quận">
-											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.Quan" class="text-danger"></span>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-12">
-											<label asp-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho">Tỉnh/Thành phố</label>
-											<input asp-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho" type="text" class="form-control" placeholder="Thành phố">
-											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho" class="text-danger"></span>
-										</div>
-									</div>
-								</div>
-								<div class="my-2 form-group">
-									<div class="inline w-100 field">
-										<label asp-for="@Model.chiNhanhViewModel.CuaHangs">Chọn chi nhánh</label>
-										<select asp-for="@Model.chiNhanhViewModel.SelectedCuaHang" asp-items="new SelectList(stores, nameof(CuaHang.Id), nameof(CuaHang.TenCuaHang))" multiple class="label ui selection fluid dropdown">
-											<option value="">Chọn</option>
-
-										</select>
-									</div>
-									<span asp-validation-for="@Model.cuaHangViewModel.ChiNhanhs" class="text-danger"></span>
-								</div>
+								
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
 									<button type="submit" class="btn btn-success">Thêm</button>
@@ -2142,10 +2050,6 @@
 										<i class="material-icons">&#xE147;</i>
 										<span>Thêm nhà tuyển dụng mới</span>
 									</a>
-									<a href="#deleteDirectoryModal" class="btn btn-danger" data-toggle="modal">
-										<i class="material-icons">&#xE15C;</i>
-										<span>Xóa tất cả</span>
-									</a>
 								</div>
 							</div>
 						</div>
@@ -2210,7 +2114,7 @@
 															</div>
 															<div class="modal-footer">
 																<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-																<button asp-controller="Company" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
+																	<button asp-controller="NhaTuyenDung" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
 															</div>
 														</form>
 													</div>
@@ -2242,7 +2146,6 @@
 													<a href="#deleteCompanyModal" class="delete" data-toggle="modal">
 														<i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
 													</a>
-													}
 													<!----delete-modal start--------->
 													<div class="modal fade" tabindex="-1" id="deleteCompanyModal" role="dialog">
 														<div class="modal-dialog" role="document">
@@ -2259,7 +2162,7 @@
 																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-																	<button asp-controller="Company" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
+																	<button asp-controller="NhaTuyenDung" asp-action="Delete" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Đồng ý</button>
 																</div>
 															</form>
 														</div>
@@ -2441,10 +2344,6 @@
 									<a href="#addCareerModal" class="btn btn-success" data-toggle="modal">
 										<i class="material-icons">&#xE147;</i>
 										<span>Thêm tuyển dụng mới</span>
-									</a>
-									<a href="#deleteCareerModal" class="btn btn-danger" data-toggle="modal">
-										<i class="material-icons">&#xE15C;</i>
-										<span>Xóa tất cả</span>
 									</a>
 								</div>
 							</div>
@@ -2697,28 +2596,28 @@
 									<label>Địa chỉ</label>
 									<div class="row">
 										<div class="col-12">
-											<label asp-for="@Model.chiNhanhViewModel.DiaChi.Duong">Tên đường &amp; Số nhà</label>
-											<input asp-for="@Model.chiNhanhViewModel.DiaChi.Duong" type="text" class="form-control" placeholder="Tên đường &amp; Số nhà">
-											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.Duong" class="text-danger"></span>
+											<label asp-for="@Model.tuyenDungViewModel.DiaChi.Duong">Tên đường &amp; Số nhà</label>
+											<input asp-for="@Model.tuyenDungViewModel.DiaChi.Duong" type="text" class="form-control" placeholder="Tên đường &amp; Số nhà">
+											<span asp-validation-for="@Model.tuyenDungViewModel.DiaChi.Duong" class="text-danger"></span>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-6">
-											<label asp-for="@Model.chiNhanhViewModel.DiaChi.Phuong">Phường</label>
-											<input asp-for="@Model.chiNhanhViewModel.DiaChi.Phuong" type="text" class="form-control" placeholder="Phường">
-											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.Phuong" class="text-danger"></span>
+											<label asp-for="@Model.tuyenDungViewModel.DiaChi.Phuong">Phường</label>
+											<input asp-for="@Model.tuyenDungViewModel.DiaChi.Phuong" type="text" class="form-control" placeholder="Phường">
+											<span asp-validation-for="@Model.tuyenDungViewModel.DiaChi.Phuong" class="text-danger"></span>
 										</div>
 										<div class="col-6">
-											<label asp-for="@Model.chiNhanhViewModel.DiaChi.Quan">Quận</label>
-											<input asp-for="@Model.chiNhanhViewModel.DiaChi.Quan" type="text" class="form-control" placeholder="Quận">
-											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.Quan" class="text-danger"></span>
+											<label asp-for="@Model.tuyenDungViewModel.DiaChi.Quan">Quận</label>
+											<input asp-for="@Model.tuyenDungViewModel.DiaChi.Quan" type="text" class="form-control" placeholder="Quận">
+											<span asp-validation-for="@Model.tuyenDungViewModel.DiaChi.Quan" class="text-danger"></span>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-12">
-											<label asp-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho">Tỉnh/Thành phố</label>
-											<input asp-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho" type="text" class="form-control" placeholder="Thành phố">
-											<span asp-validation-for="@Model.chiNhanhViewModel.DiaChi.ThanhPho" class="text-danger"></span>
+											<label asp-for="@Model.tuyenDungViewModel.DiaChi.ThanhPho">Tỉnh/Thành phố</label>
+											<input asp-for="@Model.tuyenDungViewModel.DiaChi.ThanhPho" type="text" class="form-control" placeholder="Thành phố">
+												<span asp-validation-for="@Model.tuyenDungViewModel.DiaChi.ThanhPho" class="text-danger"></span>
 										</div>
 									</div>
 								</div>
@@ -2811,3 +2710,29 @@
 <script src="~/js/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>
 <script src="~/js/site.js"></script>
+
+	<!-- TinyMCE CDN -->
+<script src="https://cdn.tiny.cloud/1/zpe1x8bdjjncr7qwsakzb1au924tgk1cgsptck5sgd5sg65g/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    tinymce.init({
+        selector: '#tinTucTextArea',
+        plugins: 'lists, link, image, media',
+        toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+        menubar: false,
+        setup: (editor) => {
+            // Apply the focus effect
+            editor.on("init", () => {
+                editor.getContainer().style.transition = "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out";
+            });
+            editor.on("focus", () => {
+                (editor.getContainer().style.boxShadow = "0 0 0 .2rem rgba(0, 123, 255, .25)"),
+                (editor.getContainer().style.borderColor = "#80bdff");
+            });
+            editor.on("blur", () => {
+                (editor.getContainer().style.boxShadow = ""),
+                    (editor.getContainer().style.borderColor = "");
+            });
+        },
+    });
+</script>

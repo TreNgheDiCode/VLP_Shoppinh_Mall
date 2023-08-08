@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VLPMall.Interfaces;
 using VLPMall.Models;
+using VLPMall.Repository;
 using VLPMall.ViewModels;
 
 namespace VLPMall.Controllers
@@ -75,5 +76,16 @@ namespace VLPMall.Controllers
 
             return BadRequest(ModelState);
 		}
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteNhaTuyenDung(int id)
+        {
+            var nhaTuyenDung = await _companyRepository.GetByIdAsync(id);
+            if (nhaTuyenDung == null) { return View("Error"); }
+
+            _companyRepository.Delete(nhaTuyenDung);
+
+            return RedirectToAction("Index", "Admin");
+        }
     }
 }

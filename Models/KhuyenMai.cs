@@ -10,8 +10,8 @@ namespace VLPMall.Models
         public DateTime NgayKetThuc { get; set; }
         public float? ChietKhau { get; set; } = 0;
         [ForeignKey("CuaHang")]
-        public int MaCuaHang { get; set; }
-        public CuaHang CuaHang { get; set; }
+        public int? MaCuaHang { get; set; }
+        public CuaHang? CuaHang { get; set; }
 		[ForeignKey("User")]
 		public string? UserId { get; set; }
 		public User? User { get; set; }

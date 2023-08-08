@@ -27,6 +27,13 @@ namespace VLPMall.Repository
             return Save();
         }
 
+        public bool Add(SanPham sanPham)
+        {
+            _context.Add(sanPham);
+
+            return Save();
+        }
+
         public bool Delete(SanPham sanPham)
         {
             _context.Remove(sanPham);

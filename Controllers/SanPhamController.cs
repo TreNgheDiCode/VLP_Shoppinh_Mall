@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VLPMall.Interfaces;
 using VLPMall.Models;
+using VLPMall.Repository;
 using VLPMall.ViewModels;
 
 namespace VLPMall.Controllers
@@ -56,15 +57,31 @@ namespace VLPMall.Controllers
 
                 var cuaHangId = adminVM.sanPhamViewModel.SelectedCuaHang;
 
-                foreach (var item in cuaHangId)
-                {
-                    var cuaHang = await _storeRepository.GetByIdAsync(item);
+                if (cuaHangId != null)
+                    foreach (var item in cuaHangId)
+                    {
+                        var cuaHang = await _storeRepository.GetByIdAsync(item);
 
-                    _productRepository.Add(cuaHang, sanPham);
+                        _productRepository.Add(cuaHang, sanPham);
+                    }
+                else
+                {
+                    _productRepository.Add(sanPham);
                 }
 			}
 
             return RedirectToAction("Index", "CuaHang");
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteSanPham(int id)
+        {
+            var sanPham = await _productRepository.GetByIdAsync(id);
+            if (sanPham == null) { return View("Error"); }
+
+            _productRepository.Delete(sanPham);
+
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

@@ -57,6 +57,10 @@ namespace VLPMall.Controllers
 				tuyenDungViewModel = new CreateTuyenDungViewModel()
 				{
 					UserId = curUserId,
+				},
+				tinTucViewModel = new CreateTinTucViewModel()
+				{
+					UserId = curUserId,
 				}
 			};
 			return View("IndexAdmin", userViews);

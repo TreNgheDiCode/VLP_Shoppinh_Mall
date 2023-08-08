@@ -33,7 +33,12 @@ namespace VLPMall.Repository
 			return await _context.NhaTuyenDungs.Include(c => c.DiaChi).ToListAsync();
 		}
 
-		public async Task<NhaTuyenDung> GetByUserIdAsync(string userId)
+        public async Task<NhaTuyenDung> GetByIdAsync(int id)
+        {
+			return await _context.NhaTuyenDungs.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<NhaTuyenDung> GetByUserIdAsync(string userId)
 		{
 			return await _context.NhaTuyenDungs.FirstAsync(c => c.UserId == userId);
 		}

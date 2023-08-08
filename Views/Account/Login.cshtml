@@ -1,6 +1,12 @@
 ﻿@using VLPMall.ViewModels;
 @model LoginViewModel
 
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -71,3 +77,25 @@
         </div>
     </div>
 </section>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=690461609573548&autoLogAppEvents=1" nonce="3Xz2C2pv"></script>
+
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '690461609573548',
+            xfbml: true,
+            version: 'v17.0'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

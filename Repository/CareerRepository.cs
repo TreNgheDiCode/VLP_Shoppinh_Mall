@@ -33,6 +33,11 @@ namespace VLPMall.Repository
 			return await _context.TuyenDungs.Include(c => c.NhaTuyenDung).ToListAsync();
 		}
 
+        public async Task<TuyenDung> GetByIdAsync(int id)
+        {
+			return await _context.TuyenDungs.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
         public async Task<ICollection<TuyenDung>> GetTop6Async()
         {
             return await _context.TuyenDungs.Include(c => c.NhaTuyenDung).OrderByDescending(c => c.NgayDang).Take(6).ToListAsync();

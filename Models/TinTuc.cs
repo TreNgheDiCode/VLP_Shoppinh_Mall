@@ -14,7 +14,7 @@ namespace VLPMall.Models
         public string? UserId { get; set; }
         public User? User { get; set; }
         public LoaiTinTuc? LoaiTinTuc { get; set; }
-        public bool? TrangThai { get; set; }
+        public bool TrangThai { get; set; }
 
     }
 }

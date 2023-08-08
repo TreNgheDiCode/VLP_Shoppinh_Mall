@@ -17,5 +17,6 @@ namespace VLPMall.ViewModels
         public CreateKhuyenMaiViewModel? khuyenMaiViewModel { get; set; }
         public CreateNhaTuyenDungViewModel? nhaTuyenDungViewModel { get; set; }
         public CreateTuyenDungViewModel? tuyenDungViewModel { get; set; }
+        public CreateTinTucViewModel? tinTucViewModel { get; set; }
     }
 }

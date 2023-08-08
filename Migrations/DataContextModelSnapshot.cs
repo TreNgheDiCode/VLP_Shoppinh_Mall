@@ -337,7 +337,7 @@ namespace VLPMall.Migrations
                     b.Property<float?>("ChietKhau")
                         .HasColumnType("real");
 
-                    b.Property<int>("MaCuaHang")
+                    b.Property<int?>("MaCuaHang")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("NgayBatDau")
@@ -468,7 +468,7 @@ namespace VLPMall.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("TrangThai")
+                    b.Property<bool>("TrangThai")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserId")
@@ -746,9 +746,7 @@ namespace VLPMall.Migrations
                 {
                     b.HasOne("VLPMall.Models.CuaHang", "CuaHang")
                         .WithMany("KhuyenMais")
-                        .HasForeignKey("MaCuaHang")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MaCuaHang");
 
                     b.HasOne("VLPMall.Models.User", "User")
                         .WithMany()

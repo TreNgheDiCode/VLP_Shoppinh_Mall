@@ -10,5 +10,10 @@ namespace VLPMall.Interfaces
 		Task<ICollection<TinTuc>> GetTop10Async();
 		Task<TinTuc> GetTinTucById(int id);
 		Task<ICollection<TinTuc>> GetTinTucByLoaiTinTUc(LoaiTinTuc loaiTinTuc);
+
+		bool Add(TinTuc tinTuc);
+		bool Delete(TinTuc tinTuc);
+		bool Update(TinTuc tinTuc);
+		bool Save();
     }
 }

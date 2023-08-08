@@ -82,11 +82,24 @@ namespace VLPMall.Controllers
                 };
 
                 _careerRepository.Add(tuyenDung);
+
+                return RedirectToAction("Index", "Home");
             }
 
             ModelState.AddModelError("", "Lỗi xảy ra khi tạo tuyển dụng");
 
             return BadRequest(ModelState);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteTuyenDung(int id)
+        {
+            var tuyenDung = await _careerRepository.GetByIdAsync(id);
+            if (tuyenDung == null) { return View("Error"); }
+
+            _careerRepository.Delete(tuyenDung);
+
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

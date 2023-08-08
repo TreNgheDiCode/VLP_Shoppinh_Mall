@@ -223,5 +223,15 @@ namespace VLPMall.Controllers
 			}
 		}
 
-	}
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteCuaHang(int id)
+        {
+            var cuaHang = await _storeRepository.GetByIdAsync(id);
+            if (cuaHang == null) { return View("Error"); }
+
+            _storeRepository.Delete(cuaHang);
+
+            return RedirectToAction("Index", "Admin");
+        }
+    }
 }
