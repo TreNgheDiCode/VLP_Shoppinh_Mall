@@ -47,6 +47,11 @@ namespace VLPMall.Repository
 			return await _context.TinTucs.Where(s => (s.LoaiTinTuc == loaiTinTuc && s.TrangThai == true)).ToListAsync();
 		}
 
+        public async Task<TinTuc> GetTinTucByName(string name)
+        {
+			return await _context.TinTucs.Include(a => a.User).FirstOrDefaultAsync(a => a.TieuDe == name);
+        }
+
         public async Task<ICollection<TinTuc>> GetTop10Async()
         {
             return await _context.TinTucs.Where(s => s.TrangThai == true).OrderByDescending(a => a.NgayDang).Take(10).ToListAsync();

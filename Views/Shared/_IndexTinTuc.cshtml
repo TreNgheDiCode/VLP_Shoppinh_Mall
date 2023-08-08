@@ -112,7 +112,7 @@
 					{
 						<div class="card card-shadow mb-3 article-card radius-tl-0 radius-bl-0">
 							<div class="card-body p-0">
-								<a asp-controller="TinTuc" asp-action="Information" class="text-black">
+								<a asp-controller="TinTuc" asp-action="Information" asp-route-name="@item.TieuDe" class="text-black">
 									<div class="row m-0 p-0">
 										<div class="col-md-5 col-12 m-0 p-0 article-thumbnail-placeholder align-middle">
 											<img class="card-img-top article-thumbnail lazy" src="@item.AnhDaiDien" alt="@item.TieuDe">
@@ -206,7 +206,7 @@
 						{
 							<li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break">
 								<div class="py-2">
-									<a asp-controller="TinTuc" asp-action="Information" class="text-black font-bold">
+									<a asp-controller="TinTuc" asp-action="Information" asp-route-name="@item.TieuDe" class="text-black font-bold">
 										@item.TieuDe
 									</a>
 									<br>

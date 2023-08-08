@@ -1,0 +1,212 @@
+﻿@using System.Web;
+@using VLPMall.Interfaces;
+@model TinTuc
+
+@inject IArticleRepository ArticleRepository
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var articles = await ArticleRepository.GetTop10Async();
+}
+
+<style>
+    .bg-light-gray {
+        background-color: #f5f5f5 !important;
+        border-color: #f5f5f5 !important;
+    }
+
+    .list-group-item {
+        background-color: #f5f5f5 !important;
+        border-right: 0px !important;
+        border-left: 0px !important;
+    }
+</style>
+
+<div class="container container-fluid">
+    <div class="row">
+        <div class="col-md-12 px-0 px-md-1 my-2">
+            <div id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a asp-controller="Home" asp-action="Index">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-controller="@Model.LoaiTinTuc" asp-action="Index">Tin tức</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">@Model.TieuDe</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <h1 class="page-title d-inline text-black">@Model.TieuDe</h1>
+            <br />
+            <div class="my-3">
+                @if (Model.User == null)
+                {
+                    <p>Đăng bởi: Vô danh</p>
+
+                }
+                else
+                {
+                    <p>Đăng bởi: @Model.User?.HoTen</p>
+                }
+                @switch (Model.NgayDang.Month)
+                {
+                    case 1:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Một @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 2:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Hai @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 3:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Ba @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 4:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Bốn @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 5:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Năm @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 6:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Sáu @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 7:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Bảy @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 8:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Tám @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 9:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Chín @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 10:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Mười @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 11:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Mười Một @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                    case 12:
+                        {
+                            <div><small>Đăng vào @Model.NgayDang.Day, Tháng Mười Hai @Model.NgayDang.Year</small></div>
+                            break;
+                        }
+                }
+            </div>
+            <div id="tinTuc">
+                @Html.Raw(HttpUtility.HtmlDecode(HttpUtility.HtmlEncode(Model.NoiDung)))
+            </div>
+        </div>
+        <div class="col-md-3 d-none d-lg-block">
+            <div class="bg-light-gray py-3 px-4">
+                <div>
+                    <div class="h4 font-bold mb-3">Tin mới nhất</div>
+                    <ul class="list-group latest-news">
+                        @foreach (var item in articles)
+                        {
+                            <li class="list-group-item border-top-0 border-right-0 border-left-0 border-bottom p-0 m-0 bg-none text-break">
+                                <div class="py-2">
+                                    <a href="#" class="text-black font-bold">@item.TieuDe</a>
+                                    <br>
+                                    @switch (item.NgayDang.Month)
+                                    {
+                                        case 1:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Một @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 2:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Hai @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 3:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Ba @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 4:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Bốn @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 5:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Năm @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 6:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Sáu @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 7:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Bảy @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 8:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Tám @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 9:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Chín @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 10:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 11:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Một @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                        case 12:
+                                            {
+                                                <div><small>Đăng vào @item.NgayDang.Day, Tháng Mười Hai @item.NgayDang.Year</small></div>
+                                                break;
+                                            }
+                                    }
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

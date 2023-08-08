@@ -54,7 +54,7 @@ namespace VLPMall.Data
                 {
                     TenCuaHang = "Lotteria Việt Nam",
                     NoiDung = "Đây là cửa hàng ẩm thực - đồ ăn nhanh",
-                    AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1688895189/lotteria_logo_cmyouc.svg",
+                    AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1691523064/vfjpuplsgckiqon439a6.jpg",
                     Email = "lotteria@gmail.com",
                     SoDienThoai = "0708611304",
                     NgayHoatDong = "Thứ Hai - Thứ Sáu",
@@ -69,7 +69,7 @@ namespace VLPMall.Data
                             {
                                 TenSanPham = "Gà rán cay",
                                 NoiDung = "Gà rán này cay",
-                                AnhDaiDien = "https://images.foody.vn/res/g1/1559/s400x400/a4f75…deb-4025-8f54-d0f2c5d4-d85c77e4-230706100809.jpeg",
+                                AnhDaiDien = "https://res.cloudinary.com/drv0jpgyx/image/upload/v1691523064/vfjpuplsgckiqon439a6.jpg",
                                 GiaThanh = 80000
                             }
                         },

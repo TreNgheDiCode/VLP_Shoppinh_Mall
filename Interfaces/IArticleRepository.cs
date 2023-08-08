@@ -8,8 +8,9 @@ namespace VLPMall.Interfaces
 		Task<ICollection<TinTuc>> GetAllAsync();
 		Task<ICollection<TinTuc>> GetTop6Async();
 		Task<ICollection<TinTuc>> GetTop10Async();
-		Task<TinTuc> GetTinTucById(int id);
 		Task<ICollection<TinTuc>> GetTinTucByLoaiTinTUc(LoaiTinTuc loaiTinTuc);
+		Task<TinTuc> GetTinTucById(int id);
+		Task<TinTuc> GetTinTucByName(string name);
 
 		bool Add(TinTuc tinTuc);
 		bool Delete(TinTuc tinTuc);

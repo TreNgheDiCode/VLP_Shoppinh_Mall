@@ -17,6 +17,13 @@ namespace VLPMall.Controllers
 			_articleRepository = articleRepository;
 		}
 
+		public async Task<IActionResult> Information(string name)
+		{
+			var tinTuc = await _articleRepository.GetTinTucByName(name);
+
+			return View("_InformationTinTuc", tinTuc);
+		}
+
         [HttpPost]
 		public async Task<IActionResult> Create(AdminViewModel adminVM)
 		{
